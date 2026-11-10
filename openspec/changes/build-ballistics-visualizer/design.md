@@ -57,6 +57,9 @@ All solver values are SI. The planner converts at the edge.
   `BC_SI = BC × 703.07 kg/m²`.
 - Density: dry-air and water-vapour partial pressures. Saturation pressure from the Buck equation.
   Speed of sound `331.3·√(1 + T/273.15)`. Altitude input uses the ISA pressure formula.
+- Air along the flight: the entered atmosphere is the air at the muzzle. Temperature, density, and
+  speed of sound then follow the standard lapse rate with bullet height. On a level shot this
+  changes nothing visible. On a 20° slope at 900 m it changes drag by about 3%.
 - Integrator: RK4, fixed 0.5 ms step, linear interpolation between steps to exact ranges.
 - Zero: bisection on bore elevation, level, no wind, in the current atmosphere. A separate "zero
   day" atmosphere is left out. The error at a 100-yard zero is far below one click.

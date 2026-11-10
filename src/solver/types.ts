@@ -25,6 +25,11 @@
  *   acceleration = -(PI / 8) * rho * |vr| * Cd(M) / (bc * 703.0696) * vr
  *   Cd(M) is linear interpolation in the G1 or G7 table (src/data/g1.json, g7.json),
  *   clamped to the first / last point outside the table.
+ *
+ * AIR ALONG THE FLIGHT: the input atmosphere is the air at the muzzle. As the bullet climbs or
+ *   falls (position.y), the air follows the standard lapse rate:
+ *   T(y) = T0 - 0.0065 * y;  rho(y) = rho0 * (T(y) / T0) ^ 4.25588;  speed of sound from T(y).
+ *   This matters on steep shots: 20 degrees downhill at 900 m is about 3% more drag.
  */
 
 export type DragModel = 'G1' | 'G7';

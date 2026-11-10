@@ -1458,7 +1458,7 @@
     "twistDirection": "right",
     "sightHeightM": 0.05,
     "zeroRangeM": 91.44,
-    "maxRangeM": 944.1149,
+    "maxRangeM": 944.1279,
     "shotAngleRad": 0.2617993877991494,
     "atmosphere": {
      "temperatureK": 288.15,
@@ -1475,80 +1475,80 @@
    "zeroAngleRad": 0.00138488,
    "rows": [
     {
-     "rangeM": 94.6665,
-     "pathM": 0.00331,
+     "rangeM": 94.6795,
+     "pathM": 0.00161,
      "windageM": 0.0,
      "speedMps": 693.75,
      "timeS": 0.13126,
      "mach": 2.0393
     },
     {
-     "rangeM": 189.2987,
-     "pathM": -0.12185,
+     "rangeM": 189.3116,
+     "pathM": -0.12356,
      "windageM": 0.0,
      "speedMps": 640.203,
      "timeS": 0.27327,
      "mach": 1.8824
     },
     {
-     "rangeM": 283.8752,
-     "pathM": -0.45442,
+     "rangeM": 283.8881,
+     "pathM": -0.45612,
      "windageM": 0.0,
      "speedMps": 589.184,
      "timeS": 0.42727,
      "mach": 1.7328
     },
     {
-     "rangeM": 378.3862,
-     "pathM": -1.03162,
+     "rangeM": 378.3991,
+     "pathM": -1.03333,
      "windageM": 0.0,
      "speedMps": 540.346,
      "timeS": 0.59477,
      "mach": 1.5896
     },
     {
-     "rangeM": 472.8193,
-     "pathM": -1.89935,
+     "rangeM": 472.8323,
+     "pathM": -1.90106,
      "windageM": 0.0,
      "speedMps": 493.48,
      "timeS": 0.77765,
      "mach": 1.4521
     },
     {
-     "rangeM": 567.1593,
-     "pathM": -3.11493,
+     "rangeM": 567.1722,
+     "pathM": -3.11664,
      "windageM": 0.0,
      "speedMps": 448.515,
      "timeS": 0.97818,
      "mach": 1.3202
     },
     {
-     "rangeM": 661.3866,
-     "pathM": -4.75088,
+     "rangeM": 661.3995,
+     "pathM": -4.75258,
      "windageM": 0.0,
      "speedMps": 405.608,
      "timeS": 1.19913,
      "mach": 1.1942
     },
     {
-     "rangeM": 755.4765,
-     "pathM": -6.89967,
+     "rangeM": 755.4894,
+     "pathM": -6.90137,
      "windageM": 0.0,
      "speedMps": 365.189,
      "timeS": 1.44371,
      "mach": 1.0755
     },
     {
-     "rangeM": 849.3974,
-     "pathM": -9.6789,
+     "rangeM": 849.4104,
+     "pathM": -9.68061,
      "windageM": 0.0,
      "speedMps": 330.192,
      "timeS": 1.71497,
      "mach": 0.9726
     },
     {
-     "rangeM": 943.1149,
-     "pathM": -13.21746,
+     "rangeM": 943.1279,
+     "pathM": -13.21916,
      "windageM": 0.0,
      "speedMps": 312.671,
      "timeS": 2.00762,
@@ -1569,7 +1569,7 @@
     "twistDirection": "right",
     "sightHeightM": 0.05,
     "zeroRangeM": 91.44,
-    "maxRangeM": 979.2403,
+    "maxRangeM": 979.2232,
     "shotAngleRad": -0.3490658503988659,
     "atmosphere": {
      "temperatureK": 288.15,
@@ -1586,80 +1586,80 @@
    "zeroAngleRad": 0.00138488,
    "rows": [
     {
-     "rangeM": 97.3062,
-     "pathM": 0.00597,
+     "rangeM": 97.2891,
+     "pathM": 0.00295,
      "windageM": 0.0,
      "speedMps": 692.869,
      "timeS": 0.13496,
      "mach": 2.0353
     },
     {
-     "rangeM": 194.6617,
-     "pathM": -0.12338,
+     "rangeM": 194.6446,
+     "pathM": -0.12639,
      "windageM": 0.0,
      "speedMps": 638.237,
      "timeS": 0.28137,
      "mach": 1.8741
     },
     {
-     "rangeM": 292.0956,
-     "pathM": -0.46794,
+     "rangeM": 292.0785,
+     "pathM": -0.47096,
      "windageM": 0.0,
      "speedMps": 585.964,
      "timeS": 0.4407,
      "mach": 1.72
     },
     {
-     "rangeM": 389.6225,
-     "pathM": -1.06839,
+     "rangeM": 389.6054,
+     "pathM": -1.0714,
      "windageM": 0.0,
      "speedMps": 535.714,
      "timeS": 0.61476,
      "mach": 1.5719
     },
     {
-     "rangeM": 487.2612,
-     "pathM": -1.97575,
+     "rangeM": 487.2441,
+     "pathM": -1.97877,
      "windageM": 0.0,
      "speedMps": 487.304,
      "timeS": 0.80586,
      "mach": 1.4293
     },
     {
-     "rangeM": 585.0353,
-     "pathM": -3.25519,
+     "rangeM": 585.0182,
+     "pathM": -3.25821,
      "windageM": 0.0,
      "speedMps": 440.723,
      "timeS": 1.01684,
      "mach": 1.2922
     },
     {
-     "rangeM": 682.9755,
-     "pathM": -4.99116,
+     "rangeM": 682.9584,
+     "pathM": -4.99418,
      "windageM": 0.0,
      "speedMps": 396.259,
      "timeS": 1.25124,
      "mach": 1.1613
     },
     {
-     "rangeM": 781.1222,
-     "pathM": -7.29427,
+     "rangeM": 781.1051,
+     "pathM": -7.29728,
      "windageM": 0.0,
      "speedMps": 354.609,
      "timeS": 1.51321,
      "mach": 1.0389
     },
     {
-     "rangeM": 879.5272,
-     "pathM": -10.30692,
+     "rangeM": 879.5101,
+     "pathM": -10.30994,
      "windageM": 0.0,
      "speedMps": 324.319,
      "timeS": 1.80525,
      "mach": 0.9497
     },
     {
-     "rangeM": 978.2403,
-     "pathM": -14.16645,
+     "rangeM": 978.2232,
+     "pathM": -14.16947,
      "windageM": 0.0,
      "speedMps": 309.909,
      "timeS": 2.11727,
@@ -1680,7 +1680,7 @@
     "twistDirection": "right",
     "sightHeightM": 0.05,
     "zeroRangeM": 91.44,
-    "maxRangeM": 1047.8931,
+    "maxRangeM": 1047.9181,
     "shotAngleRad": 0.5235987755982988,
     "atmosphere": {
      "temperatureK": 288.15,
@@ -1697,80 +1697,80 @@
    "zeroAngleRad": 0.00135379,
    "rows": [
     {
-     "rangeM": 105.5937,
-     "pathM": 0.01371,
+     "rangeM": 105.6187,
+     "pathM": 0.00701,
      "windageM": 0.02836,
      "speedMps": 698.729,
      "timeS": 0.14447,
      "mach": 2.0545
     },
     {
-     "rangeM": 211.1002,
-     "pathM": -0.12378,
+     "rangeM": 211.1252,
+     "pathM": -0.13048,
      "windageM": 0.11842,
      "speedMps": 636.036,
      "timeS": 0.30275,
      "mach": 1.8713
     },
     {
-     "rangeM": 316.4714,
-     "pathM": -0.49551,
+     "rangeM": 316.4964,
+     "pathM": -0.50221,
      "windageM": 0.27861,
      "speedMps": 576.978,
      "timeS": 0.47671,
      "mach": 1.6986
     },
     {
-     "rangeM": 421.6787,
-     "pathM": -1.15111,
+     "rangeM": 421.7037,
+     "pathM": -1.15781,
      "windageM": 0.51844,
      "speedMps": 521.82,
      "timeS": 0.66849,
      "mach": 1.5371
     },
     {
-     "rangeM": 526.6863,
-     "pathM": -2.15259,
+     "rangeM": 526.7113,
+     "pathM": -2.15929,
      "windageM": 0.84814,
      "speedMps": 471.046,
      "timeS": 0.88037,
      "mach": 1.3883
     },
     {
-     "rangeM": 631.4499,
-     "pathM": -3.57663,
+     "rangeM": 631.4749,
+     "pathM": -3.58332,
      "windageM": 1.27766,
      "speedMps": 425.323,
      "timeS": 1.11458,
      "mach": 1.2543
     },
     {
-     "rangeM": 735.9161,
-     "pathM": -5.51599,
+     "rangeM": 735.9411,
+     "pathM": -5.52269,
      "windageM": 1.81474,
      "speedMps": 385.5,
      "timeS": 1.37285,
      "mach": 1.1375
     },
     {
-     "rangeM": 840.0227,
-     "pathM": -8.07803,
+     "rangeM": 840.0477,
+     "pathM": -8.08473,
      "windageM": 2.46168,
      "speedMps": 352.578,
      "timeS": 1.65569,
      "mach": 1.041
     },
     {
-     "rangeM": 943.7033,
-     "pathM": -11.37796,
+     "rangeM": 943.7283,
+     "pathM": -11.38466,
      "windageM": 3.21191,
      "speedMps": 327.019,
      "timeS": 1.96164,
      "mach": 0.966
     },
     {
-     "rangeM": 1046.8931,
-     "pathM": -15.52796,
+     "rangeM": 1046.9181,
+     "pathM": -15.53466,
      "windageM": 4.05199,
      "speedMps": 307.487,
      "timeS": 2.28769,

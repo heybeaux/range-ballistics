@@ -66,14 +66,21 @@ def run(case):
     rows = []
     max_yd = case["maxRangeYd"]
     result = calc.fire(shot, Unit.Yard(max_yd), Unit.Yard(100))
+    # Sight-offset convention. py-ballisticcalc keeps the scope vertically above the bore on a
+    # slope. Our contract (types.ts) tilts the rifle with the line of sight, so the scope sits at
+    # right angles to it. Same trajectory, different measuring origin:
+    #   range_ours = range_pbc + h * sin(theta);  path_ours = path_pbc + h * (cos(theta) - 1)
+    theta = math.radians(case["shotAngleDeg"])
+    d_range = case["sightHeightM"] * math.sin(theta)
+    d_path = case["sightHeightM"] * (math.cos(theta) - 1.0)
     for row in result.trajectory:
-        slant_m = row.slant_distance >> Unit.Meter
+        slant_m = (row.slant_distance >> Unit.Meter) + d_range
         if slant_m < 1:
             continue
         rows.append(
             {
                 "rangeM": round(slant_m, 4),
-                "pathM": round(row.slant_height >> Unit.Meter, 5),
+                "pathM": round((row.slant_height >> Unit.Meter) + d_path, 5),
                 "windageM": round(row.windage >> Unit.Meter, 5),
                 "speedMps": round(row.velocity >> Unit.MPS, 3),
                 "timeS": round(row.time, 5),

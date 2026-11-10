@@ -15,3 +15,5 @@ MEMORY_INSTRUCTIONS.md
 BOOTSTRAP.md
 .DS_Store
 .venv/
+scripts/prompts/*.reasoning.txt
+scripts/prompts/*.response.txt
