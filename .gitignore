@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.claude-flow/
+.swarm/
+ruvector.db
+AGENTS.md
+SOUL.md
+TOOLS.md
+IDENTITY.md
+USER.md
+HEARTBEAT.md
+MEMORY.md
+MEMORY_CONTEXT.md
+MEMORY_INSTRUCTIONS.md
+BOOTSTRAP.md
+.DS_Store
