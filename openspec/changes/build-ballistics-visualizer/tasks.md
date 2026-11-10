@@ -1,23 +1,23 @@
 ## 1. Foundation (Scout)
 
-- [ ] 1.1 Scaffold Vite + TypeScript + Vitest + three.js; add lint and typecheck scripts
-- [ ] 1.2 Write `src/solver/types.ts` (the fixed solver contract)
+- [x] 1.1 Scaffold Vite + TypeScript + Vitest + three.js; add lint and typecheck scripts
+- [x] 1.2 Write `src/solver/types.ts` (the fixed solver contract)
 - [ ] 1.3 Generate `g1.json` and `g7.json` by script; add checksum and spot-value tests
-- [ ] 1.4 Generate reference cases with py-ballisticcalc into `tests/reference/`
+- [x] 1.4 Generate reference cases with py-ballisticcalc into `tests/reference/`
 - [ ] 1.5 Fill `loads.json` and `rifle.json` from sourced research; add the source-present test
 
 ## 2. Solver (Qwen writes, Scout verifies)
 
-- [ ] 2.1 Atmosphere: density, speed of sound, altitude to pressure
-- [ ] 2.2 Drag table lookup and deceleration
-- [ ] 2.3 RK4 integrator with wind and range interpolation; vacuum and convergence tests
-- [ ] 2.4 Zero-angle solve and sight height
-- [ ] 2.5 Inclined shots
-- [ ] 2.6 Stability factor and spin drift, including the "length missing" path
-- [ ] 2.7 Derived outputs: energy, Mach, transonic and subsonic ranges
-- [ ] 2.8 Input validation with named fields
+- [x] 2.1 Atmosphere: density, speed of sound, altitude to pressure
+- [x] 2.2 Drag table lookup and deceleration
+- [x] 2.3 RK4 integrator with wind and range interpolation; vacuum and convergence tests
+- [x] 2.4 Zero-angle solve and sight height
+- [x] 2.5 Inclined shots
+- [x] 2.6 Stability factor and spin drift, including the "length missing" path
+- [x] 2.7 Derived outputs: energy, Mach, transonic and subsonic ranges
+- [x] 2.8 Input validation with named fields
 - [ ] 2.9 Optional Coriolis, default off
-- [ ] 2.10 Pass all reference cases within tolerance
+- [x] 2.10 Pass all reference cases within tolerance
 
 ## 3. Units (Qwen writes, Scout verifies)
 
