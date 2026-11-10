@@ -1,5 +1,6 @@
 import type { ShotInput, Vec3, Wind } from './types';
-import { STANDARD_GRAVITY, airDensity, speedOfSound } from './atmosphere';
+import { STANDARD_GRAVITY } from './atmosphere';
+import { makeAirModel } from './integrate-air';
 import { dragFactor } from './drag';
 
 export interface RawSample {
@@ -44,8 +45,8 @@ function vec3Sub(a: Vec3, b: Vec3): Vec3 {
 export function integrate(input: ShotInput, zeroAngleRad: number): RawSample[] {
   const dt = input.timeStepS ?? 0.0005;
   const dragEnabled = input.dragEnabled ?? true;
-  const rho = airDensity(input.atmosphere);
-  const soundSpeed = speedOfSound(input.atmosphere.temperatureK);
+  // Air at the bullet's height above the muzzle (standard lapse rate). See types.ts.
+  const airAt = makeAirModel(input.atmosphere);
   const w = airVelocity(input.wind);
 
   const theta = input.shotAngleRad;
@@ -80,7 +81,7 @@ export function integrate(input: ShotInput, zeroAngleRad: number): RawSample[] {
     const pathM = vec3Dot(rel, n);
     const speedMps = vec3Norm(vel);
     const vr = vec3Sub(vel, w);
-    const mach = vec3Norm(vr) / soundSpeed;
+    const mach = vec3Norm(vr) / airAt(pos.y).speedOfSoundMps;
     return {
       timeS: time,
       position: { x: pos.x, y: pos.y, z: pos.z },
@@ -92,11 +93,12 @@ export function integrate(input: ShotInput, zeroAngleRad: number): RawSample[] {
     };
   }
 
-  function acceleration(vel: Vec3): Vec3 {
+  function acceleration(vel: Vec3, heightM: number): Vec3 {
     const vr = vec3Sub(vel, w);
     const speedVr = vec3Norm(vr);
-    const mach = speedVr / soundSpeed;
-    const k = dragFactor(input.dragModel, mach, input.bc, rho);
+    const air = airAt(heightM);
+    const mach = speedVr / air.speedOfSoundMps;
+    const k = dragFactor(input.dragModel, mach, input.bc, air.densityKgM3);
     const dragAcc = vec3Scale(vr, -k * speedVr);
     const grav: Vec3 = { x: 0, y: -STANDARD_GRAVITY, z: 0 };
     if (!dragEnabled) {
@@ -110,22 +112,22 @@ export function integrate(input: ShotInput, zeroAngleRad: number): RawSample[] {
   }
 
   function rk4Step(pos: Vec3, vel: Vec3, time: number, h: number): { pos: Vec3; vel: Vec3; time: number } {
-    const k1v = acceleration(vel);
+    const k1v = acceleration(vel, pos.y);
     const k1p = vel;
 
     const v2 = vec3Add(vel, vec3Scale(k1v, h / 2));
     const p2 = vec3Add(pos, vec3Scale(k1p, h / 2));
-    const k2v = acceleration(v2);
+    const k2v = acceleration(v2, p2.y);
     const k2p = v2;
 
     const v3 = vec3Add(vel, vec3Scale(k2v, h / 2));
     const p3 = vec3Add(pos, vec3Scale(k2p, h / 2));
-    const k3v = acceleration(v3);
+    const k3v = acceleration(v3, p3.y);
     const k3p = v3;
 
     const v4 = vec3Add(vel, vec3Scale(k3v, h));
     const p4 = vec3Add(pos, vec3Scale(k3p, h));
-    const k4v = acceleration(v4);
+    const k4v = acceleration(v4, p4.y);
     const k4p = v4;
 
     const newVel = vec3Add(
