@@ -42,3 +42,37 @@ with the independent solver at ten distances, to the existing tolerance (0.05 MI
 #### Scenario: New cartridge is checked
 - **WHEN** a cartridge is added to the library
 - **THEN** the test run includes its reference cases and they pass
+
+### Requirement: First-pass cartridges
+The library SHALL ship loads for .22 Long Rifle, .223 Remington, 5.56x45 NATO, and .308
+Winchester. .223 Remington and 5.56x45 NATO SHALL be separate cartridges with separate loads.
+
+#### Scenario: Four cartridges offered
+- **WHEN** the user adds a rifle
+- **THEN** the cartridge list offers .22 LR, .223 Remington, 5.56x45 NATO, .308 Winchester, and
+  "other"
+
+#### Scenario: 5.56 in a .223 chamber
+- **WHEN** the rifle's cartridge is .223 Remington, or the user looks at 5.56x45 NATO loads
+- **THEN** the app shows the published safety statement about firing 5.56 NATO ammunition in a
+  .223 Remington chamber, in the source's own words, with a link to the source
+
+### Requirement: Subsonic and transonic loads
+A load that leaves the muzzle below Mach 1.2 SHALL be solved and shown without the "target is past
+the transonic range" warning that applies to supersonic loads. The results SHALL say plainly which
+case applies.
+
+#### Scenario: Subsonic match load
+- **WHEN** the load's muzzle velocity is below the speed of sound in the entered air
+- **THEN** the results say "subsonic from the muzzle", show no transonic warning, and the scene
+  draws the whole path in the subsonic colour
+
+#### Scenario: High-velocity rimfire
+- **WHEN** the load leaves the muzzle between Mach 1.0 and Mach 1.2
+- **THEN** the results say the bullet starts in the transonic range and give the distance where it
+  goes subsonic
+
+#### Scenario: Short-range defaults
+- **WHEN** the selected rifle is chambered in .22 LR and has no saved conditions
+- **THEN** the default target is 50 yd, the default zero is 50 yd, and the dope table runs from 25
+  to 200 yd in 25 yd steps

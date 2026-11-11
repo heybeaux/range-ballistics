@@ -15,7 +15,11 @@ and barrel lengths.
   barrel, twist, sight height, zero, scope, loads, and last conditions.
 - Tag every library load with its cartridge. The load picker shows the loads for the selected
   rifle's cartridge. Add cartridges one at a time, each with the same sourcing rule as .308.
+- First pass: .22 LR, .223 Remington, 5.56x45 NATO, and .308 Winchester.
 - Make the barrel-length velocity estimate per cartridge. No sourced figure means no estimate.
+- Handle loads that start at or below the speed of sound (most .22 LR match ammunition) without a
+  false "past the transonic range" warning.
+- Show the published safety note on firing 5.56 NATO ammunition in a .223 Remington chamber.
 - Add a scope profile to each rifle: magnification range, focal plane, field of view, click value,
   elevation travel, and reticle.
 - Draw the scope view through that scope: a magnification control sets the real field of view,
@@ -48,8 +52,8 @@ the new capabilities add to them.
 
 ## Decisions needed from Beaux
 
-1. Which cartridges go in the first pass? Each one is a sourcing job. Suggested: 6.5 Creedmoor and
-   .223 Rem, because they have the most published match data.
+1. DECIDED 2026-11-10: the first pass ships .22 LR, .223 Remington, 5.56x45 NATO, and .308
+   Winchester. (".22" is read as .22 Long Rifle; say if another .22 was meant.)
 2. The EBR-7C fine layout is published only as a drawing marked "for representation only". The
    labelled sizes are exact; the hash and dot positions are measured from that drawing. Is it
    acceptable to ship the reticle with a note that says so?

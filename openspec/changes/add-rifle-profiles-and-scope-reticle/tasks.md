@@ -16,7 +16,9 @@
 
 - [ ] 3.1 Load picker filtered by cartridge
 - [ ] 3.2 Per-cartridge velocity estimate and the "no correction" wording
-- [ ] 3.3 Source and verify each added cartridge's loads
+- [ ] 3.3 Source and verify loads for .22 LR, .223 Remington, and 5.56x45 NATO
+- [ ] 3.4 Subsonic and transonic wording and scene colour; .22 LR default distances
+- [ ] 3.5 5.56 NATO in a .223 chamber: sourced safety note
 
 ## 4. Scope (Qwen writes, Scout verifies)
 
