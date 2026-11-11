@@ -126,7 +126,7 @@ Write exactly these tests:
  7. makeCorrection(-0.25, 500, 'windage', rifle): direction 'right', clicks 5. With +0.25: direction 'left', clicks 5.
  8. makeCorrection(0.0001, 500, 'elevation', rifle): direction 'none', clicks 0.
  9. makeCorrection(-0.5, 500, 'elevation', { ...rifle, angleUnit: 'MOA', clickValue: 0.25 }): clicks 14.
-10. shotResults(testState(), solved): not null; rangeM 548.64; elevation.direction 'up'; elevation.mil between 3 and 6; windage.direction 'right' (wind from 3 o'clock pushes the bullet left); windage.mil between 0.5 and 1.5; timeOfFlightS between 0.8 and 1.1; velocityMps between 450 and 600; spinDriftM null; stabilitySg null; velocityEstimated true.
+10. shotResults(testState(), solved): not null; rangeM 548.64; elevation.direction 'up'; elevation.mil between 3 and 6; windage.direction 'right' (wind from 3 o'clock pushes the bullet left); windage.mil between 1.2 and 2.2; timeOfFlightS between 0.8 and 1.1; velocityMps between 450 and 600; spinDriftM null; stabilitySg null; velocityEstimated true.
 11. shotResults with spinDrift true and load.bulletLengthM 0.0315: spinDriftM is a number > 0; stabilitySg is a number > 1.
 12. shotResults: with conditions.targetRangeM 548.64 pastTransonic is false. With targetRangeM 900 and dope.endM 900, pastTransonic is true.
 13. shotResults returns null when conditions.targetRangeM is 5000 (beyond the solve; build the SolveSuccess from testState(), then call shotResults with a state whose targetRangeM is 5000).

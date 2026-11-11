@@ -1,0 +1,290 @@
+{
+  "loads": [
+    {
+      "id": "federal-gm308m",
+      "name": "Federal Gold Medal 168 gr Sierra MatchKing (GM308M)",
+      "bulletMassKg": 0.01088622,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.030988,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.462,
+        "sourceUrl": "https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.224,
+        "sourceUrl": "https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 807.72,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "note": "Federal does not state its test barrel length, so the app cannot work out a 16 inch estimate for this load. The starting velocity is Federal's published figure and is probably high for a 16 inch barrel. One independent test measured 2466 fps for this load from a 16.5 inch barrel (Rifleshooter.com, one barrel). Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+    },
+    {
+      "id": "federal-gm308m2",
+      "name": "Federal Gold Medal 175 gr Sierra MatchKing (GM308M2)",
+      "bulletMassKg": 0.01133981,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.031547,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.505,
+        "sourceUrl": "https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.25,
+        "sourceUrl": "https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 792.48,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "note": "Federal does not state its test barrel length, so the app cannot work out a 16 inch estimate for this load. The starting velocity is Federal's published figure and is probably high for a 16 inch barrel. Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+    },
+    {
+      "id": "hornady-80966",
+      "name": "Hornady Match 168 gr ELD Match (80966)",
+      "bulletMassKg": 0.01088622,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.523,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.263,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 822.96,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/308-win-168-gr-eld-match",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "note": "Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.498 and G7 0.251, so real drop at long range will be a little more than shown."
+    },
+    {
+      "id": "hornady-8105",
+      "name": "Hornady Match 178 gr BTHP (8105)",
+      "bulletMassKg": 0.01153421,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "publishedVelocityMps": {
+        "value": 792.48,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/308-win-178-gr-bthp-match",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "note": "Hornady's page for this load does not give a BC. Type the BC from your ammunition box before solving."
+    },
+    {
+      "id": "berger-60010",
+      "name": "Berger 175 gr OTM Tactical (60010)",
+      "bulletMassKg": 0.01133981,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.032029,
+        "sourceUrl": "https://bergerbullets.com/product/30-caliber-175-grain-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.512,
+        "sourceUrl": "https://bergerbullets.com/product/308-winchester-175gr-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.263,
+        "sourceUrl": "https://bergerbullets.com/product/308-winchester-175gr-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 813.21,
+        "sourceUrl": "https://bergerbullets.com/product/308-winchester-175gr-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "lapua-4317076",
+      "name": "Lapua 155 gr Scenar-L (4317076)",
+      "bulletMassKg": 0.01004383,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.46,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.23,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 860,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "lapua-4317520",
+      "name": "Lapua 175 gr Scenar-L (4317520)",
+      "bulletMassKg": 0.01133981,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.49,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.247,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": 793,
+        "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "bullet-berger-30425",
+      "name": "Handload: Berger 168 gr Hybrid Target (30425)",
+      "bulletMassKg": 0.01088622,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.03269,
+        "sourceUrl": "https://bergerbullets.com/product/30-caliber-168-grain-hybrid-target/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.515,
+        "sourceUrl": "https://bergerbullets.com/product/30-caliber-168-grain-hybrid-target/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.264,
+        "sourceUrl": "https://bergerbullets.com/product/30-caliber-168-grain-hybrid-target/",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "note": "Component bullet. Enter your own chronograph velocity."
+    },
+    {
+      "id": "bullet-hornady-178-eldm",
+      "name": "Handload: Hornady 178 gr ELD Match",
+      "bulletMassKg": 0.01153421,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.547,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.275,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-10"
+      },
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "note": "Component bullet. Enter your own chronograph velocity. BCs are Hornady's Mach 2.25 figures."
+    },
+    {
+      "id": "bullet-nosler-53164",
+      "name": "Handload: Nosler 168 gr Custom Competition (53164)",
+      "bulletMassKg": 0.01088622,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.03048,
+        "sourceUrl": "https://www.nosler.com/30-caliber-168gr-hpbt-custom-competition-100ct.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.462,
+        "sourceUrl": "https://www.nosler.com/30-caliber-168gr-hpbt-custom-competition-100ct.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "note": "Component bullet. Enter your own chronograph velocity. Nosler does not publish a G7 BC."
+    }
+  ],
+  "velocityLossMpsPerM": {
+    "value": 250.8,
+    "sourceUrl": "https://rifleshooter.com/2014/12/308-winchester-7-62x51mm-nato-barrel-length-versus-velocity-28-to-16-5/",
+    "readOn": "2026-11-10"
+  },
+  "velocityLossNote": "Rifleshooter.com cut one .308 barrel from 28 to 16.5 inches and measured Federal Gold Medal 168 gr at each length: 20.9 fps lost per inch on average. It is one barrel and one test, not manufacturer data. Your rifle will differ, so chronograph your load."
+}

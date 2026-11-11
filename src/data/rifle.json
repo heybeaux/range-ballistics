@@ -1,0 +1,25 @@
+{
+  "name": "Tikka T3x CTR .308 Win, 16 inch",
+  "barrelLengthM": 0.4064,
+  "twistM": 0.2794,
+  "twistDirection": "right",
+  "twistConfirmed": false,
+  "sightHeightM": 0.04445,
+  "zeroRangeM": 91.44,
+  "angleUnit": "MIL",
+  "clickValue": 0.1,
+  "twistSources": [
+    {
+      "label": "1:11 inch, 2014 Tikka T3 CTR specification sheet (20 inch barrel)",
+      "url": "https://media.sako.global/image/upload/v1695721076/TIKKA_T3_CTR_dldro4.pdf",
+      "readOn": "2026-11-10"
+    },
+    {
+      "label": "1:10 inch, current Tikka T3x CTR page (20 and 24 inch barrels)",
+      "url": "https://www.sako.global/rifle/t3x-compact-tactical-rifle",
+      "readOn": "2026-11-10"
+    }
+  ],
+  "twistNote": "Tikka's own figures disagree and neither lists a 16 inch barrel, so this twist is unconfirmed. To measure it: push a tight patch on a cleaning rod into the bore, mark the rod at the muzzle and put a tape flag on the handle, push until the flag has made one full turn, and measure how far the mark moved. That distance in inches is your twist.",
+  "sightHeightNote": "1.75 inches is a typical scope height, not a measurement. Measure from the centre of the bolt to the centre of the scope tube."
+}
