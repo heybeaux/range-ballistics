@@ -58,8 +58,7 @@ No code structure changes are expected: cartridges and loads are data entries in
 
 ## Decisions needed from Beaux
 
-1. Load count: 3 loads per new cartridge to start (vs 8–15 for the first four). More can be added
-   later on request. OK?
-2. .450 Bushmaster is on the list and is included, but makers publish little for it beyond a
-   G1 BC around 0.2 and a 100–300 yd table. It will carry a note that it is a 200–300 yd
-   cartridge. OK to ship with that caveat?
+1. DECIDED 2026-11-11: 3 loads per new cartridge to start (vs 8–15 for the first four). More can
+   be added later on request.
+2. DECIDED 2026-11-11: .450 Bushmaster ships with the short-range caveat. Makers publish little
+   for it beyond a G1 BC around 0.2 and a 100–300 yd table.
