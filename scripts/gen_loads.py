@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 READ_ON = "2026-11-10"
+READ_ON_2 = "2026-11-11"
 IN = 0.0254
 FT = 0.3048
 YD = 0.9144
@@ -17,19 +18,19 @@ ICAO = "BC quoted by the bullet maker. Makers use different standard atmospheres
 SIERRA = "Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
 
 
-def sourced(value, url):
+def sourced(value, url, read_on=READ_ON):
     if value is None:
         return {"value": None, "sourceUrl": None, "readOn": None}
-    return {"value": value, "sourceUrl": url, "readOn": READ_ON}
+    return {"value": value, "sourceUrl": url, "readOn": read_on}
 
 
-def quote(text, url):
-    return {"text": text, "sourceUrl": url, "readOn": READ_ON}
+def quote(text, url, read_on=READ_ON):
+    return {"text": text, "sourceUrl": url, "readOn": read_on}
 
 
 def load(id_, cartridge, name, grains, diameter_in, *, g1=None, g7=None, ra4=None, bc_url=None,
          model_stated=True, length_in=None, length_url=None, fps=None, mps=None, vel_url=None,
-         barrel_in=None, by_barrel=(), note=None):
+         barrel_in=None, by_barrel=(), note=None, read_on=READ_ON):
     """by_barrel: (barrel inches, fps) pairs the maker publishes for the same load."""
     velocity = mps if mps is not None else (round(fps * FT, 2) if fps is not None else None)
     return {
@@ -38,12 +39,12 @@ def load(id_, cartridge, name, grains, diameter_in, *, g1=None, g7=None, ra4=Non
         "name": name,
         "bulletMassKg": round(grains * GR, 8),
         "bulletDiameterM": round(diameter_in * IN, 7),
-        "bulletLengthM": sourced(None if length_in is None else round(length_in * IN, 6), length_url),
-        "bcG1": sourced(g1, bc_url),
-        "bcG7": sourced(g7, bc_url),
-        "bcRA4": sourced(ra4, bc_url),
+        "bulletLengthM": sourced(None if length_in is None else round(length_in * IN, 6), length_url, read_on),
+        "bcG1": sourced(g1, bc_url, read_on),
+        "bcG7": sourced(g7, bc_url, read_on),
+        "bcRA4": sourced(ra4, bc_url, read_on),
         "bcModelStated": model_stated,
-        "publishedVelocityMps": sourced(velocity, vel_url),
+        "publishedVelocityMps": sourced(velocity, vel_url, read_on),
         "testBarrelM": None if barrel_in is None else round(barrel_in * IN, 4),
         "velocityByBarrel": [
             {"barrelM": round(b * IN, 4), "velocityMps": round(v * FT, 2)} for b, v in sorted(by_barrel)
@@ -261,8 +262,69 @@ LOADS_22 = [
          note=NOT_STATED),
 ]
 
+# ---------------------------------------------------------------- 6.5 Creedmoor
+D65 = 0.264
+HOR81500 = "https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match"
+HOR81499 = "https://www.hornady.com/ammunition/rifle/6-5-creedmoor-143-gr-eld-x-precision-hunter"
+FEDGM65 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM65CRDBH2.html"
+
+HOR_CHART_NOTE = (
+    "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady "
+    "says is the one comparable to industry BCs."
+)
+
+LOADS_65CM = [
+    load("hornady-81500", "65-creedmoor", "Hornady Match 140 gr ELD Match (81500)", 140, D65,
+         g1=0.646, g7=0.326, bc_url=HBC, fps=2710, vel_url=HOR81500, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("hornady-81499", "65-creedmoor", "Hornady Precision Hunter 143 gr ELD-X (81499)", 143, D65,
+         g1=0.623, g7=0.314, bc_url=HBC, fps=2700, vel_url=HOR81499, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-gm65crdbh2", "65-creedmoor", "Federal Gold Medal Berger 140 gr (GM65CRDBH2)", 140, D65,
+         g1=0.607, g7=0.311, bc_url=FEDGM65, model_stated=False, length_in=1.407, length_url=FEDGM65,
+         fps=2725, vel_url=FEDGM65, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " The G7 value is labeled on the page."),
+]
+
+# ---------------------------------------------------------------- 6.5 PRC
+HOR81620 = "https://www.hornady.com/ammunition/rifle/6.5-prc-147-gr-eld-match"
+HOR81621 = "https://www.hornady.com/ammunition/rifle/6.5-prc-143-gr-eld-x-precision-hunter"
+BER50010 = "https://bergerbullets.com/product/6-5-prc-156-grain-extreme-outer-limits-eol-elite-hunter-rifle-ammunition/"
+
+LOADS_65PRC = [
+    load("hornady-81620", "65-prc", "Hornady Match 147 gr ELD Match (81620)", 147, D65,
+         g1=0.697, g7=0.351, bc_url=HBC, fps=2910, vel_url=HOR81620, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("hornady-81621", "65-prc", "Hornady Precision Hunter 143 gr ELD-X (81621)", 143, D65,
+         g1=0.623, g7=0.314, bc_url=HBC, fps=2960, vel_url=HOR81621, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("berger-50010", "65-prc", "Berger 156 gr EOL Elite Hunter (50010)", 156, D65,
+         g1=0.679, g7=0.347, bc_url=BER50010, fps=2900, vel_url=BER50010, barrel_in=26, read_on=READ_ON_2,
+         note="Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:8."),
+]
+
+# ---------------------------------------------------------------- .243 Winchester
+D243 = 0.243
+HOR80462 = "https://www.hornady.com/ammunition/rifle/243-win-90-gr-eld-x-precision-hunter"
+FEDF243 = "https://www.federalpremium.com/rifle/fusion/11-F243FS1.html"
+REM29015 = "https://www.remington.com/rifle/core-lokt-tipped/29-29015.html"
+
+LOADS_243 = [
+    load("hornady-80462", "243-win", "Hornady Precision Hunter 90 gr ELD-X (80462)", 90, D243,
+         g1=0.410, g7=0.206, bc_url=HBC, fps=3150, vel_url=HOR80462, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-f243fs1", "243-win", "Federal Fusion 95 gr (F243FS1)", 95, D243,
+         g1=0.376, bc_url=FEDF243, model_stated=False, length_in=1.025, length_url=FEDF243, fps=2980,
+         vel_url=FEDF243, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+    load("remington-29015", "243-win", "Remington Core-Lokt Tipped 95 gr (29015)", 95, D243,
+         g1=0.355, bc_url=REM29015, model_stated=False, fps=3140, vel_url=REM29015, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
 # ---------------------------------------------------------------- cartridges
 SAAMI_CF = "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf"
+SAAMI_CF_2 = "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf"
 SAAMI_RF = "https://saami.org/wp-content/uploads/2026/05/SAAMI-Z299.1-R2026-Rimfire-FINAL-Approved-2026-05-08.pdf"
 SAAMI_556 = "https://saami.org/wp-content/uploads/2026/10/Public-Introduction-5.56-Commercial-2026-06-22-FINAL-Rev-3.pdf"
 SAAMI_FAQ = "https://saami.org/faqs/"
@@ -279,6 +341,14 @@ NO_LOSS_224 = (
     "No barrel-length correction is made for this cartridge. The published figures disagree: PMC's "
     "own two-barrel velocities work out to 37 to 45 fps per inch, and one independent cut-down test "
     "measured 22 to 30. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_65 = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_243 = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
 
 
@@ -331,9 +401,36 @@ CARTRIDGES = [
         "defaults": {"targetRangeM": round(50 * YD, 4), "zeroRangeM": round(50 * YD, 4), "dope": dope(25, 200, 25),
                      "twistM": round(16 * IN, 4), "barrelLengthM": round(20 * IN, 4)},
     },
+    {
+        "id": "65-creedmoor", "name": "6.5 Creedmoor", "bulletDiameterM": round(D65 * IN, 7),
+        "diameterSource": quote("SAAMI 6.5 Creedmoor drawing: bullet diameter .2644 - .0030 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_65,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(8 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "65-prc", "name": "6.5 PRC", "bulletDiameterM": round(D65 * IN, 7),
+        "diameterSource": quote("SAAMI 6.5 PRC drawing: bullet diameter .2644 - .0030 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_65,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(8 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "243-win", "name": ".243 Winchester", "bulletDiameterM": round(D243 * IN, 7),
+        "diameterSource": quote("SAAMI 243 Winchester drawing: bullet diameter .243 - .003 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_243,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
 ]
 
-LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22}
+LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243}
 
 # ---------------------------------------------------------------- scopes
 VENOM_PAGE = "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html"

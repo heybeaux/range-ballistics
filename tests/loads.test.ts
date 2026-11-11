@@ -21,14 +21,18 @@ const LIMITS: Record<string, { massKg: [number, number]; velocity: [number, numb
   '308-win': { massKg: [0.0097, 0.0123], velocity: [750, 900], g1: [0.4, 0.6], g7: [0.2, 0.3], lengthM: [0.028, 0.035] },
   '223-rem': { massKg: [0.0032, 0.0052], velocity: [780, 1010], g1: [0.22, 0.42], g7: [0.15, 0.21], lengthM: [0.018, 0.027] },
   '556-nato': { massKg: [0.0032, 0.0052], velocity: [820, 1010], g1: [0.22, 0.42], g7: [0.15, 0.21], lengthM: [0.018, 0.027] },
-  '22-lr': { massKg: [0.0025, 0.0027], velocity: [310, 385], g1: [0.1, 0.18], g7: [0, 0], lengthM: [0, 0] }
+  '22-lr': { massKg: [0.0025, 0.0027], velocity: [310, 385], g1: [0.1, 0.18], g7: [0, 0], lengthM: [0, 0] },
+  '65-creedmoor': { massKg: [0.0088, 0.0097], velocity: [800, 870], g1: [0.55, 0.75], g7: [0.28, 0.38], lengthM: [0.033, 0.038] },
+  '65-prc': { massKg: [0.0088, 0.0105], velocity: [860, 930], g1: [0.55, 0.75], g7: [0.28, 0.38], lengthM: [0.033, 0.038] },
+  '243-win': { massKg: [0.0055, 0.0068], velocity: [890, 980], g1: [0.30, 0.45], g7: [0.18, 0.24], lengthM: [0.024, 0.028] }
 };
 
 describe('load library', () => {
-  it('ships the four first-pass cartridges, each with loads', () => {
-    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '308-win', '556-nato']);
+  it('ships the library cartridges, each with loads', () => {
+    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '243-win', '308-win', '556-nato', '65-creedmoor', '65-prc']);
     for (const c of library.cartridges) {
-      expect(library.loads.filter(l => l.cartridgeId === c.id).length, c.id).toBeGreaterThanOrEqual(7);
+      const minLoads = c.id === '65-creedmoor' || c.id === '65-prc' || c.id === '243-win' ? 3 : 7;
+      expect(library.loads.filter(l => l.cartridgeId === c.id).length, c.id).toBeGreaterThanOrEqual(minLoads);
     }
   });
 
@@ -85,7 +89,6 @@ describe('load library', () => {
     for (const load of library.loads) {
       if (!load.bcModelStated) {
         expect(load.bcG1.value, load.id).not.toBeNull();
-        expect(load.bcG7.value, load.id).toBeNull();
         expect(load.bcRA4.value, load.id).toBeNull();
         expect(load.note ?? '', load.id).toContain('without naming a drag model');
       }

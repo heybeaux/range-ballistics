@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import loadsJson from '../src/data/loads.json';
 import {
   addProfile,
   activeState,
@@ -300,7 +301,8 @@ describe('addRifleDialogHtml', () => {
     const html = addRifleDialogHtml();
     expect(html).toContain('role="dialog"');
     expect(html).toContain('id="newRifleName"');
-    expect(html.match(/<option/g)).toHaveLength(5);
+    // One option per library cartridge plus "other".
+    expect(html.match(/<option/g)).toHaveLength(loadsJson.cartridges.length + 1);
     expect(html).toContain('id="addRifleConfirm"');
     expect(html).toContain('id="addRifleCancel"');
   });

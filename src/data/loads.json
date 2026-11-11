@@ -119,6 +119,90 @@
         "twistM": 0.4064,
         "barrelLengthM": 0.508
       }
+    },
+    {
+      "id": "65-creedmoor",
+      "name": "6.5 Creedmoor",
+      "bulletDiameterM": 0.0067056,
+      "diameterSource": {
+        "text": "SAAMI 6.5 Creedmoor drawing: bullet diameter .2644 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2032,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "65-prc",
+      "name": "6.5 PRC",
+      "bulletDiameterM": 0.0067056,
+      "diameterSource": {
+        "text": "SAAMI 6.5 PRC drawing: bullet diameter .2644 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2032,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "243-win",
+      "name": ".243 Winchester",
+      "bulletDiameterM": 0.0061722,
+      "diameterSource": {
+        "text": "SAAMI 243 Winchester drawing: bullet diameter .243 - .003 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.254,
+        "barrelLengthM": 0.6096
+      }
     }
   ],
   "loads": [
@@ -1732,6 +1816,330 @@
       "testBarrelM": 0.65,
       "velocityByBarrel": [],
       "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "hornady-81500",
+      "cartridgeId": "65-creedmoor",
+      "name": "Hornady Match 140 gr ELD Match (81500)",
+      "bulletMassKg": 0.00907185,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.646,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.326,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 826.01,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "hornady-81499",
+      "cartridgeId": "65-creedmoor",
+      "name": "Hornady Precision Hunter 143 gr ELD-X (81499)",
+      "bulletMassKg": 0.00926624,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.623,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.314,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 822.96,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/6-5-creedmoor-143-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-gm65crdbh2",
+      "cartridgeId": "65-creedmoor",
+      "name": "Federal Gold Medal Berger 140 gr (GM65CRDBH2)",
+      "bulletMassKg": 0.00907185,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": 0.035738,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM65CRDBH2.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.607,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM65CRDBH2.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.311,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM65CRDBH2.html",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 830.58,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM65CRDBH2.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The G7 value is labeled on the page."
+    },
+    {
+      "id": "hornady-81620",
+      "cartridgeId": "65-prc",
+      "name": "Hornady Match 147 gr ELD Match (81620)",
+      "bulletMassKg": 0.00952544,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.697,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.351,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 886.97,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/6.5-prc-147-gr-eld-match",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "hornady-81621",
+      "cartridgeId": "65-prc",
+      "name": "Hornady Precision Hunter 143 gr ELD-X (81621)",
+      "bulletMassKg": 0.00926624,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.623,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.314,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 902.21,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/6.5-prc-143-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "berger-50010",
+      "cartridgeId": "65-prc",
+      "name": "Berger 156 gr EOL Elite Hunter (50010)",
+      "bulletMassKg": 0.01010863,
+      "bulletDiameterM": 0.0067056,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.679,
+        "sourceUrl": "https://bergerbullets.com/product/6-5-prc-156-grain-extreme-outer-limits-eol-elite-hunter-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.347,
+        "sourceUrl": "https://bergerbullets.com/product/6-5-prc-156-grain-extreme-outer-limits-eol-elite-hunter-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 883.92,
+        "sourceUrl": "https://bergerbullets.com/product/6-5-prc-156-grain-extreme-outer-limits-eol-elite-hunter-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:8."
+    },
+    {
+      "id": "hornady-80462",
+      "cartridgeId": "243-win",
+      "name": "Hornady Precision Hunter 90 gr ELD-X (80462)",
+      "bulletMassKg": 0.0058319,
+      "bulletDiameterM": 0.0061722,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.41,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.206,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 960.12,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/243-win-90-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-f243fs1",
+      "cartridgeId": "243-win",
+      "name": "Federal Fusion 95 gr (F243FS1)",
+      "bulletMassKg": 0.0061559,
+      "bulletDiameterM": 0.0061722,
+      "bulletLengthM": {
+        "value": 0.026035,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F243FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.376,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F243FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 908.3,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F243FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "remington-29015",
+      "cartridgeId": "243-win",
+      "name": "Remington Core-Lokt Tipped 95 gr (29015)",
+      "bulletMassKg": 0.0061559,
+      "bulletDiameterM": 0.0061722,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.355,
+        "sourceUrl": "https://www.remington.com/rifle/core-lokt-tipped/29-29015.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 957.07,
+        "sourceUrl": "https://www.remington.com/rifle/core-lokt-tipped/29-29015.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
     }
   ]
 }
