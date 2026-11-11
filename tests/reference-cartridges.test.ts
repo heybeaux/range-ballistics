@@ -1,6 +1,8 @@
 // Scout-owned check. The coder does not edit this file.
-// Reference shots for .22 LR (G1 and RA4), .223 Remington and 5.56x45 NATO, through the public
-// solve() entry: our own zero solve, our own spin drift. Tolerance from the spec: 0.05 MIL at that range, or 1%, whichever is larger.
+// Reference shots for every library cartridge beyond .308: .22 LR (G1 and RA4), .223 Remington,
+// 5.56x45 NATO, and the 2026-11-11 additions (6.5 CM, 6.5 PRC, .243, 7mm-08, 7mm RM, 7mm PRC,
+// .270, .30-06, .300 WM, .300 PRC, .450 BM), through the public solve() entry: our own zero
+// solve, our own spin drift. Tolerance from the spec: 0.05 MIL at that range, or 1%, whichever is larger.
 import { describe, it, expect } from 'vitest';
 import reference from './reference/cases-cartridges.json';
 import { solve, sampleAt } from '../src/solver/solve';

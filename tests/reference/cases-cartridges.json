@@ -1426,6 +1426,2559 @@
      "mach": 1.0384
     }
    ]
+  },
+  {
+   "name": "65cm-g7-140gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 826.01,
+    "bc": 0.326,
+    "dragModel": "G7",
+    "bulletMassKg": 0.0090718474,
+    "bulletDiameterM": 0.0067056,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00137537,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 783.215,
+     "timeS": 0.11369,
+     "mach": 2.3016
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.07033,
+     "windageM": 0.0,
+     "speedMps": 741.651,
+     "timeS": 0.23366,
+     "mach": 2.1794
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.28991,
+     "windageM": 0.0,
+     "speedMps": 701.361,
+     "timeS": 0.36045,
+     "mach": 2.061
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.6764,
+     "windageM": 0.0,
+     "speedMps": 662.395,
+     "timeS": 0.49461,
+     "mach": 1.9465
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.25003,
+     "windageM": 0.0,
+     "speedMps": 624.745,
+     "timeS": 0.63676,
+     "mach": 1.8359
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.03405,
+     "windageM": 0.0,
+     "speedMps": 588.295,
+     "timeS": 0.7876,
+     "mach": 1.7288
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.05538,
+     "windageM": 0.0,
+     "speedMps": 552.911,
+     "timeS": 0.94793,
+     "mach": 1.6248
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.34543,
+     "windageM": 0.0,
+     "speedMps": 518.527,
+     "timeS": 1.11872,
+     "mach": 1.5238
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.94108,
+     "windageM": 0.0,
+     "speedMps": 485.093,
+     "timeS": 1.30107,
+     "mach": 1.4255
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -7.886,
+     "windageM": 0.0,
+     "speedMps": 452.609,
+     "timeS": 1.49625,
+     "mach": 1.3301
+    }
+   ]
+  },
+  {
+   "name": "65cm-g1-140gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 830.58,
+    "bc": 0.607,
+    "dragModel": "G1",
+    "bulletMassKg": 0.0090718474,
+    "bulletDiameterM": 0.0067056,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00136954,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.01418,
+     "speedMps": 784.743,
+     "timeS": 0.11326,
+     "mach": 2.3061
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.06983,
+     "windageM": -0.05831,
+     "speedMps": 740.412,
+     "timeS": 0.23323,
+     "mach": 2.1758
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.28944,
+     "windageM": -0.13497,
+     "speedMps": 697.519,
+     "timeS": 0.36047,
+     "mach": 2.0498
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.67783,
+     "windageM": -0.24712,
+     "speedMps": 656.024,
+     "timeS": 0.49565,
+     "mach": 1.9278
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.25706,
+     "windageM": -0.39806,
+     "speedMps": 615.949,
+     "timeS": 0.6395,
+     "mach": 1.8101
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.05278,
+     "windageM": -0.59142,
+     "speedMps": 577.374,
+     "timeS": 0.79285,
+     "mach": 1.6967
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.0949,
+     "windageM": -0.83117,
+     "speedMps": 540.399,
+     "timeS": 0.95657,
+     "mach": 1.588
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.41833,
+     "windageM": -1.12154,
+     "speedMps": 505.181,
+     "timeS": 1.13162,
+     "mach": 1.4845
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -6.06368,
+     "windageM": -1.46685,
+     "speedMps": 471.916,
+     "timeS": 1.31895,
+     "mach": 1.3868
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -8.07793,
+     "windageM": -1.87134,
+     "speedMps": 440.843,
+     "timeS": 1.51952,
+     "mach": 1.2955
+    }
+   ]
+  },
+  {
+   "name": "65cm-g1-140gr-spin-drift",
+   "input": {
+    "muzzleVelocityMps": 830.58,
+    "bc": 0.607,
+    "dragModel": "G1",
+    "bulletMassKg": 0.0090718474,
+    "bulletDiameterM": 0.0067056,
+    "bulletLengthM": 0.0357378,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": true,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00136954,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.00163,
+     "speedMps": 784.743,
+     "timeS": 0.11326,
+     "mach": 2.3061
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.06983,
+     "windageM": 0.00613,
+     "speedMps": 740.412,
+     "timeS": 0.23323,
+     "mach": 2.1758
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.28944,
+     "windageM": 0.0136,
+     "speedMps": 697.52,
+     "timeS": 0.36047,
+     "mach": 2.0498
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.67783,
+     "windageM": 0.02436,
+     "speedMps": 656.024,
+     "timeS": 0.49565,
+     "mach": 1.9278
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.25706,
+     "windageM": 0.03883,
+     "speedMps": 615.95,
+     "timeS": 0.6395,
+     "mach": 1.8101
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.05277,
+     "windageM": 0.05755,
+     "speedMps": 577.374,
+     "timeS": 0.79285,
+     "mach": 1.6967
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.09489,
+     "windageM": 0.08114,
+     "speedMps": 540.399,
+     "timeS": 0.95657,
+     "mach": 1.588
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.41832,
+     "windageM": 0.11035,
+     "speedMps": 505.181,
+     "timeS": 1.13161,
+     "mach": 1.4845
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -6.06365,
+     "windageM": 0.14606,
+     "speedMps": 471.915,
+     "timeS": 1.31895,
+     "mach": 1.3868
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -8.07789,
+     "windageM": 0.18925,
+     "speedMps": 440.841,
+     "timeS": 1.51952,
+     "mach": 1.2955
+    }
+   ]
+  },
+  {
+   "name": "65prc-g7-147gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 886.97,
+    "bc": 0.351,
+    "dragModel": "G7",
+    "bulletMassKg": 0.00952543977,
+    "bulletDiameterM": 0.0067056,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00128278,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 845.704,
+     "timeS": 0.10558,
+     "mach": 2.4852
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05126,
+     "windageM": 0.0,
+     "speedMps": 805.415,
+     "timeS": 0.21637,
+     "mach": 2.3668
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.22904,
+     "windageM": 0.0,
+     "speedMps": 766.172,
+     "timeS": 0.33278,
+     "mach": 2.2515
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.54666,
+     "windageM": 0.0,
+     "speedMps": 728.004,
+     "timeS": 0.45521,
+     "mach": 2.1393
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.01916,
+     "windageM": 0.0,
+     "speedMps": 690.947,
+     "timeS": 0.58415,
+     "mach": 2.0304
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.6636,
+     "windageM": 0.0,
+     "speedMps": 655.044,
+     "timeS": 0.72007,
+     "mach": 1.9249
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.49939,
+     "windageM": 0.0,
+     "speedMps": 620.263,
+     "timeS": 0.86353,
+     "mach": 1.8227
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.54858,
+     "windageM": 0.0,
+     "speedMps": 586.502,
+     "timeS": 1.01515,
+     "mach": 1.7235
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.83652,
+     "windageM": 0.0,
+     "speedMps": 553.656,
+     "timeS": 1.17563,
+     "mach": 1.627
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.3924,
+     "windageM": 0.0,
+     "speedMps": 521.676,
+     "timeS": 1.34579,
+     "mach": 1.533
+    }
+   ]
+  },
+  {
+   "name": "65prc-g1-156gr-wind-4.5mps-from-9",
+   "input": {
+    "muzzleVelocityMps": 883.92,
+    "bc": 0.679,
+    "dragModel": "G1",
+    "bulletMassKg": 0.010108629959999999,
+    "bulletDiameterM": 0.0067056,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 9.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00128763,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.01161,
+     "speedMps": 841.224,
+     "timeS": 0.10604,
+     "mach": 2.4721
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05248,
+     "windageM": 0.0475,
+     "speedMps": 799.852,
+     "timeS": 0.21752,
+     "mach": 2.3505
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.23327,
+     "windageM": 0.10944,
+     "speedMps": 759.713,
+     "timeS": 0.33483,
+     "mach": 2.2325
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.55628,
+     "windageM": 0.19941,
+     "speedMps": 720.743,
+     "timeS": 0.4584,
+     "mach": 2.118
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.03732,
+     "windageM": 0.31963,
+     "speedMps": 682.906,
+     "timeS": 0.58874,
+     "mach": 2.0068
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.6944,
+     "windageM": 0.47255,
+     "speedMps": 646.181,
+     "timeS": 0.7264,
+     "mach": 1.8989
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.54812,
+     "windageM": 0.66091,
+     "speedMps": 610.607,
+     "timeS": 0.87198,
+     "mach": 1.7944
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.62208,
+     "windageM": 0.88765,
+     "speedMps": 576.24,
+     "timeS": 1.02615,
+     "mach": 1.6934
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.94336,
+     "windageM": 1.15598,
+     "speedMps": 543.155,
+     "timeS": 1.18962,
+     "mach": 1.5961
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.54302,
+     "windageM": 1.46927,
+     "speedMps": 511.464,
+     "timeS": 1.36315,
+     "mach": 1.503
+    }
+   ]
+  },
+  {
+   "name": "243-g7-90gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 960.12,
+    "bc": 0.206,
+    "dragModel": "G7",
+    "bulletMassKg": 0.0058319018999999995,
+    "bulletDiameterM": 0.006172199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00120695,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 887.768,
+     "timeS": 0.09904,
+     "mach": 2.6088
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04082,
+     "windageM": 0.0,
+     "speedMps": 818.019,
+     "timeS": 0.20634,
+     "mach": 2.4039
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.20453,
+     "windageM": 0.0,
+     "speedMps": 751.231,
+     "timeS": 0.32299,
+     "mach": 2.2076
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.51399,
+     "windageM": 0.0,
+     "speedMps": 687.602,
+     "timeS": 0.45022,
+     "mach": 2.0206
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.99744,
+     "windageM": 0.0,
+     "speedMps": 627.281,
+     "timeS": 0.58946,
+     "mach": 1.8434
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.69003,
+     "windageM": 0.0,
+     "speedMps": 569.972,
+     "timeS": 0.74239,
+     "mach": 1.6749
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.63608,
+     "windageM": 0.0,
+     "speedMps": 515.245,
+     "timeS": 0.91113,
+     "mach": 1.5141
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.89247,
+     "windageM": 0.0,
+     "speedMps": 462.901,
+     "timeS": 1.09837,
+     "mach": 1.3603
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.53362,
+     "windageM": 0.0,
+     "speedMps": 413.049,
+     "timeS": 1.30751,
+     "mach": 1.2138
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -7.65831,
+     "windageM": 0.0,
+     "speedMps": 366.29,
+     "timeS": 1.5427,
+     "mach": 1.0764
+    }
+   ]
+  },
+  {
+   "name": "243-g1-95gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 908.3,
+    "bc": 0.376,
+    "dragModel": "G1",
+    "bulletMassKg": 0.006155896449999999,
+    "bulletDiameterM": 0.006172199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00127145,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.02057,
+     "speedMps": 830.803,
+     "timeS": 0.10527,
+     "mach": 2.4414
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05568,
+     "windageM": -0.08582,
+     "speedMps": 757.558,
+     "timeS": 0.22054,
+     "mach": 2.2262
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.25476,
+     "windageM": -0.20196,
+     "speedMps": 688.128,
+     "timeS": 0.34719,
+     "mach": 2.0222
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.62768,
+     "windageM": -0.3766,
+     "speedMps": 622.354,
+     "timeS": 0.48693,
+     "mach": 1.8289
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.21321,
+     "windageM": -0.6188,
+     "speedMps": 560.45,
+     "timeS": 0.64178,
+     "mach": 1.647
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.06096,
+     "windageM": -0.93896,
+     "speedMps": 502.892,
+     "timeS": 0.81407,
+     "mach": 1.4778
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.23438,
+     "windageM": -1.34825,
+     "speedMps": 450.467,
+     "timeS": 1.0063,
+     "mach": 1.3238
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.81349,
+     "windageM": -1.85712,
+     "speedMps": 404.225,
+     "timeS": 1.2208,
+     "mach": 1.1879
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -6.89587,
+     "windageM": -2.47229,
+     "speedMps": 365.517,
+     "timeS": 1.45908,
+     "mach": 1.0741
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -9.59266,
+     "windageM": -3.19217,
+     "speedMps": 335.515,
+     "timeS": 1.72078,
+     "mach": 0.9859
+    }
+   ]
+  },
+  {
+   "name": "7mm08-g7-150gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 844.3,
+    "bc": 0.289,
+    "dragModel": "G7",
+    "bulletMassKg": 0.009719836499999999,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2413,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00134893,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 795.547,
+     "timeS": 0.11157,
+     "mach": 2.3378
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.06625,
+     "windageM": 0.0,
+     "speedMps": 748.345,
+     "timeS": 0.23008,
+     "mach": 2.1991
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.27915,
+     "windageM": 0.0,
+     "speedMps": 702.754,
+     "timeS": 0.35618,
+     "mach": 2.0651
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.65835,
+     "windageM": 0.0,
+     "speedMps": 658.843,
+     "timeS": 0.49057,
+     "mach": 1.9361
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.22677,
+     "windageM": 0.0,
+     "speedMps": 616.593,
+     "timeS": 0.63404,
+     "mach": 1.8119
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.01129,
+     "windageM": 0.0,
+     "speedMps": 575.828,
+     "timeS": 0.7875,
+     "mach": 1.6921
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.04362,
+     "windageM": 0.0,
+     "speedMps": 536.388,
+     "timeS": 0.95204,
+     "mach": 1.5762
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.36164,
+     "windageM": 0.0,
+     "speedMps": 498.178,
+     "timeS": 1.12894,
+     "mach": 1.464
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -6.01094,
+     "windageM": 0.0,
+     "speedMps": 461.174,
+     "timeS": 1.31974,
+     "mach": 1.3552
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -8.04697,
+     "windageM": 0.0,
+     "speedMps": 425.435,
+     "timeS": 1.52622,
+     "mach": 1.2502
+    }
+   ]
+  },
+  {
+   "name": "7mm08-g1-140gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 868.68,
+    "bc": 0.39,
+    "dragModel": "G1",
+    "bulletMassKg": 0.0090718474,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2413,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00132447,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.02104,
+     "speedMps": 796.027,
+     "timeS": 0.10997,
+     "mach": 2.3392
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.06631,
+     "windageM": -0.08781,
+     "speedMps": 727.1,
+     "timeS": 0.23017,
+     "mach": 2.1367
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.28826,
+     "windageM": -0.20662,
+     "speedMps": 661.622,
+     "timeS": 0.36201,
+     "mach": 1.9443
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.69825,
+     "windageM": -0.38512,
+     "speedMps": 599.58,
+     "timeS": 0.5072,
+     "mach": 1.7619
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.33724,
+     "windageM": -0.63222,
+     "speedMps": 541.262,
+     "timeS": 0.66774,
+     "mach": 1.5906
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.25729,
+     "windageM": -0.95795,
+     "speedMps": 487.193,
+     "timeS": 0.84587,
+     "mach": 1.4317
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.5242,
+     "windageM": -1.37269,
+     "speedMps": 438.149,
+     "timeS": 1.04391,
+     "mach": 1.2876
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -5.21974,
+     "windageM": -1.88559,
+     "speedMps": 395.145,
+     "timeS": 1.2639,
+     "mach": 1.1612
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -7.44169,
+     "windageM": -2.50153,
+     "speedMps": 359.433,
+     "timeS": 1.50695,
+     "mach": 1.0562
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -10.29886,
+     "windageM": -3.21711,
+     "speedMps": 331.879,
+     "timeS": 1.77228,
+     "mach": 0.9752
+    }
+   ]
+  },
+  {
+   "name": "7rm-g7-162gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 906.78,
+    "bc": 0.318,
+    "dragModel": "G7",
+    "bulletMassKg": 0.010497423419999999,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2413,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00125901,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 860.804,
+     "timeS": 0.1035,
+     "mach": 2.5296
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04729,
+     "windageM": 0.0,
+     "speedMps": 815.987,
+     "timeS": 0.2126,
+     "mach": 2.3979
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.21787,
+     "windageM": 0.0,
+     "speedMps": 772.424,
+     "timeS": 0.32778,
+     "mach": 2.2699
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.52606,
+     "windageM": 0.0,
+     "speedMps": 730.165,
+     "timeS": 0.44954,
+     "mach": 2.1457
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.98825,
+     "windageM": 0.0,
+     "speedMps": 689.256,
+     "timeS": 0.57844,
+     "mach": 2.0255
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.62328,
+     "windageM": 0.0,
+     "speedMps": 649.752,
+     "timeS": 0.71509,
+     "mach": 1.9094
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.45283,
+     "windageM": 0.0,
+     "speedMps": 611.596,
+     "timeS": 0.86015,
+     "mach": 1.7973
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.50195,
+     "windageM": 0.0,
+     "speedMps": 574.647,
+     "timeS": 1.0144,
+     "mach": 1.6887
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.79984,
+     "windageM": 0.0,
+     "speedMps": 538.79,
+     "timeS": 1.17875,
+     "mach": 1.5833
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.38078,
+     "windageM": 0.0,
+     "speedMps": 503.952,
+     "timeS": 1.35425,
+     "mach": 1.4809
+    }
+   ]
+  },
+  {
+   "name": "7rm-g1-155gr-wind-6.7mps-from-1:30",
+   "input": {
+    "muzzleVelocityMps": 914.4,
+    "bc": 0.586,
+    "dragModel": "G1",
+    "bulletMassKg": 0.010043831049999999,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2413,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 6.7056,
+     "clock": 1.5
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00125147,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -1e-05,
+     "windageM": -0.01373,
+     "speedMps": 863.472,
+     "timeS": 0.10291,
+     "mach": 2.5374
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04663,
+     "windageM": -0.0564,
+     "speedMps": 814.424,
+     "timeS": 0.21196,
+     "mach": 2.3933
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.21708,
+     "windageM": -0.13041,
+     "speedMps": 767.092,
+     "timeS": 0.32765,
+     "mach": 2.2542
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.52718,
+     "windageM": -0.23856,
+     "speedMps": 721.352,
+     "timeS": 0.45057,
+     "mach": 2.1198
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.99528,
+     "windageM": -0.38403,
+     "speedMps": 677.139,
+     "timeS": 0.58141,
+     "mach": 1.9899
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.64276,
+     "windageM": -0.57043,
+     "speedMps": 634.424,
+     "timeS": 0.72093,
+     "mach": 1.8643
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.49471,
+     "windageM": -0.80184,
+     "speedMps": 593.271,
+     "timeS": 0.86999,
+     "mach": 1.7434
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.5806,
+     "windageM": -1.08275,
+     "speedMps": 553.775,
+     "timeS": 1.02954,
+     "mach": 1.6273
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.93516,
+     "windageM": -1.41804,
+     "speedMps": 516.081,
+     "timeS": 1.20062,
+     "mach": 1.5166
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.59922,
+     "windageM": -1.81288,
+     "speedMps": 480.398,
+     "timeS": 1.38432,
+     "mach": 1.4117
+    }
+   ]
+  },
+  {
+   "name": "7prc-g7-180gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 906.78,
+    "bc": 0.391,
+    "dragModel": "G7",
+    "bulletMassKg": 0.011663803799999999,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00125531,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 869.3,
+     "timeS": 0.10299,
+     "mach": 2.5546
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04509,
+     "windageM": 0.0,
+     "speedMps": 832.577,
+     "timeS": 0.21047,
+     "mach": 2.4466
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.20856,
+     "windageM": 0.0,
+     "speedMps": 796.661,
+     "timeS": 0.32275,
+     "mach": 2.3411
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.50133,
+     "windageM": 0.0,
+     "speedMps": 761.594,
+     "timeS": 0.44014,
+     "mach": 2.238
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.9356,
+     "windageM": 0.0,
+     "speedMps": 727.398,
+     "timeS": 0.563,
+     "mach": 2.1376
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.52497,
+     "windageM": 0.0,
+     "speedMps": 694.097,
+     "timeS": 0.69169,
+     "mach": 2.0397
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.2847,
+     "windageM": 0.0,
+     "speedMps": 661.726,
+     "timeS": 0.82662,
+     "mach": 1.9446
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.23188,
+     "windageM": 0.0,
+     "speedMps": 630.273,
+     "timeS": 0.96822,
+     "mach": 1.8521
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.3857,
+     "windageM": 0.0,
+     "speedMps": 599.666,
+     "timeS": 1.11697,
+     "mach": 1.7622
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -5.76783,
+     "windageM": 0.0,
+     "speedMps": 569.828,
+     "timeS": 1.27342,
+     "mach": 1.6745
+    }
+   ]
+  },
+  {
+   "name": "7prc-g1-155gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 944.88,
+    "bc": 0.586,
+    "dragModel": "G1",
+    "bulletMassKg": 0.010043831049999999,
+    "bulletDiameterM": 0.007213599999999999,
+    "bulletLengthM": null,
+    "twistM": 0.2032,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00121592,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.01236,
+     "speedMps": 893.224,
+     "timeS": 0.09954,
+     "mach": 2.6249
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.0394,
+     "windageM": -0.05068,
+     "speedMps": 843.537,
+     "timeS": 0.20489,
+     "mach": 2.4788
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.19419,
+     "windageM": -0.11705,
+     "speedMps": 795.637,
+     "timeS": 0.31651,
+     "mach": 2.3381
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.47868,
+     "windageM": -0.21383,
+     "speedMps": 749.38,
+     "timeS": 0.43493,
+     "mach": 2.2022
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.90942,
+     "windageM": -0.34375,
+     "speedMps": 704.679,
+     "timeS": 0.56076,
+     "mach": 2.0708
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.50554,
+     "windageM": -0.50987,
+     "speedMps": 661.482,
+     "timeS": 0.6947,
+     "mach": 1.9439
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.28938,
+     "windageM": -0.7157,
+     "speedMps": 619.801,
+     "timeS": 0.83752,
+     "mach": 1.8214
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.28707,
+     "windageM": -0.9651,
+     "speedMps": 579.719,
+     "timeS": 0.99008,
+     "mach": 1.7036
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.52922,
+     "windageM": -1.26229,
+     "speedMps": 541.345,
+     "timeS": 1.15333,
+     "mach": 1.5908
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.05174,
+     "windageM": -1.61179,
+     "speedMps": 504.852,
+     "timeS": 1.32829,
+     "mach": 1.4836
+    }
+   ]
+  },
+  {
+   "name": "270-g7-145gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 905.26,
+    "bc": 0.27,
+    "dragModel": "G7",
+    "bulletMassKg": 0.009395841949999999,
+    "bulletDiameterM": 0.0070358,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.0012645,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 851.276,
+     "timeS": 0.10416,
+     "mach": 2.5016
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04983,
+     "windageM": 0.0,
+     "speedMps": 798.927,
+     "timeS": 0.21504,
+     "mach": 2.3478
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.22835,
+     "windageM": 0.0,
+     "speedMps": 748.347,
+     "timeS": 0.3333,
+     "mach": 2.1991
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.55355,
+     "windageM": 0.0,
+     "speedMps": 699.611,
+     "timeS": 0.45968,
+     "mach": 2.0559
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.04659,
+     "windageM": 0.0,
+     "speedMps": 652.804,
+     "timeS": 0.59499,
+     "mach": 1.9184
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.73243,
+     "windageM": 0.0,
+     "speedMps": 607.876,
+     "timeS": 0.74016,
+     "mach": 1.7863
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.64067,
+     "windageM": 0.0,
+     "speedMps": 564.601,
+     "timeS": 0.89625,
+     "mach": 1.6592
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.80679,
+     "windageM": 0.0,
+     "speedMps": 522.812,
+     "timeS": 1.06456,
+     "mach": 1.5364
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.27375,
+     "windageM": 0.0,
+     "speedMps": 482.412,
+     "timeS": 1.24665,
+     "mach": 1.4176
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -7.09419,
+     "windageM": 0.0,
+     "speedMps": 443.403,
+     "timeS": 1.44439,
+     "mach": 1.303
+    }
+   ]
+  },
+  {
+   "name": "270-g1-130gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 932.69,
+    "bc": 0.336,
+    "dragModel": "G1",
+    "bulletMassKg": 0.0084238583,
+    "bulletDiameterM": 0.0070358,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00124537,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.02233,
+     "speedMps": 844.699,
+     "timeS": 0.10303,
+     "mach": 2.4823
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05188,
+     "windageM": -0.09355,
+     "speedMps": 762.175,
+     "timeS": 0.21701,
+     "mach": 2.2398
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.24555,
+     "windageM": -0.22126,
+     "speedMps": 684.459,
+     "timeS": 0.34361,
+     "mach": 2.0114
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.61511,
+     "windageM": -0.41497,
+     "speedMps": 611.335,
+     "timeS": 0.48498,
+     "mach": 1.7965
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.20526,
+     "windageM": -0.68623,
+     "speedMps": 543.14,
+     "timeS": 0.6437,
+     "mach": 1.5961
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.07492,
+     "windageM": -1.04836,
+     "speedMps": 480.643,
+     "timeS": 0.82275,
+     "mach": 1.4124
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.30141,
+     "windageM": -1.51525,
+     "speedMps": 425.08,
+     "timeS": 1.02522,
+     "mach": 1.2492
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.98361,
+     "windageM": -2.09823,
+     "speedMps": 378.119,
+     "timeS": 1.25367,
+     "mach": 1.1112
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -7.24042,
+     "windageM": -2.8001,
+     "speedMps": 341.655,
+     "timeS": 1.50872,
+     "mach": 1.004
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -10.19959,
+     "windageM": -3.61003,
+     "speedMps": 315.518,
+     "timeS": 1.78793,
+     "mach": 0.9271
+    }
+   ]
+  },
+  {
+   "name": "3006-g7-178gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 838.2,
+    "bc": 0.278,
+    "dragModel": "G7",
+    "bulletMassKg": 0.011534205979999998,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00135966,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 787.745,
+     "timeS": 0.11253,
+     "mach": 2.3149
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.06885,
+     "windageM": 0.0,
+     "speedMps": 738.977,
+     "timeS": 0.23238,
+     "mach": 2.1716
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.28811,
+     "windageM": 0.0,
+     "speedMps": 691.963,
+     "timeS": 0.36026,
+     "mach": 2.0334
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.67893,
+     "windageM": 0.0,
+     "speedMps": 646.779,
+     "timeS": 0.49695,
+     "mach": 1.9006
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.26613,
+     "windageM": 0.0,
+     "speedMps": 603.343,
+     "timeS": 0.64333,
+     "mach": 1.773
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.07907,
+     "windageM": 0.0,
+     "speedMps": 561.445,
+     "timeS": 0.80045,
+     "mach": 1.6499
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.15275,
+     "windageM": 0.0,
+     "speedMps": 520.94,
+     "timeS": 0.96953,
+     "mach": 1.5309
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.52939,
+     "windageM": 0.0,
+     "speedMps": 481.744,
+     "timeS": 1.15207,
+     "mach": 1.4157
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -6.26042,
+     "windageM": 0.0,
+     "speedMps": 443.86,
+     "timeS": 1.34985,
+     "mach": 1.3043
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -8.40908,
+     "windageM": 0.0,
+     "speedMps": 407.433,
+     "timeS": 1.56493,
+     "mach": 1.1973
+    }
+   ]
+  },
+  {
+   "name": "3006-g1-168gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 822.96,
+    "bc": 0.463,
+    "dragModel": "G1",
+    "bulletMassKg": 0.010886216879999999,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00139056,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": 0.0,
+     "windageM": -0.019,
+     "speedMps": 763.512,
+     "timeS": 0.11536,
+     "mach": 2.2437
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.07749,
+     "windageM": -0.07883,
+     "speedMps": 706.59,
+     "timeS": 0.23986,
+     "mach": 2.0764
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.31963,
+     "windageM": -0.18435,
+     "speedMps": 652.083,
+     "timeS": 0.37457,
+     "mach": 1.9162
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.75513,
+     "windageM": -0.34117,
+     "speedMps": 600.033,
+     "timeS": 0.52076,
+     "mach": 1.7633
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.41903,
+     "windageM": -0.55571,
+     "speedMps": 550.621,
+     "timeS": 0.67987,
+     "mach": 1.6181
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -2.3542,
+     "windageM": -0.83503,
+     "speedMps": 504.145,
+     "timeS": 0.85346,
+     "mach": 1.4815
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -3.61295,
+     "windageM": -1.18654,
+     "speedMps": 461.039,
+     "timeS": 1.0432,
+     "mach": 1.3548
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -5.25856,
+     "windageM": -1.61734,
+     "speedMps": 421.845,
+     "timeS": 1.25068,
+     "mach": 1.2396
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -7.36609,
+     "windageM": -2.13302,
+     "speedMps": 387.245,
+     "timeS": 1.47714,
+     "mach": 1.138
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -10.02141,
+     "windageM": -2.73578,
+     "speedMps": 358.003,
+     "timeS": 1.72309,
+     "mach": 1.0519
+    }
+   ]
+  },
+  {
+   "name": "300wm-g7-200gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 871.73,
+    "bc": 0.301,
+    "dragModel": "G7",
+    "bulletMassKg": 0.012959782,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00130702,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 824.115,
+     "timeS": 0.10788,
+     "mach": 2.4218
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05739,
+     "windageM": 0.0,
+     "speedMps": 777.88,
+     "timeS": 0.22209,
+     "mach": 2.2859
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.25049,
+     "windageM": 0.0,
+     "speedMps": 733.096,
+     "timeS": 0.34318,
+     "mach": 2.1543
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.59637,
+     "windageM": 0.0,
+     "speedMps": 689.815,
+     "timeS": 0.47177,
+     "mach": 2.0271
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.11484,
+     "windageM": 0.0,
+     "speedMps": 648.099,
+     "timeS": 0.60853,
+     "mach": 1.9045
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.82885,
+     "windageM": 0.0,
+     "speedMps": 607.881,
+     "timeS": 0.75422,
+     "mach": 1.7863
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.76516,
+     "windageM": 0.0,
+     "speedMps": 568.994,
+     "timeS": 0.90971,
+     "mach": 1.6721
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.95526,
+     "windageM": 0.0,
+     "speedMps": 531.313,
+     "timeS": 1.07602,
+     "mach": 1.5613
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.4365,
+     "windageM": 0.0,
+     "speedMps": 494.757,
+     "timeS": 1.25439,
+     "mach": 1.4539
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -7.25358,
+     "windageM": 0.0,
+     "speedMps": 459.313,
+     "timeS": 1.44624,
+     "mach": 1.3498
+    }
+   ]
+  },
+  {
+   "name": "300wm-g1-190gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 883.92,
+    "bc": 0.533,
+    "dragModel": "G1",
+    "bulletMassKg": 0.012311792899999998,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.254,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00129313,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": -0.01488,
+     "speedMps": 829.766,
+     "timeS": 0.10678,
+     "mach": 2.4384
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05579,
+     "windageM": -0.06129,
+     "speedMps": 777.721,
+     "timeS": 0.22061,
+     "mach": 2.2854
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.24737,
+     "windageM": -0.14225,
+     "speedMps": 727.611,
+     "timeS": 0.34217,
+     "mach": 2.1382
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.59413,
+     "windageM": -0.26123,
+     "speedMps": 679.349,
+     "timeS": 0.47223,
+     "mach": 1.9964
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.11891,
+     "windageM": -0.4222,
+     "speedMps": 632.898,
+     "timeS": 0.61169,
+     "mach": 1.8599
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.84884,
+     "windageM": -0.62968,
+     "speedMps": 588.347,
+     "timeS": 0.76155,
+     "mach": 1.7289
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.81617,
+     "windageM": -0.88866,
+     "speedMps": 545.827,
+     "timeS": 0.92293,
+     "mach": 1.604
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -4.05938,
+     "windageM": -1.20456,
+     "speedMps": 505.55,
+     "timeS": 1.09704,
+     "mach": 1.4856
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.62419,
+     "windageM": -1.58297,
+     "speedMps": 467.805,
+     "timeS": 1.28514,
+     "mach": 1.3747
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -7.56457,
+     "windageM": -2.02933,
+     "speedMps": 432.94,
+     "timeS": 1.48843,
+     "mach": 1.2723
+    }
+   ]
+  },
+  {
+   "name": "300prc-g7-225gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 856.49,
+    "bc": 0.391,
+    "dragModel": "G7",
+    "bulletMassKg": 0.014579754749999998,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.21589999999999998,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00132366,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 820.038,
+     "timeS": 0.10911,
+     "mach": 2.4098
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.05853,
+     "windageM": 0.0,
+     "speedMps": 784.412,
+     "timeS": 0.22312,
+     "mach": 2.3051
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.25043,
+     "windageM": 0.0,
+     "speedMps": 749.642,
+     "timeS": 0.34237,
+     "mach": 2.2029
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.58837,
+     "windageM": 0.0,
+     "speedMps": 715.752,
+     "timeS": 0.4672,
+     "mach": 2.1033
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -1.08651,
+     "windageM": 0.0,
+     "speedMps": 682.768,
+     "timeS": 0.59801,
+     "mach": 2.0064
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.76071,
+     "windageM": 0.0,
+     "speedMps": 650.719,
+     "timeS": 0.7352,
+     "mach": 1.9122
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.62875,
+     "windageM": 0.0,
+     "speedMps": 619.566,
+     "timeS": 0.87922,
+     "mach": 1.8207
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.71064,
+     "windageM": 0.0,
+     "speedMps": 589.235,
+     "timeS": 1.03057,
+     "mach": 1.7315
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -5.02899,
+     "windageM": 0.0,
+     "speedMps": 559.645,
+     "timeS": 1.18982,
+     "mach": 1.6446
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -6.60951,
+     "windageM": 0.0,
+     "speedMps": 530.763,
+     "timeS": 1.35762,
+     "mach": 1.5597
+    }
+   ]
+  },
+  {
+   "name": "300prc-g1-215gr-altitude-1500m",
+   "input": {
+    "muzzleVelocityMps": 896.11,
+    "bc": 0.691,
+    "dragModel": "G1",
+    "bulletMassKg": 0.013931765649999999,
+    "bulletDiameterM": 0.007823199999999999,
+    "bulletLengthM": null,
+    "twistM": 0.21589999999999998,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 915.4,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 278.15,
+     "pressurePa": 84556.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00126854,
+   "rows": [
+    {
+     "rangeM": 91.44,
+     "pathM": -0.0,
+     "windageM": 0.0,
+     "speedMps": 859.622,
+     "timeS": 0.10419,
+     "mach": 2.5711
+    },
+    {
+     "rangeM": 182.88,
+     "pathM": -0.04754,
+     "windageM": 0.0,
+     "speedMps": 824.139,
+     "timeS": 0.21283,
+     "mach": 2.465
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.21589,
+     "windageM": 0.0,
+     "speedMps": 789.59,
+     "timeS": 0.32618,
+     "mach": 2.3617
+    },
+    {
+     "rangeM": 365.76,
+     "pathM": -0.51585,
+     "windageM": 0.0,
+     "speedMps": 755.922,
+     "timeS": 0.44454,
+     "mach": 2.261
+    },
+    {
+     "rangeM": 457.2,
+     "pathM": -0.95943,
+     "windageM": 0.0,
+     "speedMps": 723.09,
+     "timeS": 0.56823,
+     "mach": 2.1628
+    },
+    {
+     "rangeM": 548.64,
+     "pathM": -1.55997,
+     "windageM": 0.0,
+     "speedMps": 691.07,
+     "timeS": 0.69758,
+     "mach": 2.067
+    },
+    {
+     "rangeM": 640.08,
+     "pathM": -2.33235,
+     "windageM": 0.0,
+     "speedMps": 659.846,
+     "timeS": 0.833,
+     "mach": 1.9736
+    },
+    {
+     "rangeM": 731.52,
+     "pathM": -3.29324,
+     "windageM": 0.0,
+     "speedMps": 629.412,
+     "timeS": 0.9749,
+     "mach": 1.8826
+    },
+    {
+     "rangeM": 822.96,
+     "pathM": -4.46133,
+     "windageM": 0.0,
+     "speedMps": 599.803,
+     "timeS": 1.12373,
+     "mach": 1.794
+    },
+    {
+     "rangeM": 914.4,
+     "pathM": -5.8576,
+     "windageM": 0.0,
+     "speedMps": 571.05,
+     "timeS": 1.28,
+     "mach": 1.708
+    }
+   ]
+  },
+  {
+   "name": "450bm-g1-260gr-no-wind",
+   "input": {
+    "muzzleVelocityMps": 670.56,
+    "bc": 0.18,
+    "dragModel": "G1",
+    "bulletMassKg": 0.0168477166,
+    "bulletDiameterM": 0.0114808,
+    "bulletLengthM": null,
+    "twistM": 0.6095999999999999,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 275.32,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 0.0,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00184929,
+   "rows": [
+    {
+     "rangeM": 27.432,
+     "pathM": -0.02133,
+     "windageM": 0.0,
+     "speedMps": 629.523,
+     "timeS": 0.04222,
+     "mach": 1.8499
+    },
+    {
+     "rangeM": 54.864,
+     "pathM": 0.00219,
+     "windageM": 0.0,
+     "speedMps": 589.987,
+     "timeS": 0.08724,
+     "mach": 1.7338
+    },
+    {
+     "rangeM": 82.296,
+     "pathM": 0.00447,
+     "windageM": 0.0,
+     "speedMps": 552.04,
+     "timeS": 0.13531,
+     "mach": 1.6222
+    },
+    {
+     "rangeM": 109.728,
+     "pathM": -0.01751,
+     "windageM": 0.0,
+     "speedMps": 515.824,
+     "timeS": 0.18672,
+     "mach": 1.5158
+    },
+    {
+     "rangeM": 137.16,
+     "pathM": -0.06727,
+     "windageM": 0.0,
+     "speedMps": 481.532,
+     "timeS": 0.24177,
+     "mach": 1.415
+    },
+    {
+     "rangeM": 164.592,
+     "pathM": -0.14891,
+     "windageM": 0.0,
+     "speedMps": 449.395,
+     "timeS": 0.30075,
+     "mach": 1.3206
+    },
+    {
+     "rangeM": 192.024,
+     "pathM": -0.26714,
+     "windageM": 0.0,
+     "speedMps": 419.682,
+     "timeS": 0.36394,
+     "mach": 1.2333
+    },
+    {
+     "rangeM": 219.456,
+     "pathM": -0.42733,
+     "windageM": 0.0,
+     "speedMps": 392.72,
+     "timeS": 0.43154,
+     "mach": 1.1541
+    },
+    {
+     "rangeM": 246.888,
+     "pathM": -0.6354,
+     "windageM": 0.0,
+     "speedMps": 368.869,
+     "timeS": 0.50365,
+     "mach": 1.084
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -0.89772,
+     "windageM": 0.0,
+     "speedMps": 348.449,
+     "timeS": 0.58022,
+     "mach": 1.024
+    }
+   ]
+  },
+  {
+   "name": "450bm-g1-300gr-wind-4.5mps-from-3",
+   "input": {
+    "muzzleVelocityMps": 579.12,
+    "bc": 0.225,
+    "dragModel": "G1",
+    "bulletMassKg": 0.019439672999999998,
+    "bulletDiameterM": 0.0114808,
+    "bulletLengthM": null,
+    "twistM": 0.6095999999999999,
+    "twistDirection": "right",
+    "sightHeightM": 0.0635,
+    "zeroRangeM": 91.44,
+    "maxRangeM": 275.32,
+    "shotAngleRad": 0.0,
+    "atmosphere": {
+     "temperatureK": 288.15,
+     "pressurePa": 101325.0,
+     "relativeHumidity": 0.0
+    },
+    "wind": {
+     "speedMps": 4.4704,
+     "clock": 3.0
+    },
+    "spinDrift": false,
+    "coriolis": null
+   },
+   "zeroAngleRad": 0.00220626,
+   "rows": [
+    {
+     "rangeM": 27.432,
+     "pathM": -0.01438,
+     "windageM": -0.00574,
+     "speedMps": 548.998,
+     "timeS": 0.04865,
+     "mach": 1.6133
+    },
+    {
+     "rangeM": 54.864,
+     "pathM": 0.01023,
+     "windageM": -0.02352,
+     "speedMps": 519.993,
+     "timeS": 0.1,
+     "mach": 1.5281
+    },
+    {
+     "rangeM": 82.296,
+     "pathM": 0.00751,
+     "windageM": -0.05418,
+     "speedMps": 492.206,
+     "timeS": 0.15423,
+     "mach": 1.4464
+    },
+    {
+     "rangeM": 109.728,
+     "pathM": -0.0257,
+     "windageM": -0.09858,
+     "speedMps": 465.747,
+     "timeS": 0.21153,
+     "mach": 1.3687
+    },
+    {
+     "rangeM": 137.16,
+     "pathM": -0.09296,
+     "windageM": -0.15753,
+     "speedMps": 440.748,
+     "timeS": 0.27208,
+     "mach": 1.2952
+    },
+    {
+     "rangeM": 164.592,
+     "pathM": -0.19824,
+     "windageM": -0.23177,
+     "speedMps": 417.356,
+     "timeS": 0.33606,
+     "mach": 1.2265
+    },
+    {
+     "rangeM": 192.024,
+     "pathM": -0.34593,
+     "windageM": -0.32184,
+     "speedMps": 395.743,
+     "timeS": 0.40357,
+     "mach": 1.1629
+    },
+    {
+     "rangeM": 219.456,
+     "pathM": -0.54076,
+     "windageM": -0.42807,
+     "speedMps": 376.096,
+     "timeS": 0.47471,
+     "mach": 1.1052
+    },
+    {
+     "rangeM": 246.888,
+     "pathM": -0.78779,
+     "windageM": -0.5504,
+     "speedMps": 358.594,
+     "timeS": 0.54944,
+     "mach": 1.0538
+    },
+    {
+     "rangeM": 274.32,
+     "pathM": -1.09221,
+     "windageM": -0.68832,
+     "speedMps": 343.342,
+     "timeS": 0.62766,
+     "mach": 1.009
+    }
+   ]
   }
  ]
 }
