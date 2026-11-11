@@ -3,7 +3,6 @@ dist/
 .claude-flow/
 .swarm/
 ruvector.db
-AGENTS.md
 SOUL.md
 TOOLS.md
 IDENTITY.md
