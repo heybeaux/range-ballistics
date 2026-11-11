@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Range Ballistics</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header id="topbar">
+      <h1>Range Ballistics</h1>
+      <span id="rifleName"></span>
+      <button type="button" id="runSetup">Run setup again</button>
+    </header>
+    <main id="app">
+      <aside id="inputs"><form id="form" novalidate></form></aside>
+      <section id="stage">
+        <div id="scene"></div>
+        <div id="sceneBar">
+          <div class="bar-row">
+            <button type="button" data-camera="shooter">Shooter's view</button>
+            <button type="button" data-camera="side">Side view</button>
+            <button type="button" data-camera="top">Top-down view</button>
+            <button type="button" data-camera="reset">Reset view</button>
+            <label>Drop and drift scale <input type="range" id="exaggeration" min="1" max="20" step="1" value="1"></label>
+            <span id="exaggerationLabel"></span>
+          </div>
+          <div class="bar-row">
+            <button type="button" id="play">Play</button>
+            <button type="button" id="pause">Pause</button>
+            <button type="button" id="replay">Replay</button>
+            <label>Speed <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+            <input type="range" id="timeline" min="0" max="1000" step="1" value="0" aria-label="Flight timeline">
+            <span id="readout"></span>
+          </div>
+        </div>
+        <section id="dopeSection">
+          <div class="bar-row"><h2>Dope table</h2><button type="button" id="exportCsv">Export CSV</button><button type="button" id="printCard">Print card</button></div>
+          <div id="dope"></div>
+        </section>
+      </section>
+      <aside id="resultsPane"><div id="results"></div></aside>
+    </main>
+    <div id="printArea"></div>
+    <div id="setupRoot"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

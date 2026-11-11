@@ -1,0 +1,307 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #14171a;
+  color: #e8eaed;
+  font-family: system-ui, sans-serif;
+}
+
+#topbar {
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: #1e2328;
+}
+
+#topbar h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+#runSetup {
+  margin-left: auto;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 340px 1fr 340px;
+  height: calc(100vh - 48px);
+}
+
+#inputs,
+#resultsPane {
+  overflow-y: auto;
+  padding: 12px;
+  background: #1e2328;
+}
+
+#stage {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+#scene {
+  height: 52vh;
+  min-height: 320px;
+  position: relative;
+  background: #000;
+}
+
+#sceneBar,
+#dopeSection {
+  padding: 8px 12px;
+}
+
+.bar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+#timeline {
+  flex: 1;
+  min-width: 160px;
+}
+
+#readout {
+  font-variant-numeric: tabular-nums;
+  color: #9aa3ad;
+}
+
+fieldset.group {
+  border: 1px solid #333a42;
+  border-radius: 8px;
+  margin: 0 0 12px;
+  padding: 8px 10px;
+}
+
+fieldset.group legend {
+  color: #ffb000;
+  font-weight: 600;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+label.check {
+  font-weight: 400;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+input[type="text"],
+select {
+  background: #14171a;
+  color: #e8eaed;
+  border: 1px solid #3a424b;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.unit {
+  color: #9aa3ad;
+  min-width: 44px;
+  font-size: 13px;
+}
+
+.help {
+  color: #9aa3ad;
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.has-error input {
+  border-color: #ff6b6b;
+}
+
+button {
+  background: #2a3037;
+  color: #e8eaed;
+  border: 1px solid #3a424b;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #ffb000;
+}
+
+.results .notice,
+.print-card .notice {
+  border: 1px solid #ffb000;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: #ffb000;
+}
+
+.results.stale {
+  opacity: 0.55;
+}
+
+.stale-mark,
+.warning {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.estimate-mark,
+.velocity-note.estimate,
+.twist-note.unconfirmed {
+  background: #2b2410;
+  border-left: 3px solid #ffb000;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.correction {
+  background: #14171a;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.correction h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #9aa3ad;
+}
+
+.dial {
+  font-size: 20px;
+  margin: 0;
+}
+
+.equiv {
+  font-size: 12px;
+  color: #9aa3ad;
+  margin: 4px 0 0;
+}
+
+dl.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  font-size: 13px;
+}
+
+dl.facts dt {
+  color: #9aa3ad;
+}
+
+dl.facts dd {
+  margin: 0;
+}
+
+.sources,
+.load-note,
+.pressure-note,
+.sight-note {
+  font-size: 12px;
+  color: #9aa3ad;
+}
+
+a {
+  color: #ffb000;
+}
+
+table.dope {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+table.dope th,
+table.dope td {
+  padding: 4px 8px;
+  text-align: right;
+  border-bottom: 1px solid #333a42;
+}
+
+table.dope th {
+  color: #9aa3ad;
+}
+
+#exaggerationLabel {
+  color: #ffb000;
+  font-weight: 600;
+}
+
+#printArea {
+  display: none;
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  #topbar,
+  #app,
+  #setupRoot {
+    display: none;
+  }
+
+  #printArea {
+    display: block;
+    width: 9cm;
+    font-size: 9pt;
+    color: black;
+  }
+
+  #printArea .print-card .notice,
+  #printArea table.dope th,
+  #printArea table.dope td {
+    color: black;
+    border-color: black;
+  }
+}
+
+@media (max-width: 1100px) {
+  #app {
+    grid-template-columns: 300px 1fr;
+  }
+
+  #resultsPane {
+    grid-column: 1 / -1;
+  }
+}
