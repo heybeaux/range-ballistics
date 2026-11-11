@@ -31,14 +31,15 @@ const LIMITS: Record<string, { massKg: [number, number]; velocity: [number, numb
   '270-win': { massKg: [0.0082, 0.0096], velocity: [880, 960], g1: [0.30, 0.58], g7: [0.22, 0.30], lengthM: [0.032, 0.037] },
   '3006-spr': { massKg: [0.0106, 0.0120], velocity: [800, 860], g1: [0.40, 0.60], g7: [0.20, 0.30], lengthM: [0.028, 0.034] },
   '300-win-mag': { massKg: [0.0113, 0.0133], velocity: [850, 930], g1: [0.45, 0.65], g7: [0.24, 0.33], lengthM: [0.032, 0.037] },
-  '300-prc': { massKg: [0.0133, 0.0150], velocity: [830, 920], g1: [0.60, 0.85], g7: [0.30, 0.42], lengthM: [0, 0] } // no .300 PRC load here publishes bullet length
+  '300-prc': { massKg: [0.0133, 0.0150], velocity: [830, 920], g1: [0.60, 0.85], g7: [0.30, 0.42], lengthM: [0, 0] }, // no .300 PRC load here publishes bullet length
+  '450-bm': { massKg: [0.0163, 0.0198], velocity: [560, 690], g1: [0.12, 0.26], g7: [0, 0], lengthM: [0.018, 0.022] }
 };
 
 describe('load library', () => {
   it('ships the library cartridges, each with loads', () => {
-    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '243-win', '270-win', '300-prc', '300-win-mag', '3006-spr', '308-win', '556-nato', '65-creedmoor', '65-prc', '7mm-prc', '7mm-rem-mag', '7mm08-rem']);
+    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '243-win', '270-win', '300-prc', '300-win-mag', '3006-spr', '308-win', '450-bm', '556-nato', '65-creedmoor', '65-prc', '7mm-prc', '7mm-rem-mag', '7mm08-rem']);
     for (const c of library.cartridges) {
-      const minLoads = c.id === '65-creedmoor' || c.id === '65-prc' || c.id === '243-win' || c.id === '7mm08-rem' || c.id === '7mm-rem-mag' || c.id === '7mm-prc' || c.id === '270-win' || c.id === '3006-spr' || c.id === '300-win-mag' || c.id === '300-prc' ? 3 : 7;
+      const minLoads = c.id === '65-creedmoor' || c.id === '65-prc' || c.id === '243-win' || c.id === '7mm08-rem' || c.id === '7mm-rem-mag' || c.id === '7mm-prc' || c.id === '270-win' || c.id === '3006-spr' || c.id === '300-win-mag' || c.id === '300-prc' || c.id === '450-bm' ? 3 : 7;
       expect(library.loads.filter(l => l.cartridgeId === c.id).length, c.id).toBeGreaterThanOrEqual(minLoads);
     }
   });

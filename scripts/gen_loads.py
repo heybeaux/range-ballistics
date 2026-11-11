@@ -453,6 +453,32 @@ LOADS_300PRC = [
          note="Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:10."),
 ]
 
+# ---------------------------------------------------------------- .450 Bushmaster
+D450 = 0.452
+FEDF450BMFS1 = "https://www.federalpremium.com/rifle/fusion/11-F450BMFS1.html"
+FED450BMB = "https://www.federalpremium.com/rifle/power-shok/power-shok-rifle/11-450BMB.html"
+REM27943 = "https://www.remington.com/rifle/premier-accutip/29-27943.html"
+
+SHORT_RANGE_NOTE = (
+    "Federal and Remington print this load's trajectory table to 500 yd, but their own 500 yd "
+    "velocities are deep subsonic (816-932 fps); see the cartridge note. Treat it as a 300 yd "
+    "cartridge."
+)
+
+LOADS_450BM = [
+    load("federal-f450bmfs1", "450-bm", "Federal Fusion 260 gr soft point (F450BMFS1)", 260, D450,
+         g1=0.180, bc_url=FEDF450BMFS1, model_stated=False, length_in=0.779, length_url=FEDF450BMFS1,
+         fps=2200, vel_url=FEDF450BMFS1, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY + " " + SHORT_RANGE_NOTE),
+    load("federal-450bmb", "450-bm", "Federal Power-Shok 300 gr jacketed soft point (450BMB)", 300, D450,
+         g1=0.225, bc_url=FED450BMB, model_stated=False, length_in=0.800, length_url=FED450BMB,
+         fps=1900, vel_url=FED450BMB, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY + " " + SHORT_RANGE_NOTE),
+    load("remington-27943", "450-bm", "Remington Premier AccuTip 260 gr (27943)", 260, D450,
+         g1=0.144, bc_url=REM27943, model_stated=False, fps=2180, vel_url=REM27943, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY + " " + SHORT_RANGE_NOTE),
+]
+
 # ---------------------------------------------------------------- cartridges
 SAAMI_CF = "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf"
 SAAMI_CF_2 = "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf"
@@ -490,6 +516,10 @@ NO_LOSS_270 = (
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
 NO_LOSS_30 = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_450 = (
     "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
@@ -642,9 +672,23 @@ CARTRIDGES = [
         "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
                      "twistM": round(8.5 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
     },
+    {
+        "id": "450-bm", "name": ".450 Bushmaster", "bulletDiameterM": round(D450 * IN, 7),
+        "diameterSource": quote(
+            "SAAMI 450 Bushmaster drawing: bullet diameter .4525 - .0030 in, twist 24 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_450,
+        "safetyNote": quote(
+            "Published maker data for .450 Bushmaster is short-range: Hornady and Winchester stop "
+            "their trajectory tables at 300 yd, and Federal and Remington's own 500 yd rows show the "
+            "bullet at 816-932 fps, deep subsonic. Treat it as a 300 yd cartridge.",
+            "https://www.hornady.com/ammunition/rifle/450-bushmaster-250-gr-ftx-black", READ_ON_2),
+        "defaults": {"targetRangeM": round(200 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 300, 50),
+                     "twistM": round(24 * IN, 4), "barrelLengthM": round(20 * IN, 4)},
+    },
 ]
 
-LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243 + LOADS_7MM08 + LOADS_7MMRM + LOADS_7MMPRC + LOADS_270 + LOADS_3006 + LOADS_300WM + LOADS_300PRC}
+LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243 + LOADS_7MM08 + LOADS_7MMRM + LOADS_7MMPRC + LOADS_270 + LOADS_3006 + LOADS_300WM + LOADS_300PRC + LOADS_450BM}
 
 # ---------------------------------------------------------------- scopes
 VENOM_PAGE = "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html"

@@ -399,6 +399,38 @@
         "twistM": 0.2159,
         "barrelLengthM": 0.6096
       }
+    },
+    {
+      "id": "450-bm",
+      "name": ".450 Bushmaster",
+      "bulletDiameterM": 0.0114808,
+      "diameterSource": {
+        "text": "SAAMI 450 Bushmaster drawing: bullet diameter .4525 - .0030 in, twist 24 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": {
+        "text": "Published maker data for .450 Bushmaster is short-range: Hornady and Winchester stop their trajectory tables at 300 yd, and Federal and Remington's own 500 yd rows show the bullet at 816-932 fps, deep subsonic. Treat it as a 300 yd cartridge.",
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/450-bushmaster-250-gr-ftx-black",
+        "readOn": "2026-11-11"
+      },
+      "defaults": {
+        "targetRangeM": 182.88,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 274.32,
+          "stepM": 45.72
+        },
+        "twistM": 0.6096,
+        "barrelLengthM": 0.508
+      }
     }
   ],
   "loads": [
@@ -3092,6 +3124,114 @@
       "testBarrelM": 0.6604,
       "velocityByBarrel": [],
       "note": "Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:10."
+    },
+    {
+      "id": "federal-f450bmfs1",
+      "cartridgeId": "450-bm",
+      "name": "Federal Fusion 260 gr soft point (F450BMFS1)",
+      "bulletMassKg": 0.01684772,
+      "bulletDiameterM": 0.0114808,
+      "bulletLengthM": {
+        "value": 0.019787,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F450BMFS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.18,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F450BMFS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 670.56,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F450BMFS1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet. Federal and Remington print this load's trajectory table to 500 yd, but their own 500 yd velocities are deep subsonic (816-932 fps); see the cartridge note. Treat it as a 300 yd cartridge."
+    },
+    {
+      "id": "federal-450bmb",
+      "cartridgeId": "450-bm",
+      "name": "Federal Power-Shok 300 gr jacketed soft point (450BMB)",
+      "bulletMassKg": 0.01943967,
+      "bulletDiameterM": 0.0114808,
+      "bulletLengthM": {
+        "value": 0.02032,
+        "sourceUrl": "https://www.federalpremium.com/rifle/power-shok/power-shok-rifle/11-450BMB.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.225,
+        "sourceUrl": "https://www.federalpremium.com/rifle/power-shok/power-shok-rifle/11-450BMB.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 579.12,
+        "sourceUrl": "https://www.federalpremium.com/rifle/power-shok/power-shok-rifle/11-450BMB.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet. Federal and Remington print this load's trajectory table to 500 yd, but their own 500 yd velocities are deep subsonic (816-932 fps); see the cartridge note. Treat it as a 300 yd cartridge."
+    },
+    {
+      "id": "remington-27943",
+      "cartridgeId": "450-bm",
+      "name": "Remington Premier AccuTip 260 gr (27943)",
+      "bulletMassKg": 0.01684772,
+      "bulletDiameterM": 0.0114808,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.144,
+        "sourceUrl": "https://www.remington.com/rifle/premier-accutip/29-27943.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 664.46,
+        "sourceUrl": "https://www.remington.com/rifle/premier-accutip/29-27943.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet. Federal and Remington print this load's trajectory table to 500 yd, but their own 500 yd velocities are deep subsonic (816-932 fps); see the cartridge note. Treat it as a 300 yd cartridge."
     }
   ]
 }
