@@ -365,3 +365,9 @@ button.primary {
   border-color: #ffb000;
   font-weight: 600;
 }
+
+#sceneBar label, #dopeSection label { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-weight: 400; font-size: 13px; white-space: nowrap; }
+#sceneBar select { width: auto; }
+#sceneBar input[type=range] { accent-color: #ffb000; }
+#dopeSection h2 { margin: 0; font-size: 16px; }
+#sceneNote { margin: 0 0 4px; }

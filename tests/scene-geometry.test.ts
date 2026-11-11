@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { solve, sampleAt } from '../src/solver/solve';
 import type { ShotInput, TrajectorySample } from '../src/solver/types';
-import { losPoint, displayPoint, trimToRange, regimeOf, pathRuns, sampleAtTime, flagPose, markerRanges, cameraPose, readoutAt } from '../src/scene/geometry';
+import { losPoint, displayPoint, trimToRange, regimeOf, pathRuns, sampleAtTime, flagPose, markerRanges, cameraPose, readoutAt, dialSamples } from '../src/scene/geometry';
 
 const base: ShotInput = {
   muzzleVelocityMps: 750, bc: 0.243, dragModel: 'G7', bulletMassKg: 0.01134, bulletDiameterM: 0.007823,
@@ -199,7 +199,7 @@ describe('cameraPose', () => {
   it('test 14', () => {
     const side = cameraPose('side', 600, 0, 0.05);
     expect(Math.abs(side.position.x - 300)).toBeLessThan(1e-9);
-    expect(Math.abs(side.position.y - 30.025)).toBeLessThan(1e-9);
+    expect(Math.abs(side.position.y - 12.025)).toBeLessThan(1e-9);
     expect(Math.abs(side.position.z - 450)).toBeLessThan(1e-9);
     expect(Math.abs(side.target.x - 300)).toBeLessThan(1e-9);
     expect(Math.abs(side.target.y - 0.025)).toBeLessThan(1e-9);
@@ -209,7 +209,7 @@ describe('cameraPose', () => {
     expect(Math.abs(top.position.x - 300)).toBeLessThan(1e-9);
     expect(Math.abs(top.position.y - 450.025)).toBeLessThan(1e-9);
     expect(Math.abs(top.position.z)).toBeLessThan(1e-9);
-    expect(top.up).toEqual({ x: 1, y: 0, z: 0 });
+    expect(top.up).toEqual({ x: 0, y: 0, z: -1 });
     const shooter = cameraPose('shooter', 600, 0, 0.05);
     expect(Math.abs(shooter.position.x - (-4))).toBeLessThan(1e-9);
     expect(Math.abs(shooter.position.y - 0.55)).toBeLessThan(1e-9);
@@ -237,5 +237,71 @@ describe('readoutAt', () => {
     expect(r.rangeM).toBeGreaterThan(300);
     expect(r.rangeM).toBeLessThan(400);
     expect(readoutAt([], 0, false)).toBeNull();
+  });
+});
+
+describe('dialSamples', () => {
+  it('test 16: the dialled shot hits the point of aim at the target', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 548.64);
+    const at = sampleAt(dialed, 548.64);
+    if (at === null) throw new Error('sampleAt returned null');
+    expect(Math.abs(at.pathM)).toBeLessThan(1e-6);
+    expect(Math.abs(at.windageM)).toBeLessThan(1e-6);
+  });
+
+  it('test 17: the muzzle sample is unchanged and length is preserved', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 548.64);
+    expect(dialed.length).toBe(samples.length);
+    const first = dialed[0];
+    if (first === undefined) throw new Error('empty result');
+    expect(Math.abs(first.pathM - -0.05)).toBeLessThan(1e-9);
+    expect(Math.abs(first.windageM)).toBeLessThan(1e-9);
+  });
+
+  it('test 18: the dialled path rises above the line of sight', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 548.64);
+    let maxPath = -Infinity;
+    for (const s of dialed) {
+      if (s.rangeM < 548.64 && s.pathM > maxPath) {
+        maxPath = s.pathM;
+      }
+    }
+    expect(maxPath).toBeGreaterThan(0.5);
+    expect(maxPath).toBeLessThan(3);
+  });
+
+  it('test 19: wind from 3 o\'clock, the dialled bullet is right of the line of sight mid-flight', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 548.64);
+    const at = sampleAt(dialed, 274.32);
+    if (at === null) throw new Error('sampleAt returned null');
+    expect(at.windageM).toBeGreaterThan(0);
+  });
+
+  it('test 20: a target beyond the solve leaves the path unchanged; empty input stays empty', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 5000);
+    for (let i = 0; i < samples.length; i++) {
+      const a = samples[i];
+      const b = dialed[i];
+      if (a === undefined || b === undefined) throw new Error('missing sample');
+      expect(b.pathM).toBe(a.pathM);
+    }
+    expect(dialSamples([], 100)).toEqual([]);
+  });
+
+  it('test 21: dialSamples does not change timeS, speedMps, rangeM, or position', () => {
+    const samples = samplesFor(base);
+    const dialed = dialSamples(samples, 548.64);
+    const a = samples[500];
+    const b = dialed[500];
+    if (a === undefined || b === undefined) throw new Error('missing sample');
+    expect(b.timeS).toBe(a.timeS);
+    expect(b.speedMps).toBe(a.speedMps);
+    expect(b.rangeM).toBe(a.rangeM);
+    expect(b.position).toEqual(a.position);
   });
 });

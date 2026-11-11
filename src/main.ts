@@ -42,6 +42,8 @@ const timelineEl = el('timeline', HTMLInputElement);
 const readoutEl = el('readout', HTMLSpanElement);
 const printArea = el('printArea', HTMLDivElement);
 const sceneBar = el('sceneBar', HTMLDivElement);
+const showDialedEl = el('showDialed', HTMLInputElement);
+const sceneNoteEl = el('sceneNote', HTMLParagraphElement);
 const speedEl = el('speed', HTMLSelectElement);
 const playBtn = el('play', HTMLButtonElement);
 const pauseBtn = el('pause', HTMLButtonElement);
@@ -57,6 +59,7 @@ let lastResults: ShotResults | null = null;
 let lastRows: DopeRow[] = [];
 let stale = false;
 let exaggeration = 1;
+let showDialed = true;
 let durationS = 0;
 const scene = createRangeScene(el('scene', HTMLDivElement));
 
@@ -141,7 +144,8 @@ function recompute(): void {
     windClock: state.conditions.windClock,
     unitSystem: state.unitSystem,
     targetType: state.targetType,
-    exaggeration
+    exaggeration,
+    showDialed
   });
 }
 
@@ -150,6 +154,10 @@ function renderOutputs(): void {
   dopeEl.innerHTML = dopeTableHtml(lastRows, state);
   exaggerationLabel.textContent =
     exaggeration === 1 ? 'True scale' : `Drop and drift drawn ${exaggeration}× larger than real`;
+  sceneNoteEl.textContent =
+    showDialed
+      ? 'Showing the shot after you dial the correction: the bullet rises above your line of sight (dashed) and comes down onto the target. Blue arrows show which way the wind blows.'
+      : 'Showing the shot with the scope still at its zero: the red dot is where the bullet would land, the green dot is where you aimed. Blue arrows show which way the wind blows.';
 }
 
 function refresh(): void {
@@ -236,6 +244,12 @@ speedEl.addEventListener('change', () => {
 
 exaggerationEl.addEventListener('input', () => {
   exaggeration = Number(exaggerationEl.value);
+  recompute();
+  renderOutputs();
+});
+
+showDialedEl.addEventListener('change', () => {
+  showDialed = showDialedEl.checked;
   recompute();
   renderOutputs();
 });

@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import type { Vec3 } from '../solver/types';
 import type { DistanceMarker, FlagPose, PathRun } from './types';
 
@@ -163,19 +166,19 @@ export function buildFlag(rangeM: number): { group: THREE.Group; cloth: THREE.Me
   const group = new THREE.Group();
 
   const pole = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.03, 0.03, 3.3, 8),
+    new THREE.CylinderGeometry(0.06, 0.06, 6.3, 8),
     new THREE.MeshLambertMaterial({ color: 0xdddddd })
   );
-  pole.position.set(rangeM, -0.3 + 1.65, 7);
+  pole.position.set(rangeM, -0.3 + 3.15, 9);
   group.add(pole);
 
-  const clothGeometry = new THREE.PlaneGeometry(1.2, 0.5, 12, 1);
-  clothGeometry.translate(0.6, -0.25, 0);
+  const clothGeometry = new THREE.PlaneGeometry(3, 1.2, 12, 1);
+  clothGeometry.translate(1.5, -0.6, 0);
   const cloth = new THREE.Mesh(
     clothGeometry,
     new THREE.MeshLambertMaterial({ color: COLORS.flag, side: THREE.DoubleSide })
   );
-  cloth.position.set(rangeM, 3.0, 7);
+  cloth.position.set(rangeM, 6.0, 9);
   cloth.matrixAutoUpdate = false;
   group.add(cloth);
 
@@ -207,7 +210,7 @@ export function poseFlag(cloth: THREE.Mesh, pose: FlagPose, timeS: number): void
   const liftFactor = pose.liftRad / (Math.PI / 2);
   for (let i = 0; i < position.count; i++) {
     const x = position.getX(i);
-    position.setZ(i, Math.sin(x * 5 - timeS * 2 * Math.PI * pose.flutterHz) * 0.07 * x * liftFactor);
+    position.setZ(i, Math.sin(x * 2 - timeS * 2 * Math.PI * pose.flutterHz) * 0.15 * x * liftFactor);
   }
   position.needsUpdate = true;
 }
@@ -215,13 +218,31 @@ export function poseFlag(cloth: THREE.Mesh, pose: FlagPose, timeS: number): void
 export function buildPath(runs: PathRun[]): THREE.Group {
   const group = new THREE.Group();
   for (const run of runs) {
-    const points = run.points.map(toV3);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const positions: number[] = [];
+    for (const p of run.points) {
+      positions.push(p.x, p.y, p.z);
+    }
+    const geometry = new LineGeometry();
+    geometry.setPositions(positions);
     const color =
       run.regime === 'supersonic' ? COLORS.supersonic : run.regime === 'transonic' ? COLORS.transonic : COLORS.subsonic;
-    const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color }));
+    const line = new Line2(geometry, new LineMaterial({ color, linewidth: 3 }));
+    line.computeLineDistances();
     group.add(line);
   }
+  return group;
+}
+
+export function buildWindArrow(): THREE.Group {
+  const group = new THREE.Group();
+  const material = new THREE.MeshBasicMaterial({ color: 0x1e90ff });
+  const shaft = new THREE.Mesh(new THREE.BoxGeometry(6, 0.05, 0.6), material);
+  shaft.position.set(-1, 0, 0);
+  group.add(shaft);
+  const head = new THREE.Mesh(new THREE.ConeGeometry(1.2, 2.4, 3), material);
+  head.rotation.z = -Math.PI / 2;
+  head.position.set(3.2, 0, 0);
+  group.add(head);
   return group;
 }
 

@@ -32,6 +32,17 @@ export function trimToRange(samples: TrajectorySample[], targetRangeM: number): 
   return [...kept, extra];
 }
 
+export function dialSamples(samples: TrajectorySample[], targetRangeM: number): TrajectorySample[] {
+  if (targetRangeM <= 0) return [...samples];
+  const t = sampleAt(samples, targetRangeM);
+  if (t === null) return [...samples];
+  return samples.map((s) => ({
+    ...s,
+    pathM: s.pathM - t.pathM * (s.rangeM / targetRangeM),
+    windageM: s.windageM - t.windageM * (s.rangeM / targetRangeM)
+  }));
+}
+
 export function regimeOf(mach: number): FlightRegime {
   if (mach >= 1.2) return 'supersonic';
   if (mach >= 1.0) return 'transonic';
@@ -142,7 +153,7 @@ export function cameraPose(preset: CameraPreset, targetRangeM: number, shotAngle
       };
     case 'side':
       return {
-        position: { x: R / 2, y: T.y / 2 + Math.max(3, R * 0.05), z: Math.max(30, R * 0.75) },
+        position: { x: R / 2, y: T.y / 2 + Math.max(2, R * 0.02), z: Math.max(30, R * 0.75) },
         target: { x: R / 2, y: T.y / 2, z: 0 },
         up: { x: 0, y: 1, z: 0 }
       };
@@ -150,7 +161,7 @@ export function cameraPose(preset: CameraPreset, targetRangeM: number, shotAngle
       return {
         position: { x: R / 2, y: T.y / 2 + Math.max(30, R * 0.75), z: 0 },
         target: { x: R / 2, y: T.y / 2, z: 0 },
-        up: { x: 1, y: 0, z: 0 }
+        up: { x: 0, y: 0, z: -1 }
       };
     case 'reset':
       return {

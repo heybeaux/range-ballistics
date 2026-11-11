@@ -4,6 +4,7 @@ import type { TrajectorySample, Vec3 } from '../solver/types';
 import type { CameraPreset, FlagPose, RangeScene, Readout, SceneView } from './types';
 import {
   cameraPose,
+  dialSamples,
   displayPoint,
   flagPose,
   losPoint,
@@ -21,10 +22,12 @@ import {
   buildMarker,
   buildPath,
   buildTarget,
+  buildWindArrow,
   COLORS,
   disposeObject,
   poseFlag
 } from './objects';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 
 function setVec(target: THREE.Vector3, p: Vec3): void {
   target.set(p.x, p.y, p.z);
@@ -51,6 +54,9 @@ export function createRangeScene(container: HTMLElement): RangeScene {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
 
+  const staticGroup = new THREE.Group();
+  scene.add(staticGroup);
+
   function resize(): void {
     const w = container.clientWidth;
     const h = container.clientHeight;
@@ -58,14 +64,17 @@ export function createRangeScene(container: HTMLElement): RangeScene {
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      staticGroup.traverse((object) => {
+        if (object instanceof Line2) {
+          object.material.resolution.set(w, h);
+        }
+      });
     }
   }
   resize();
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(container);
 
-  const staticGroup = new THREE.Group();
-  scene.add(staticGroup);
 
   const bullet = buildDot(COLORS.bullet);
   const impact = buildDot(COLORS.impact);
@@ -74,6 +83,7 @@ export function createRangeScene(container: HTMLElement): RangeScene {
 
   let view: SceneView | null = null;
   let trimmed: TrajectorySample[] = [];
+  let drawn: TrajectorySample[] = [];
   const flags: THREE.Mesh[] = [];
   let flag: FlagPose | null = null;
   let timeS = 0;
@@ -90,7 +100,7 @@ export function createRangeScene(container: HTMLElement): RangeScene {
   let rafId = 0;
 
   function emitReadout(): void {
-    const r = readoutAt(trimmed, timeS, playing);
+    const r = readoutAt(drawn, timeS, playing);
     if (r !== null && readoutCallback !== null) {
       readoutCallback(r);
     }
@@ -105,6 +115,7 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     flags.length = 0;
 
     trimmed = trimToRange(v.samples, v.targetRangeM);
+    drawn = v.showDialed ? dialSamples(trimmed, v.targetRangeM) : trimmed;
     const lastSample = trimmed[trimmed.length - 1];
     durationS = lastSample === undefined ? 0 : lastSample.timeS;
 
@@ -128,8 +139,17 @@ export function createRangeScene(container: HTMLElement): RangeScene {
 
     flag = flagPose(v.windSpeedMps, v.windClock);
 
+    if (v.windSpeedMps > 0.05) {
+      for (const m of markers) {
+        const arrow = buildWindArrow();
+        arrow.position.set(m.rangeM, -0.2, -9);
+        arrow.rotation.y = Math.atan2(-flag.downwind.z, flag.downwind.x);
+        rangeGroup.add(arrow);
+      }
+    }
+
     staticGroup.add(
-      buildPath(pathRuns(trimmed, v.shotAngleRad, v.sightHeightM, v.exaggeration))
+      buildPath(pathRuns(drawn, v.shotAngleRad, v.sightHeightM, v.exaggeration))
     );
     staticGroup.add(
       buildLineOfSight(
@@ -139,10 +159,11 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     );
 
     setVec(aim.position, losPoint(v.targetRangeM, v.shotAngleRad, v.sightHeightM));
-    if (lastSample !== undefined) {
+    const lastDrawn = drawn[drawn.length - 1];
+    if (lastDrawn !== undefined) {
       setVec(
         impact.position,
-        displayPoint(lastSample, v.shotAngleRad, v.sightHeightM, v.exaggeration)
+        displayPoint(lastDrawn, v.shotAngleRad, v.sightHeightM, v.exaggeration)
       );
     }
 
@@ -154,6 +175,13 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     timeS = 0;
     playing = true;
     emitReadout();
+
+    const size = renderer.getSize(new THREE.Vector2());
+    staticGroup.traverse((object) => {
+      if (object instanceof Line2) {
+        object.material.resolution.set(size.x, size.y);
+      }
+    });
   }
 
   function setCamera(preset: CameraPreset): void {
@@ -224,7 +252,7 @@ export function createRangeScene(container: HTMLElement): RangeScene {
       emitReadout();
     }
 
-    const s = sampleAtTime(trimmed, timeS);
+    const s = sampleAtTime(drawn, timeS);
     if (view !== null && s !== null) {
       setVec(
         bullet.position,
@@ -233,8 +261,8 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     }
     bullet.visible = s !== null;
 
-    const kBullet = 0.006;
-    const kOther = 0.004;
+    const kBullet = 0.012;
+    const kOther = 0.008;
     bullet.scale.setScalar(camera.position.distanceTo(bullet.position) * kBullet);
     impact.scale.setScalar(camera.position.distanceTo(impact.position) * kOther);
     aim.scale.setScalar(camera.position.distanceTo(aim.position) * kOther);

@@ -24,6 +24,7 @@
             <button type="button" data-camera="reset">Reset view</button>
             <label>Drop and drift scale <input type="range" id="exaggeration" min="1" max="20" step="1" value="1"></label>
             <span id="exaggerationLabel"></span>
+            <label class="inline"><input type="checkbox" id="showDialed" checked> Show the shot with the correction dialled</label>
           </div>
           <div class="bar-row">
             <button type="button" id="play">Play</button>
@@ -33,6 +34,7 @@
             <input type="range" id="timeline" min="0" max="1000" step="1" value="0" aria-label="Flight timeline">
             <span id="readout"></span>
           </div>
+          <p id="sceneNote" class="help"></p>
         </div>
         <section id="dopeSection">
           <div class="bar-row"><h2>Dope table</h2><button type="button" id="exportCsv">Export CSV</button><button type="button" id="printCard">Print card</button></div>
