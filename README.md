@@ -11,7 +11,7 @@ It is set up for a Tikka T3x CTR in .308 Win with a 16 inch barrel. Every value 
 
 ## Run it
 
-You need Node.js 20 or newer.
+You need Node.js 24 or newer. The repo pins it in `.node-version`, which mise, fnm, nvm and nodenv all read.
 
 ```
 npm install     # once
