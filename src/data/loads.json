@@ -1,7 +1,130 @@
 {
+  "cartridges": [
+    {
+      "id": "308-win",
+      "name": ".308 Winchester",
+      "bulletDiameterM": 0.0078232,
+      "diameterSource": {
+        "text": "Bullet diameter 0.308 in, as listed on the bullet makers' pages.",
+        "sourceUrl": "https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "velocityLossMpsPerM": {
+        "value": 250.8,
+        "sourceUrl": "https://rifleshooter.com/2014/12/308-winchester-7-62x51mm-nato-barrel-length-versus-velocity-28-to-16-5/",
+        "readOn": "2026-11-10"
+      },
+      "velocityLossNote": "Rifleshooter.com cut one .308 barrel from 28 to 16.5 inches and measured Federal Gold Medal 168 gr at each length: 20.9 fps lost per inch on average. It is one barrel and one test, not manufacturer data. Your rifle will differ, so chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2794,
+        "barrelLengthM": 0.4064
+      }
+    },
+    {
+      "id": "223-rem",
+      "name": ".223 Remington",
+      "bulletDiameterM": 0.0056896,
+      "diameterSource": {
+        "text": "SAAMI .223 Remington drawing: bullet diameter .2245 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf",
+        "readOn": "2026-11-10"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No barrel-length correction is made for this cartridge. The published figures disagree: PMC's own two-barrel velocities work out to 37 to 45 fps per inch, and one independent cut-down test measured 22 to 30. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": {
+        "text": "However, it is not safe to shoot \u201c5.56,\u201d \u201c5.56 NATO,\u201d or \u201c5.56x45mm\u201d ammunition in a barrel marked as being chambered in 223 Remington for a number of reasons. The main reason being that a barrel marked as chambered in 223 Remington will have a shorter throat into the rifling than a \u201c5.56\u201d barrel which may cause increased pressure if the \u201c5.56\u201d ammunition is fired in it. This can result in serious injury or death to the user and/or bystanders, as well as damage to the firearm.",
+        "sourceUrl": "https://saami.org/faqs/",
+        "readOn": "2026-11-10"
+      },
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2032,
+        "barrelLengthM": 0.508
+      }
+    },
+    {
+      "id": "556-nato",
+      "name": "5.56x45 NATO",
+      "bulletDiameterM": 0.0056896,
+      "diameterSource": {
+        "text": "SAAMI 5.56 Commercial introduction: bullet diameter .2245 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/10/Public-Introduction-5.56-Commercial-2026-06-22-FINAL-Rev-3.pdf",
+        "readOn": "2026-11-10"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No barrel-length correction is made for this cartridge. The published figures disagree: PMC's own two-barrel velocities work out to 37 to 45 fps per inch, and one independent cut-down test measured 22 to 30. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": {
+        "text": "However, it is not safe to shoot \u201c5.56,\u201d \u201c5.56 NATO,\u201d or \u201c5.56x45mm\u201d ammunition in a barrel marked as being chambered in 223 Remington for a number of reasons. The main reason being that a barrel marked as chambered in 223 Remington will have a shorter throat into the rifling than a \u201c5.56\u201d barrel which may cause increased pressure if the \u201c5.56\u201d ammunition is fired in it. This can result in serious injury or death to the user and/or bystanders, as well as damage to the firearm.",
+        "sourceUrl": "https://saami.org/faqs/",
+        "readOn": "2026-11-10"
+      },
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.1778,
+        "barrelLengthM": 0.4064
+      }
+    },
+    {
+      "id": "22-lr",
+      "name": ".22 Long Rifle",
+      "bulletDiameterM": 0.0057277,
+      "diameterSource": {
+        "text": "SAAMI 22 Long Rifle Match drawing: bullet diameter .2255 - .0040 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/05/SAAMI-Z299.1-R2026-Rimfire-FINAL-Approved-2026-05-08.pdf",
+        "readOn": "2026-11-10"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No barrel-length correction is made for .22 Long Rifle. The one cut-down test found (Ballistics By The Inch, one barrel) shows velocity flat within shot-to-shot noise from about 12 to 18 inches, and it did not test longer barrels or match ammunition. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 45.72,
+        "zeroRangeM": 45.72,
+        "dope": {
+          "startM": 22.86,
+          "endM": 182.88,
+          "stepM": 22.86
+        },
+        "twistM": 0.4064,
+        "barrelLengthM": 0.508
+      }
+    }
+  ],
   "loads": [
     {
       "id": "federal-gm308m",
+      "cartridgeId": "308-win",
       "name": "Federal Gold Medal 168 gr Sierra MatchKing (GM308M)",
       "bulletMassKg": 0.01088622,
       "bulletDiameterM": 0.0078232,
@@ -20,16 +143,24 @@
         "sourceUrl": "https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 807.72,
         "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M.html",
         "readOn": "2026-11-10"
       },
       "testBarrelM": null,
-      "note": "Federal does not state its test barrel length, so the app cannot work out a 16 inch estimate for this load. The starting velocity is Federal's published figure and is probably high for a 16 inch barrel. One independent test measured 2466 fps for this load from a 16.5 inch barrel (Rifleshooter.com, one barrel). Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. One independent test measured 2466 fps for this load from a 16.5 inch barrel (Rifleshooter.com, one barrel). Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
     },
     {
       "id": "federal-gm308m2",
+      "cartridgeId": "308-win",
       "name": "Federal Gold Medal 175 gr Sierra MatchKing (GM308M2)",
       "bulletMassKg": 0.01133981,
       "bulletDiameterM": 0.0078232,
@@ -48,16 +179,24 @@
         "sourceUrl": "https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 792.48,
         "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html",
         "readOn": "2026-11-10"
       },
       "testBarrelM": null,
-      "note": "Federal does not state its test barrel length, so the app cannot work out a 16 inch estimate for this load. The starting velocity is Federal's published figure and is probably high for a 16 inch barrel. Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
     },
     {
       "id": "hornady-80966",
+      "cartridgeId": "308-win",
       "name": "Hornady Match 168 gr ELD Match (80966)",
       "bulletMassKg": 0.01088622,
       "bulletDiameterM": 0.0078232,
@@ -76,16 +215,24 @@
         "sourceUrl": "https://www.hornady.com/bc",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 822.96,
         "sourceUrl": "https://www.hornady.com/ammunition/rifle/308-win-168-gr-eld-match",
         "readOn": "2026-11-10"
       },
       "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
       "note": "Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.498 and G7 0.251, so real drop at long range will be a little more than shown."
     },
     {
       "id": "hornady-8105",
+      "cartridgeId": "308-win",
       "name": "Hornady Match 178 gr BTHP (8105)",
       "bulletMassKg": 0.01153421,
       "bulletDiameterM": 0.0078232,
@@ -104,16 +251,24 @@
         "sourceUrl": null,
         "readOn": null
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 792.48,
         "sourceUrl": "https://www.hornady.com/ammunition/rifle/308-win-178-gr-bthp-match",
         "readOn": "2026-11-10"
       },
       "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
       "note": "Hornady's page for this load does not give a BC. Type the BC from your ammunition box before solving."
     },
     {
       "id": "berger-60010",
+      "cartridgeId": "308-win",
       "name": "Berger 175 gr OTM Tactical (60010)",
       "bulletMassKg": 0.01133981,
       "bulletDiameterM": 0.0078232,
@@ -132,16 +287,24 @@
         "sourceUrl": "https://bergerbullets.com/product/308-winchester-175gr-otm-tactical/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 813.21,
         "sourceUrl": "https://bergerbullets.com/product/308-winchester-175gr-otm-tactical/",
         "readOn": "2026-11-10"
       },
       "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
       "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
     },
     {
       "id": "lapua-4317076",
+      "cartridgeId": "308-win",
       "name": "Lapua 155 gr Scenar-L (4317076)",
       "bulletMassKg": 0.01004383,
       "bulletDiameterM": 0.0078232,
@@ -160,16 +323,24 @@
         "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 860,
         "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/",
         "readOn": "2026-11-10"
       },
       "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
       "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
     },
     {
       "id": "lapua-4317520",
+      "cartridgeId": "308-win",
       "name": "Lapua 175 gr Scenar-L (4317520)",
       "bulletMassKg": 0.01133981,
       "bulletDiameterM": 0.0078232,
@@ -188,16 +359,24 @@
         "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": 793,
         "sourceUrl": "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/",
         "readOn": "2026-11-10"
       },
       "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
       "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
     },
     {
       "id": "bullet-berger-30425",
+      "cartridgeId": "308-win",
       "name": "Handload: Berger 168 gr Hybrid Target (30425)",
       "bulletMassKg": 0.01088622,
       "bulletDiameterM": 0.0078232,
@@ -216,16 +395,24 @@
         "sourceUrl": "https://bergerbullets.com/product/30-caliber-168-grain-hybrid-target/",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": null,
         "sourceUrl": null,
         "readOn": null
       },
       "testBarrelM": null,
+      "velocityByBarrel": [],
       "note": "Component bullet. Enter your own chronograph velocity."
     },
     {
       "id": "bullet-hornady-178-eldm",
+      "cartridgeId": "308-win",
       "name": "Handload: Hornady 178 gr ELD Match",
       "bulletMassKg": 0.01153421,
       "bulletDiameterM": 0.0078232,
@@ -244,16 +431,24 @@
         "sourceUrl": "https://www.hornady.com/bc",
         "readOn": "2026-11-10"
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": null,
         "sourceUrl": null,
         "readOn": null
       },
       "testBarrelM": null,
+      "velocityByBarrel": [],
       "note": "Component bullet. Enter your own chronograph velocity. BCs are Hornady's Mach 2.25 figures."
     },
     {
       "id": "bullet-nosler-53164",
+      "cartridgeId": "308-win",
       "name": "Handload: Nosler 168 gr Custom Competition (53164)",
       "bulletMassKg": 0.01088622,
       "bulletDiameterM": 0.0078232,
@@ -272,19 +467,1271 @@
         "sourceUrl": null,
         "readOn": null
       },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
       "publishedVelocityMps": {
         "value": null,
         "sourceUrl": null,
         "readOn": null
       },
       "testBarrelM": null,
+      "velocityByBarrel": [],
       "note": "Component bullet. Enter your own chronograph velocity. Nosler does not publish a G7 BC."
+    },
+    {
+      "id": "federal-gm223m",
+      "cartridgeId": "223-rem",
+      "name": "Federal Gold Medal 69 gr Sierra MatchKing (GM223M)",
+      "bulletMassKg": 0.00447112,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.023393,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.341,
+        "sourceUrl": "https://sierrabullets.com/22-cal-69-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.167,
+        "sourceUrl": "https://sierrabullets.com/22-cal-69-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 899.16,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The BCs shown are Sierra's, the bullet maker. Federal's page for this load gives different figures (G1 .301, G7 .165). Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+    },
+    {
+      "id": "federal-gm223m3",
+      "cartridgeId": "223-rem",
+      "name": "Federal Gold Medal 77 gr Sierra MatchKing (GM223M3)",
+      "bulletMassKg": 0.00498952,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.024943,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M3.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.372,
+        "sourceUrl": "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.182,
+        "sourceUrl": "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk/",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 829.06,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M3.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The BCs shown are Sierra's, the bullet maker. Federal's page for this load gives different figures (G1 .372, G7 .188). Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
+    },
+    {
+      "id": "federal-gm223bh73",
+      "cartridgeId": "223-rem",
+      "name": "Federal Gold Medal 73 gr Berger BT Target (GM223BH73)",
+      "bulletMassKg": 0.00473032,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.024435,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM223BH73.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.348,
+        "sourceUrl": "https://bergerbullets.com/product/223-remington-73-grain-boat-tail-target/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.178,
+        "sourceUrl": "https://bergerbullets.com/product/223-remington-73-grain-boat-tail-target/",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 853.44,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM223BH73.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "federal-ae223",
+      "cartridgeId": "223-rem",
+      "name": "Federal American Eagle 55 gr FMJ (AE223)",
+      "bulletMassKg": 0.00356394,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.018669,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.269,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 987.55,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "hornady-80269",
+      "cartridgeId": "223-rem",
+      "name": "Hornady Match 73 gr ELD Match (80269)",
+      "bulletMassKg": 0.00473032,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.398,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-rem-73-gr-eld-match",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.2,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-rem-73-gr-eld-match",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 850.39,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-rem-73-gr-eld-match",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.382 and G7 0.192, so real drop at long range will be a little more than shown."
+    },
+    {
+      "id": "hornady-8026",
+      "cartridgeId": "223-rem",
+      "name": "Hornady Match 75 gr BTHP (8026)",
+      "bulletMassKg": 0.00485992,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.395,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-rem-75-gr-bthp-match",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 850.39,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-rem-75-gr-bthp-match",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-fr160",
+      "cartridgeId": "223-rem",
+      "name": "Hornady Frontier 68 gr BTHP Match (FR160)",
+      "bulletMassKg": 0.00440633,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.355,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-remington-68-gr-bthp-match-frontier",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 902.21,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/223-remington-68-gr-bthp-match-frontier",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "berger-23030",
+      "cartridgeId": "223-rem",
+      "name": "Berger 77 gr OTM Tactical (23030)",
+      "bulletMassKg": 0.00498952,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.025781,
+        "sourceUrl": "https://bergerbullets.com/product/22-caliber-77-grain-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.374,
+        "sourceUrl": "https://bergerbullets.com/product/223-remington-77-grain-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.192,
+        "sourceUrl": "https://bergerbullets.com/product/223-remington-77-grain-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 838.2,
+        "sourceUrl": "https://bergerbullets.com/product/223-remington-77-grain-otm-tactical/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "lapua-4315015",
+      "cartridgeId": "223-rem",
+      "name": "Lapua 69 gr Scenar-L (4315015)",
+      "bulletMassKg": 0.00447112,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.341,
+        "sourceUrl": "https://www.lapua.com/product/223-rem-target-cartridge-scenar-l-45g-69gr-4315015/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": 0.171,
+        "sourceUrl": "https://www.lapua.com/product/223-rem-target-cartridge-scenar-l-45g-69gr-4315015/",
+        "readOn": "2026-11-10"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 830,
+        "sourceUrl": "https://www.lapua.com/product/223-rem-target-cartridge-scenar-l-45g-69gr-4315015/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
+    },
+    {
+      "id": "nosler-60011",
+      "cartridgeId": "223-rem",
+      "name": "Nosler Match Grade 77 gr Custom Competition (60011)",
+      "bulletMassKg": 0.00498952,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.024892,
+        "sourceUrl": "https://www.nosler.com/22-caliber-77gr-hpbt-custom-competition-100ct.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.34,
+        "sourceUrl": "https://www.nosler.com/22-caliber-77gr-hpbt-custom-competition-100ct.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 792.48,
+        "sourceUrl": "https://www.nosler.com/223-rem-77gr-custom-competition-match-grade-ammunition.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "pmc-223a",
+      "cartridgeId": "223-rem",
+      "name": "PMC Bronze 55 gr FMJ-BT (223A)",
+      "bulletMassKg": 0.00356394,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.018796,
+        "sourceUrl": "https://pmcammo.com/product/bronze-223a/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.243,
+        "sourceUrl": "https://pmcammo.com/product/bronze-223a/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 975.36,
+        "sourceUrl": "https://pmcammo.com/product/bronze-223a/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [
+        {
+          "barrelM": 0.4064,
+          "velocityMps": 883.92
+        },
+        {
+          "barrelM": 0.6096,
+          "velocityMps": 975.36
+        }
+      ],
+      "note": "PMC publishes this load's velocity from two barrel lengths. The app uses the one nearest your barrel. The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "federal-ae193",
+      "cartridgeId": "556-nato",
+      "name": "Federal American Eagle 55 gr FMJ-BT (AE193)",
+      "bulletMassKg": 0.00356394,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.018669,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.246,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 964.69,
+        "sourceUrl": "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "hornady-fr200",
+      "cartridgeId": "556-nato",
+      "name": "Hornady Frontier 55 gr FMJ, M193 (FR200)",
+      "bulletMassKg": 0.00356394,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.243,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-bt-frontier",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 987.55,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-bt-frontier",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "pmc-556x",
+      "cartridgeId": "556-nato",
+      "name": "PMC X-TAC 55 gr FMJ-BT (5.56X)",
+      "bulletMassKg": 0.00356394,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.018796,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56x/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.243,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56x/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 996.7,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56x/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [
+        {
+          "barrelM": 0.4064,
+          "velocityMps": 950.98
+        },
+        {
+          "barrelM": 0.508,
+          "velocityMps": 996.7
+        }
+      ],
+      "note": "PMC publishes this load's velocity from two barrel lengths. The app uses the one nearest your barrel. The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "pmc-556k",
+      "cartridgeId": "556-nato",
+      "name": "PMC X-TAC 62 gr LAP (5.56K)",
+      "bulletMassKg": 0.00401753,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": 0.023444,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56k/",
+        "readOn": "2026-11-10"
+      },
+      "bcG1": {
+        "value": 0.304,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56k/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 944.88,
+        "sourceUrl": "https://pmcammo.com/product/x-tac-5-56k/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [
+        {
+          "barrelM": 0.4064,
+          "velocityMps": 890.02
+        },
+        {
+          "barrelM": 0.508,
+          "velocityMps": 944.88
+        }
+      ],
+      "note": "PMC publishes this load's velocity from two barrel lengths. The app uses the one nearest your barrel. The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "hornady-fr260",
+      "cartridgeId": "556-nato",
+      "name": "Hornady Frontier 62 gr FMJ (FR260)",
+      "bulletMassKg": 0.00401753,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.274,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-62-gr-fmj-frontier",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 932.69,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-62-gr-fmj-frontier",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-fr310",
+      "cartridgeId": "556-nato",
+      "name": "Hornady Frontier 68 gr BTHP Match (FR310)",
+      "bulletMassKg": 0.00440633,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.355,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-68-gr-bthp-match-frontier",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 902.21,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5.56-nato-68-gr-bthp-match-frontier",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-81264",
+      "cartridgeId": "556-nato",
+      "name": "Hornady Superformance Match 75 gr BTHP (81264)",
+      "bulletMassKg": 0.00485992,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.395,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5-56-nato-75-gr-bthp-superformance-match",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 886.97,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/5-56-nato-75-gr-bthp-superformance-match",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "blackhills-mk262",
+      "cartridgeId": "556-nato",
+      "name": "Black Hills 77 gr MK 262 MOD 1-C",
+      "bulletMassKg": 0.00498952,
+      "bulletDiameterM": 0.0056896,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 838.2,
+        "sourceUrl": "https://www.black-hills.com/shop/mk-262-mod-1-c-mil-pack/556mm/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.508,
+      "velocityByBarrel": [],
+      "note": "Black Hills publishes the velocity for this load and no BC. Type a BC before solving."
+    },
+    {
+      "id": "cci-32",
+      "cartridgeId": "22-lr",
+      "name": "CCI Standard Velocity 40 gr (32)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.12,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/standard-velocity/6-32.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 326.14,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/standard-velocity/6-32.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "cci-33",
+      "cartridgeId": "22-lr",
+      "name": "CCI Green Tag 40 gr (33)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.12,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/green-tag/6-33.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 326.14,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/green-tag/6-33.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "cci-30",
+      "cartridgeId": "22-lr",
+      "name": "CCI Target Mini-Mag 40 gr (30)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.13,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/target-mini-mag/6-30.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 376.43,
+        "sourceUrl": "https://www.cci-ammunition.com/rimfire/cci/target-mini-mag/6-30.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "federal-711b",
+      "cartridgeId": "22-lr",
+      "name": "Federal Gold Medal Rimfire 40 gr, 1080 fps (711B)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.138,
+        "sourceUrl": "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-711B.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 329.18,
+        "sourceUrl": "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-711B.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "federal-719",
+      "cartridgeId": "22-lr",
+      "name": "Federal Gold Medal Rimfire 40 gr, 1200 fps (719)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.138,
+        "sourceUrl": "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-719.html",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 365.76,
+        "sourceUrl": "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-719.html",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
+    },
+    {
+      "id": "lapua-420163",
+      "cartridgeId": "22-lr",
+      "name": "Lapua Center-X 40 gr (420163)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.172,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-center-x-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 327,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-center-x-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "Lapua gives one calculated G1 BC, 0.172, for all its .22 LR bullets. It is not measured for this load."
+    },
+    {
+      "id": "lapua-420162",
+      "cartridgeId": "22-lr",
+      "name": "Lapua Midas+ 40 gr (420162)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.172,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-midas-plus-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 327,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-midas-plus-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "Lapua gives one calculated G1 BC, 0.172, for all its .22 LR bullets. It is not measured for this load."
+    },
+    {
+      "id": "lapua-420168",
+      "cartridgeId": "22-lr",
+      "name": "Lapua Long Range 40 gr (420168)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.172,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-long-range-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 337,
+        "sourceUrl": "https://www.lapua.com/product/22-lr-lapua-long-range-rimfire-ammo/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Lapua gives one calculated G1 BC, 0.172, for all its .22 LR bullets. It is not measured for this load."
+    },
+    {
+      "id": "sk-420101",
+      "cartridgeId": "22-lr",
+      "name": "SK Standard Plus 40 gr (420101)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 327,
+        "sourceUrl": "https://sk-ammunition.com/products/standard-plus/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "SK's page for this load gives no BC. SK's brochure gives G1 0.172 for round-nose and 0.139 for flat-nose bullets and does not say which this load has. Type the BC before solving."
+    },
+    {
+      "id": "sk-420108",
+      "cartridgeId": "22-lr",
+      "name": "SK Rifle Match 40 gr (420108)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 327,
+        "sourceUrl": "https://sk-ammunition.com/products/rifle-match/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "SK's page for this load gives no BC. SK's brochure gives G1 0.172 for round-nose and 0.139 for flat-nose bullets and does not say which this load has. Type the BC before solving."
+    },
+    {
+      "id": "sk-420158",
+      "cartridgeId": "22-lr",
+      "name": "SK Long Range Match 40 gr (420158)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 335,
+        "sourceUrl": "https://sk-ammunition.com/products/long-range-match/",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "SK's page for this load gives no BC. SK's brochure gives G1 0.172 for round-nose and 0.139 for flat-nose bullets and does not say which this load has. Type the BC before solving."
+    },
+    {
+      "id": "eley-tenex",
+      "cartridgeId": "22-lr",
+      "name": "Eley Tenex 40 gr",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": 0.112,
+        "sourceUrl": "https://eley.co.uk/eley-tenex/",
+        "readOn": "2026-11-10"
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Eley publishes its BC against the RA4 rimfire drag model, not G1, and gives a velocity band (1040 to 1085 fps) instead of one figure. Eley says to use the velocity printed on your box. Enter it before solving."
+    },
+    {
+      "id": "eley-match",
+      "cartridgeId": "22-lr",
+      "name": "Eley Match 40 gr",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": 0.112,
+        "sourceUrl": "https://eley.co.uk/eley-match/",
+        "readOn": "2026-11-10"
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Eley publishes its BC against the RA4 rimfire drag model, not G1, and gives a velocity band (1040 to 1085 fps) instead of one figure. Eley says to use the velocity printed on your box. Enter it before solving."
+    },
+    {
+      "id": "eley-club",
+      "cartridgeId": "22-lr",
+      "name": "Eley Club 40 gr",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": 0.112,
+        "sourceUrl": "https://eley.co.uk/eley-club/",
+        "readOn": "2026-11-10"
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Eley publishes its BC against the RA4 rimfire drag model, not G1, and gives a velocity band (1040 to 1085 fps) instead of one figure. Eley says to use the velocity printed on your box. Enter it before solving."
+    },
+    {
+      "id": "rws-2134187",
+      "cartridgeId": "22-lr",
+      "name": "RWS R 50 40 gr (2134187)",
+      "bulletMassKg": 0.00259196,
+      "bulletDiameterM": 0.0057277,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.136,
+        "sourceUrl": "https://rws-ammunition.com/en/products/rimfire-cartridges/rws-r-50",
+        "readOn": "2026-11-10"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 330,
+        "sourceUrl": "https://rws-ammunition.com/en/products/rimfire-cartridges/rws-r-50",
+        "readOn": "2026-11-10"
+      },
+      "testBarrelM": 0.65,
+      "velocityByBarrel": [],
+      "note": "The maker gives this BC without naming a drag model. The app treats it as G1."
     }
-  ],
-  "velocityLossMpsPerM": {
-    "value": 250.8,
-    "sourceUrl": "https://rifleshooter.com/2014/12/308-winchester-7-62x51mm-nato-barrel-length-versus-velocity-28-to-16-5/",
-    "readOn": "2026-11-10"
-  },
-  "velocityLossNote": "Rifleshooter.com cut one .308 barrel from 28 to 16.5 inches and measured Federal Gold Medal 168 gr at each length: 20.9 fps lost per inch on average. It is one barrel and one test, not manufacturer data. Your rifle will differ, so chronograph your load."
+  ]
 }

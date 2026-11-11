@@ -9,6 +9,7 @@
  */
 import type { TrajectorySample, Vec3 } from '../solver/types';
 import type { UnitSystem } from '../units/units';
+import type { ScopeProfile } from '../planner/types';
 
 export interface SceneView {
   /** Solver samples, muzzle first. */
@@ -27,6 +28,10 @@ export interface SceneView {
   exaggeration: number;
   /** true = draw the shot after the shooter dials the correction, so it lands on the target. */
   showDialed: boolean;
+  /** The rifle's scope. The scope view uses its field of view and its reticle. */
+  scope: ScopeProfile;
+  /** Scope-view magnification, already kept within the scope's range. */
+  magnification: number;
 }
 
 export type CameraPreset = 'shooter' | 'side' | 'top' | 'reset';
@@ -84,6 +89,8 @@ export interface RangeScene {
   setSpeed(multiplier: number): void;
   /** Jump to a time in seconds, clamped to 0..duration. Pauses playback. */
   seek(timeS: number): void;
+  /** Change the scope-view magnification without restarting the animation. */
+  setMagnification(magnification: number): void;
   /** Called on every frame while playing, and after update / seek. */
   onReadout(callback: (readout: Readout) => void): void;
   /** Average frames per second over the last second. */

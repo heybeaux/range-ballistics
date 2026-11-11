@@ -10,7 +10,7 @@
   <body>
     <header id="topbar">
       <h1>Range Ballistics</h1>
-      <span id="rifleName"></span>
+      <div id="rifleBar"></div>
       <button type="button" id="runSetup">Run setup again</button>
     </header>
     <main id="app">
@@ -28,6 +28,7 @@
             <label class="inline"><input type="checkbox" id="showDialed" checked> Show the shot with the correction dialled</label>
           </div>
           <div class="bar-row">
+            <label id="magnificationLabel" hidden>Magnification <input type="range" id="magnification" min="5" max="25" step="0.5" value="10"> <span id="magnificationValue"></span></label>
             <button type="button" id="play">Play</button>
             <button type="button" id="pause">Pause</button>
             <button type="button" id="replay">Replay</button>
@@ -46,6 +47,7 @@
     </main>
     <div id="printArea"></div>
     <div id="setupRoot"></div>
+    <div id="dialogRoot"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

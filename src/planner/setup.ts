@@ -1,17 +1,19 @@
 import type { AppState } from './types';
 import { applyField, fieldById, fieldHtml, parseInput } from './fields';
-import { selectCustomLoad, selectLibraryLoad } from './storage';
+import { selectCustomLoad, selectGenericScope, selectLibraryLoad, selectLibraryScope } from './storage';
 import { escapeHtml } from './view';
 import {
+  cartridgeNoteHtml,
   loadPickerHtml,
   loadSourcesHtml,
+  scopePanelHtml,
   sightHeightNoteHtml,
   twistNoteHtml,
   velocityNoteHtml
 } from './panels';
 
 export interface SetupStep {
-  key: 'rifle' | 'load' | 'velocity' | 'zero';
+  key: 'rifle' | 'scope' | 'load' | 'velocity' | 'zero';
   title: string;
   intro: string;
   fieldIds: string[];
@@ -22,8 +24,15 @@ export const SETUP_STEPS: SetupStep[] = [
     key: 'rifle',
     title: 'Confirm your rifle',
     intro:
-      'These describe your rifle and scope. The defaults are for a Tikka T3x CTR in .308 with a 16 inch barrel. Change anything that is different on yours.',
-    fieldIds: ['twist', 'twistDirection', 'twistConfirmed', 'sightHeight', 'angleUnit', 'clickValue']
+      'These describe your rifle. Change anything that is different on yours. Barrel length matters because shorter barrels give lower velocity.',
+    fieldIds: ['rifleName', 'barrelLength', 'twist', 'twistDirection', 'twistConfirmed', 'sightHeight']
+  },
+  {
+    key: 'scope',
+    title: 'Pick your scope',
+    intro:
+      "Choose your scope so the app speaks its language: the unit on your turrets, the size of one click, how far the turret can dial, and the reticle you see.",
+    fieldIds: ['angleUnit', 'clickValue', 'availableElevation']
   },
   {
     key: 'load',
@@ -43,7 +52,7 @@ export const SETUP_STEPS: SetupStep[] = [
     key: 'zero',
     title: 'Set your zero',
     intro:
-      'Your zero is the distance where the bullet hits exactly where you aim, with the scope dials at zero. Most people zero at 100 yards. Enter the distance you actually zeroed at.',
+      'Your zero is the distance where the bullet hits exactly where you aim, with the scope dials at zero. Most centrefire shooters zero at 100 yards, and most .22 shooters at 50. Enter the distance you actually zeroed at.',
     fieldIds: ['zeroRange']
   }
 ];
@@ -52,6 +61,13 @@ export function setupStepHtml(state: AppState, stepIndex: number, errors: Record
   const step = SETUP_STEPS[stepIndex];
   if (step === undefined) return '';
   const body: string[] = [];
+  if (step.key === 'rifle') {
+    body.push(cartridgeNoteHtml(state));
+  } else if (step.key === 'scope') {
+    body.push(scopePanelHtml(state));
+  } else if (step.key === 'load') {
+    body.push(loadPickerHtml(state) + loadSourcesHtml(state));
+  }
   for (const id of step.fieldIds) {
     const def = fieldById(id);
     if (def === undefined) continue;
@@ -60,17 +76,14 @@ export function setupStepHtml(state: AppState, stepIndex: number, errors: Record
     else if (id === 'sightHeight') body.push(sightHeightNoteHtml());
     else if (id === 'velocityMeasured') body.push(velocityNoteHtml(state));
   }
-  if (step.key === 'load') {
-    body.push(loadPickerHtml(state) + loadSourcesHtml(state));
-  }
   const back = stepIndex > 0 ? '<button type="button" id="setupBack">Back</button>' : '';
   const next =
-    stepIndex < 3
+    stepIndex < SETUP_STEPS.length - 1
       ? '<button type="button" id="setupNext" class="primary">Next</button>'
       : '<button type="button" id="setupFinish" class="primary">Finish</button>';
   return (
     '<div class="setup-backdrop"><div class="setup-dialog" role="dialog" aria-modal="true" aria-labelledby="setupTitle">' +
-    `<p class="setup-progress">Step ${stepIndex + 1} of 4</p>` +
+    `<p class="setup-progress">Step ${stepIndex + 1} of ${SETUP_STEPS.length}</p>` +
     `<h2 id="setupTitle">${escapeHtml(step.title)}</h2>` +
     `<p class="setup-intro">${escapeHtml(step.intro)}</p>` +
     `<form id="setupForm" novalidate>${body.join('')}</form>` +
@@ -119,9 +132,25 @@ export function openSetup(
       return;
     }
     if (name === 'loadName') return;
+    if (name === 'scopePicker') {
+      const value = target.value;
+      if (value === 'generic') {
+        setState(selectGenericScope(getState()));
+      } else if (value.startsWith('lib:')) {
+        setState(selectLibraryScope(getState(), value.slice(4)));
+      } else {
+        return;
+      }
+      render();
+      return;
+    }
     const def = fieldById(name);
     if (def === undefined) return;
-    if (def.kind === 'number') {
+    if (def.kind === 'text') {
+      const input = target as HTMLInputElement;
+      setState(applyField(getState(), def, input.value));
+      render();
+    } else if (def.kind === 'number') {
       const p = parseInput(def, target.value, getState().unitSystem);
       if (!p.ok) {
         errors[def.id] = p.message;

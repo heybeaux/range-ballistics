@@ -1,14 +1,33 @@
 import './styles.css';
-import type { AppState, DopeRow, ShotResults } from './planner/types';
-import { loadState, saveState, selectLibraryLoad, selectCustomLoad, saveCustomLoad } from './planner/storage';
-import { dopeRows, shotResults, toCsv, toShotInput } from './planner/model';
+import type { AppState, DopeRow, SavedState, ShotResults } from './planner/types';
+import {
+  addProfile,
+  activeState,
+  deleteProfile,
+  duplicateProfile,
+  loadSaved,
+  saveSaved,
+  selectCustomLoad,
+  selectGenericScope,
+  selectLibraryLoad,
+  selectLibraryScope,
+  selectProfile,
+  saveCustomLoad,
+  withActiveState
+} from './planner/storage';
+import { clampMagnification, dopeRows, shotResults, toCsv, toShotInput } from './planner/model';
 import { applyField, fieldById, formHtml, parseInput } from './planner/fields';
 import { dopeTableHtml, printCardHtml, resultsHtml, windClockSvg } from './planner/view';
 import { openSetup } from './planner/setup';
 import {
+  addRifleDialogHtml,
+  cartridgeNoteHtml,
+  deleteRifleDialogHtml,
   loadPickerHtml,
   loadSourcesHtml,
   pressureNoteHtml,
+  rifleBarHtml,
+  scopePanelHtml,
   sightHeightNoteHtml,
   twistNoteHtml,
   velocityNoteHtml
@@ -17,7 +36,7 @@ import { solve } from './solver/solve';
 import type { TrajectorySample } from './solver/types';
 import { format } from './units/units';
 import { createRangeScene } from './scene/scene';
-import type { RangeScene } from './scene/types';
+import type { CameraPreset, RangeScene } from './scene/types';
 import { NICE_SCALES, autoExaggeration, dialSamples, trimToRange } from './scene/geometry';
 
 declare global {
@@ -35,7 +54,8 @@ function el<T extends HTMLElement>(id: string, ctor: new () => T): T {
 }
 
 const form = el('form', HTMLFormElement);
-const rifleName = el('rifleName', HTMLSpanElement);
+const rifleBar = el('rifleBar', HTMLDivElement);
+const dialogRoot = el('dialogRoot', HTMLDivElement);
 const resultsEl = el('results', HTMLDivElement);
 const dopeEl = el('dope', HTMLDivElement);
 const exaggerationEl = el('exaggeration', HTMLInputElement);
@@ -55,8 +75,13 @@ const replayBtn = el('replay', HTMLButtonElement);
 const exportCsvBtn = el('exportCsv', HTMLButtonElement);
 const printCardBtn = el('printCard', HTMLButtonElement);
 const runSetupBtn = el('runSetup', HTMLButtonElement);
+const magnificationLabel = el('magnificationLabel', HTMLLabelElement);
+const magnificationEl = el('magnification', HTMLInputElement);
+const magnificationValueEl = el('magnificationValue', HTMLSpanElement);
 
-let state: AppState = loadState(localStorage);
+let saved: SavedState = loadSaved(localStorage);
+let state: AppState = activeState(saved);
+let currentPreset: CameraPreset = 'reset';
 let parseErrors: Record<string, string> = {};
 let errors: Record<string, string> = {};
 let lastResults: ShotResults | null = null;
@@ -86,7 +111,9 @@ const SOLVER_FIELD_TO_FORM: Record<string, string | 'bc'> = {
 };
 
 function bcFieldId(): string {
-  return state.load.dragModel === 'G7' ? 'bcG7' : 'bcG1';
+  if (state.load.dragModel === 'G7') return 'bcG7';
+  if (state.load.dragModel === 'RA4') return 'bcRA4';
+  return 'bcG1';
 }
 
 function renderForm(): void {
@@ -108,7 +135,17 @@ function renderForm(): void {
   insert('[data-field="twistConfirmed"]', twistNoteHtml(state));
   insert('[data-field="sightHeight"]', sightHeightNoteHtml());
   insert('[data-field="pressureMode"]', pressureNoteHtml(state));
-  rifleName.textContent = state.rifle.name;
+  const rifleGroup = form.querySelector('fieldset[data-group="rifle"]');
+  const rifleLegend = rifleGroup === null ? null : rifleGroup.querySelector('legend');
+  if (rifleLegend !== null) {
+    rifleLegend.insertAdjacentHTML('afterend', cartridgeNoteHtml(state));
+  }
+  const scopeGroup = form.querySelector('fieldset[data-group="scope"]');
+  const scopeLegend = scopeGroup === null ? null : scopeGroup.querySelector('legend');
+  if (scopeLegend !== null) {
+    scopeLegend.insertAdjacentHTML('afterend', scopePanelHtml(state));
+  }
+  rifleBar.innerHTML = rifleBarHtml(saved);
 }
 
 function recompute(): void {
@@ -151,7 +188,9 @@ function recompute(): void {
     unitSystem: state.unitSystem,
     targetType: state.targetType,
     exaggeration,
-    showDialed
+    showDialed,
+    scope: state.rifle.scope,
+    magnification: state.magnification
   });
 }
 
@@ -179,14 +218,30 @@ function renderOutputs(): void {
     exaggeration === 1
       ? 'True scale'
       : `Drop and drift drawn ${exaggeration}× larger than real. The numbers are not changed.`;
-  sceneNoteEl.textContent =
-    showDialed
+  if (currentPreset === 'shooter') {
+    sceneNoteEl.textContent = showDialed
+      ? 'Scope view through your scope. The bullet rises above the crosshair and comes down onto the target.'
+      : 'Scope view with the scope still at its zero. The red dot is where the bullet lands. Read the hold off the reticle at that dot.';
+  } else {
+    sceneNoteEl.textContent = showDialed
       ? 'Showing the shot after you dial the correction: the bullet rises above your line of sight (dashed) and comes down onto the target. Blue arrows show which way the wind blows.'
       : 'Showing the shot with the scope still at its zero: the red dot is where the bullet would land, the green dot is where you aimed. Blue arrows show which way the wind blows.';
+  }
+}
+
+function syncMagnification(): void {
+  const scope = state.rifle.scope;
+  const value = clampMagnification(state.magnification, scope);
+  magnificationEl.min = String(scope.magMin);
+  magnificationEl.max = String(scope.magMax);
+  magnificationEl.value = String(value);
+  magnificationValueEl.textContent = `${value % 1 === 0 ? String(value) : value.toFixed(1)}×`;
+  scene.setMagnification(state.magnification);
 }
 
 function refresh(): void {
-  saveState(localStorage, state);
+  saved = withActiveState(saved, state);
+  saveSaved(localStorage, saved);
   recompute();
   renderForm();
   renderOutputs();
@@ -215,8 +270,28 @@ form.addEventListener('change', (event: Event) => {
     refresh();
     return;
   }
+  if (name === 'scopePicker') {
+    const value = target.value;
+    if (value === 'generic') {
+      state = selectGenericScope(state);
+    } else if (value.startsWith('lib:')) {
+      state = selectLibraryScope(state, value.slice(4));
+    } else {
+      return;
+    }
+    parseErrors = {};
+    refresh();
+    syncMagnification();
+    return;
+  }
   const def = fieldById(name);
   if (def === undefined) return;
+  if (def.kind === 'text') {
+    const input = target as HTMLInputElement;
+    state = applyField(state, def, input.value);
+    refresh();
+    return;
+  }
   if (def.kind === 'number') {
     const p = parseInput(def, target.value, state.unitSystem);
     if (!p.ok) {
@@ -235,6 +310,9 @@ form.addEventListener('change', (event: Event) => {
     state = applyField(state, def, input.checked);
   }
   refresh();
+  if (def.group === 'scope' || name === 'angleUnit') {
+    syncMagnification();
+  }
 });
 
 form.addEventListener('submit', (event: Event) => {
@@ -250,6 +328,74 @@ form.addEventListener('click', (event: Event) => {
   }
 });
 
+rifleBar.addEventListener('change', (event: Event) => {
+  const target = event.target;
+  if (target instanceof HTMLSelectElement && target.id === 'riflePicker') {
+    saved = withActiveState(saved, state);
+    saved = selectProfile(saved, target.value);
+    state = activeState(saved);
+    parseErrors = {};
+    lastResults = null;
+    lastRows = [];
+    refresh();
+    syncMagnification();
+    if (!state.setupDone) {
+      openSetup(el('setupRoot', HTMLDivElement), getState, setState);
+    }
+  }
+});
+
+rifleBar.addEventListener('click', (event: Event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  if (target.id === 'addRifle') {
+    dialogRoot.innerHTML = addRifleDialogHtml();
+    el('newRifleName', HTMLInputElement).focus();
+  } else if (target.id === 'duplicateRifle') {
+    saved = duplicateProfile(withActiveState(saved, state));
+    state = activeState(saved);
+    refresh();
+  } else if (target.id === 'deleteRifle') {
+    dialogRoot.innerHTML = deleteRifleDialogHtml(state.rifle.name);
+  }
+});
+
+dialogRoot.addEventListener('click', (event: Event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  const id = target.id;
+  if (id === 'addRifleCancel' || id === 'deleteRifleCancel') {
+    dialogRoot.innerHTML = '';
+  } else if (id === 'addRifleConfirm') {
+    const name = el('newRifleName', HTMLInputElement).value.trim() || 'My rifle';
+    const cartridge = el('newRifleCartridge', HTMLSelectElement).value;
+    saved = addProfile(withActiveState(saved, state), cartridge, name);
+    state = activeState(saved);
+    dialogRoot.innerHTML = '';
+    parseErrors = {};
+    lastResults = null;
+    lastRows = [];
+    refresh();
+    syncMagnification();
+    openSetup(el('setupRoot', HTMLDivElement), getState, setState);
+  } else if (id === 'deleteRifleConfirm') {
+    saved = deleteProfile(withActiveState(saved, state), saved.activeId);
+    state = activeState(saved);
+    dialogRoot.innerHTML = '';
+    parseErrors = {};
+    lastResults = null;
+    lastRows = [];
+    refresh();
+    syncMagnification();
+  }
+});
+
+document.addEventListener('keydown', (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && dialogRoot.innerHTML !== '') {
+    dialogRoot.innerHTML = '';
+  }
+});
+
 for (const button of sceneBar.querySelectorAll<HTMLButtonElement>('button[data-camera]')) {
   button.addEventListener('click', () => {
     const value = button.dataset.camera;
@@ -262,7 +408,10 @@ for (const button of sceneBar.querySelectorAll<HTMLButtonElement>('button[data-c
       } else {
         setExaggeration(1);
       }
+      currentPreset = value;
       scene.setCamera(value);
+      magnificationLabel.hidden = currentPreset !== 'shooter';
+      renderOutputs();
     }
   });
 }
@@ -277,6 +426,14 @@ speedEl.addEventListener('change', () => {
 
 exaggerationEl.addEventListener('input', () => {
   setExaggeration(NICE_SCALES[Number(exaggerationEl.value)] ?? 1);
+});
+
+magnificationEl.addEventListener('input', () => {
+  state = { ...state, magnification: clampMagnification(Number(magnificationEl.value), state.rifle.scope) };
+  magnificationValueEl.textContent = `${state.magnification % 1 === 0 ? String(state.magnification) : state.magnification.toFixed(1)}×`;
+  scene.setMagnification(state.magnification);
+  saved = withActiveState(saved, state);
+  saveSaved(localStorage, saved);
 });
 
 showDialedEl.addEventListener('change', () => {
@@ -336,6 +493,7 @@ runSetupBtn.addEventListener('click', () => {
 window.__rangeScene = scene;
 
 refresh();
+syncMagnification();
 
 if (!state.setupDone) {
   openSetup(el('setupRoot', HTMLDivElement), getState, setState);

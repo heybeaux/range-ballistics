@@ -1,0 +1,52 @@
+{
+  "scopes": [
+    {
+      "scope": {
+        "libraryId": "vortex-venom-5-25x56-ebr7c-mrad",
+        "name": "Vortex Venom 5-25x56 FFP, EBR-7C MRAD",
+        "magMin": 5,
+        "magMax": 25,
+        "focalPlane": "first",
+        "fovAtMinRad": 0.070637,
+        "fovAtMaxRad": 0.015666,
+        "trueSubtensionMag": null,
+        "reticleId": "ebr-7c-mrad",
+        "availableElevation": 19,
+        "note": {
+          "text": "The reticle's line, dot, and hash sizes are Vortex's published figures. The positions of the hashes and wind dots are drawn from Vortex's subtension diagram, which Vortex marks \"for representation only\".",
+          "sourceUrl": "https://vortexoptics.widen.net/view/pdf/wtqaqb3spd/VTX_VEN-52502_EBR-7C_MRAD_RS_I_RI_ST.pdf",
+          "readOn": "2026-11-10"
+        }
+      },
+      "angleUnit": "MIL",
+      "clickValue": 0.1,
+      "facts": [
+        {
+          "text": "Magnification 5-25x, first focal plane.",
+          "sourceUrl": "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html",
+          "readOn": "2026-11-10"
+        },
+        {
+          "text": "Field of view 21.2 ft to 4.7 ft at 100 yd.",
+          "sourceUrl": "https://vortexoptics.widen.net/view/pdf/j900peyuse/VTX_M-00285-0_WEB.pdf",
+          "readOn": "2026-11-10"
+        },
+        {
+          "text": "0.1 MRAD per click, 10 MRAD per rotation.",
+          "sourceUrl": "https://vortexoptics.widen.net/view/pdf/j900peyuse/VTX_M-00285-0_WEB.pdf",
+          "readOn": "2026-11-10"
+        },
+        {
+          "text": "Maximum elevation 25 MRAD; 19 MRAD with the RevStop zero ring fitted.",
+          "sourceUrl": "https://vortexoptics.widen.net/view/pdf/j900peyuse/VTX_M-00285-0_WEB.pdf",
+          "readOn": "2026-11-10"
+        },
+        {
+          "text": "Maximum windage 25 MRAD.",
+          "sourceUrl": "https://vortexoptics.widen.net/view/pdf/j900peyuse/VTX_M-00285-0_WEB.pdf",
+          "readOn": "2026-11-10"
+        }
+      ]
+    }
+  ]
+}

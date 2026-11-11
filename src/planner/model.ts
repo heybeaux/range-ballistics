@@ -5,12 +5,15 @@ import { clicksFor, correctionFor, format, unitFor } from '../units/units';
 import type {
   ActiveLoad,
   AppState,
+  Cartridge,
   Conditions,
   Correction,
   DopeRow,
   LibraryLoad,
   LoadLibrary,
+  MuzzleRegime,
   Rifle,
+  ScopeProfile,
   ShotResults
 } from './types';
 import { PLANNING_NOTICE } from './types';
@@ -21,7 +24,8 @@ export function effectivePressurePa(c: Conditions): number {
 
 export function toShotInput(state: AppState): ShotInput | null {
   const { load, rifle, conditions, dope } = state;
-  const bc = load.dragModel === 'G1' ? load.bcG1 : load.bcG7;
+  const bc =
+    load.dragModel === 'G1' ? load.bcG1 : load.dragModel === 'G7' ? load.bcG7 : load.bcRA4;
   if (bc === null) return null;
   return {
     muzzleVelocityMps: load.muzzleVelocityMps,
@@ -59,13 +63,24 @@ export function makeCorrection(offsetM: number, rangeM: number, axis: 'elevation
     direction = offsetM < 0 ? 'right' : 'left';
   }
   const clicks = clicksFor(rifle.angleUnit === 'MIL' ? mil : moa, rifle.clickValue);
-  return { offsetM, mil, moa, direction, clicks };
+  const a = rifle.angleUnit === 'MIL' ? mil : moa;
+  const beyondDial = axis === 'elevation' && direction === 'up' && a > rifle.scope.availableElevation + 1e-9;
+  const holdRemaining = beyondDial ? a - rifle.scope.availableElevation : 0;
+  return { offsetM, mil, moa, direction, clicks, beyondDial, holdRemaining };
+}
+
+export function muzzleRegimeOf(mach: number): MuzzleRegime {
+  if (mach >= 1.2) return 'supersonic';
+  if (mach >= 1.0) return 'transonic';
+  return 'subsonic';
 }
 
 export function shotResults(state: AppState, result: SolveSuccess): ShotResults | null {
   const { conditions, rifle, load } = state;
   const s = sampleAt(result.samples, conditions.targetRangeM);
   if (s === null) return null;
+  const first = result.samples[0];
+  const muzzleRegime = first === undefined ? 'subsonic' : muzzleRegimeOf(first.mach);
   return {
     rangeM: conditions.targetRangeM,
     elevation: makeCorrection(s.pathM, s.rangeM, 'elevation', rifle),
@@ -79,7 +94,11 @@ export function shotResults(state: AppState, result: SolveSuccess): ShotResults 
     stabilityStatus: result.stability?.status ?? null,
     transonicRangeM: result.transonicRangeM,
     subsonicRangeM: result.subsonicRangeM,
-    pastTransonic: result.transonicRangeM !== null && conditions.targetRangeM > result.transonicRangeM,
+    muzzleRegime,
+    pastTransonic:
+      muzzleRegime === 'supersonic' &&
+      result.transonicRangeM !== null &&
+      conditions.targetRangeM > result.transonicRangeM,
     velocityEstimated: !load.velocityMeasured,
     notes: result.notes
   };
@@ -116,14 +135,60 @@ export function estimateVelocityMps(
   return publishedMps - lossMpsPerM * (testBarrelM - barrelLengthM);
 }
 
-export function activeLoadFromLibrary(lib: LibraryLoad, rifle: Rifle, library: LoadLibrary): ActiveLoad {
-  const dragModel: DragModel = lib.bcG7.value !== null ? 'G7' : 'G1';
-  const estimate = estimateVelocityMps(
-    lib.publishedVelocityMps.value,
+export type VelocityBasis = 'published-barrel' | 'interpolated' | 'nearest-barrel' | 'estimated' | 'published' | 'none';
+
+export function velocityForBarrel(
+  lib: LibraryLoad,
+  barrelLengthM: number,
+  cartridge: Cartridge | undefined
+): { velocityMps: number | null; basis: VelocityBasis } {
+  const listed = lib.velocityByBarrel;
+  if (listed.length > 0) {
+    for (const entry of listed) {
+      if (Math.abs(entry.barrelM - barrelLengthM) <= 0.0127) {
+        return { velocityMps: entry.velocityMps, basis: 'published-barrel' };
+      }
+    }
+    const first = listed[0];
+    const last = listed[listed.length - 1];
+    if (first !== undefined && last !== undefined) {
+      if (barrelLengthM < first.barrelM) {
+        return { velocityMps: first.velocityMps, basis: 'nearest-barrel' };
+      }
+      if (barrelLengthM > last.barrelM) {
+        return { velocityMps: last.velocityMps, basis: 'nearest-barrel' };
+      }
+      for (let i = 1; i < listed.length; i++) {
+        const prev = listed[i - 1];
+        const curr = listed[i];
+        if (prev === undefined || curr === undefined) continue;
+        if (barrelLengthM >= prev.barrelM && barrelLengthM <= curr.barrelM) {
+          const span = curr.barrelM - prev.barrelM;
+          const t = span === 0 ? 0 : (barrelLengthM - prev.barrelM) / span;
+          return {
+            velocityMps: prev.velocityMps + t * (curr.velocityMps - prev.velocityMps),
+            basis: 'interpolated'
+          };
+        }
+      }
+    }
+  }
+  const published = lib.publishedVelocityMps.value;
+  if (published === null) return { velocityMps: null, basis: 'none' };
+  const est = estimateVelocityMps(
+    published,
     lib.testBarrelM,
-    rifle.barrelLengthM,
-    library.velocityLossMpsPerM.value
+    barrelLengthM,
+    cartridge?.velocityLossMpsPerM.value ?? null
   );
+  if (est !== null && est !== published) return { velocityMps: est, basis: 'estimated' };
+  return { velocityMps: published, basis: 'published' };
+}
+
+export function activeLoadFromLibrary(lib: LibraryLoad, rifle: Rifle, library: LoadLibrary): ActiveLoad {
+  const cartridge = library.cartridges.find((c) => c.id === lib.cartridgeId);
+  const dragModel: DragModel =
+    lib.bcG7.value !== null ? 'G7' : lib.bcG1.value !== null ? 'G1' : lib.bcRA4.value !== null ? 'RA4' : 'G1';
   return {
     libraryId: lib.id,
     name: lib.name,
@@ -132,11 +197,17 @@ export function activeLoadFromLibrary(lib: LibraryLoad, rifle: Rifle, library: L
     bulletLengthM: lib.bulletLengthM.value,
     bcG1: lib.bcG1.value,
     bcG7: lib.bcG7.value,
+    bcRA4: lib.bcRA4.value,
     dragModel,
-    muzzleVelocityMps: estimate ?? lib.publishedVelocityMps.value ?? 0,
+    muzzleVelocityMps: velocityForBarrel(lib, rifle.barrelLengthM, cartridge).velocityMps ?? 0,
     velocityMeasured: false,
-    origin: { bulletLengthM: 'library', bcG1: 'library', bcG7: 'library' }
+    origin: { bulletLengthM: 'library', bcG1: 'library', bcG7: 'library', bcRA4: 'library' }
   };
+}
+
+export function clampMagnification(mag: number, scope: ScopeProfile): number {
+  if (!Number.isFinite(mag)) return scope.magMin;
+  return Math.min(Math.max(mag, scope.magMin), scope.magMax);
 }
 
 export function toCsv(state: AppState, rows: DopeRow[], dateIso: string): string {

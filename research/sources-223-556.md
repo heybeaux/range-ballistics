@@ -71,12 +71,21 @@ any estimate is shown.
 
 SAAMI FAQ, https://saami.org/faqs/ :
 
-> "However, it is not safe to shoot "5.56," "5.56 NATO," or "5.56x45mm" ammunition in a barrel
+> "However, it is not safe to shoot “5.56,” “5.56 NATO,” or “5.56x45mm” ammunition in a barrel
 > marked as being chambered in 223 Remington for a number of reasons. The main reason being that a
 > barrel marked as chambered in 223 Remington will have a shorter throat into the rifling than a
-> "5.56" barrel which may cause increased pressure if the "5.56" ammunition is fired in it. This
+> “5.56” barrel which may cause increased pressure if the “5.56” ammunition is fired in it. This
 > can result in serious injury or death to the user and/or bystanders, as well as damage to the
 > firearm."
 
 > "It is safe to shoot 223 Remington ammunition in a 5.56 military specification chamber. The
 > firearm manufacturer can verify whether the chamber in your firearm meets that definition."
+
+## Second pass (2026-11-10)
+
+Every value in the two load tables was fetched again and none contradicts the first pass.
+Corrections made from it: Federal's and PMC's first BC field is labelled only "Ballistic
+Coefficient", so those loads are marked "drag model not stated, treated as G1"; the Berger 73 gr
+BCs are cited to Berger's page, which names G1 and G7; "M193 type" and "M855 type" were our labels,
+not the makers', and are removed from load names; the SAAMI passage uses curly quotes, and on the
+page the "It is safe to shoot 223 Remington ammunition..." passage comes first.
