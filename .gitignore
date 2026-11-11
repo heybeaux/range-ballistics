@@ -17,3 +17,6 @@ BOOTSTRAP.md
 scripts/prompts/*.reasoning.txt
 scripts/prompts/*.response.txt
 .receipts/
+.openclaw/
+scripts/drag_tables_source.py.txt
+.playwright-mcp/
