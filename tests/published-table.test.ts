@@ -75,7 +75,19 @@ const MORE_TABLES = [
   { name: 'Federal GM223M3, 77 gr, BC 0.372', input: table(2720, 0.372, 77, 0.224), yards: [100, 200, 300, 400, 500], fps: [2481, 2255, 2041, 1838, 1652], bound: 0.015 },
   { name: 'Federal AE193, 55 gr, BC 0.246', input: table(3165, 0.246, 55, 0.224), yards: [100, 200, 300, 400, 500], fps: [2772, 2412, 2080, 1776, 1506], bound: 0.015 },
   { name: 'Hornady 80269, 73 gr, G1 0.398', input: table(2790, 0.398, 73, 0.224), yards: [100, 200, 300, 400, 500], fps: [2563, 2348, 2143, 1949, 1766], bound: 0.015 },
-  { name: 'PMC X-TAC 5.56K from 16 in, 62 gr, BC 0.304', input: table(2920, 0.304, 62, 0.224), yards: [100, 200, 300, 400, 500], fps: [2617, 2333, 2067, 1819, 1595], bound: 0.015 }
+  { name: 'PMC X-TAC 5.56K from 16 in, 62 gr, BC 0.304', input: table(2920, 0.304, 62, 0.224), yards: [100, 200, 300, 400, 500], fps: [2617, 2333, 2067, 1819, 1595], bound: 0.015 },
+  // 2026-11-11 cartridges: one maker-published velocity table per cartridge (research/sources-*.md).
+  { name: 'Federal GM65CRDBH2 (6.5 CM), 140 gr, BC 0.607', input: table(2725, 0.607, 140, 0.264), yards: [100, 200, 300, 400, 500], fps: [2577, 2434, 2295, 2161, 2031], bound: 0.015 },
+  { name: 'Berger 50010 (6.5 PRC), 156 gr, G1 0.679', input: table(2900, 0.679, 156, 0.264), yards: [100, 200, 300, 400], fps: [2764, 2631, 2501, 2375], bound: 0.015 },
+  { name: 'Federal F243FS1 (.243 Win), 95 gr, BC 0.376', input: table(2980, 0.376, 95, 0.243), yards: [100, 200, 300, 400, 500], fps: [2730, 2493, 2268, 2056, 1854], bound: 0.015 },
+  { name: 'Federal F708FS1 (7mm-08), 140 gr, BC 0.390', input: table(2850, 0.39, 140, 0.284), yards: [100, 200, 300, 400, 500], fps: [2615, 2393, 2181, 1980, 1791], bound: 0.015 },
+  { name: 'Federal P7RTA1 (7mm RM), 155 gr, BC 0.586', input: table(3000, 0.586, 155, 0.284), yards: [100, 200, 300, 400, 500], fps: [2837, 2680, 2528, 2382, 2240], bound: 0.015 },
+  { name: 'Federal P7PRCTA1 (7mm PRC), 155 gr, BC 0.586', input: table(3100, 0.586, 155, 0.284), yards: [100, 200, 300, 400, 500], fps: [2933, 2773, 2618, 2468, 2324], bound: 0.015 },
+  { name: 'Federal P270TA1 (.270 Win), 136 gr, BC 0.493', input: table(3000, 0.493, 136, 0.277), yards: [100, 200, 300, 400, 500], fps: [2807, 2622, 2445, 2274, 2111], bound: 0.015 },
+  { name: 'Federal GM3006M (.30-06), 168 gr, BC 0.463', input: table(2700, 0.463, 168, 0.308), yards: [100, 200, 300, 400, 500], fps: [2508, 2324, 2148, 1980, 1819], bound: 0.015 },
+  { name: 'Federal GM300WM (.300 WM), 190 gr, BC 0.533', input: table(2900, 0.533, 190, 0.308), yards: [100, 200, 300, 400, 500], fps: [2725, 2557, 2395, 2239, 2089], bound: 0.015 },
+  { name: 'Berger 55030 (.300 PRC), 215 gr, G1 0.691', input: table(2940, 0.691, 215, 0.308), yards: [100, 200, 300, 400], fps: [2805, 2674, 2546, 2421], bound: 0.015 },
+  { name: 'Federal F450BMFS1 (.450 BM), 260 gr, BC 0.180', input: table(2200, 0.18, 260, 0.452), yards: [100, 200, 300], fps: [1777, 1419, 1155], bound: 0.015 }
 ];
 
 describe('solver against published velocity tables: .22 LR, .223 Remington, 5.56 NATO', () => {
