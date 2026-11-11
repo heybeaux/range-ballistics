@@ -2,15 +2,17 @@ import type { AppState } from './types';
 import type { Quantity, UnitSystem } from '../units/units';
 import { unitFor } from '../units/units';
 import { escapeHtml } from './view';
+import { cartridgeById, library } from './storage';
+import { clampMagnification, velocityForBarrel } from './model';
 
-export type Group = 'shot' | 'air' | 'load' | 'rifle' | 'table' | 'display';
+export type Group = 'shot' | 'air' | 'load' | 'rifle' | 'scope' | 'table' | 'display';
 
 export interface FieldDef {
   id: string;
   group: Group;
   label: string;
   help: string;
-  kind: 'number' | 'select' | 'checkbox';
+  kind: 'number' | 'select' | 'checkbox' | 'text';
   path: string;
   quantity?: Quantity;
   unitLabel?: string;
@@ -163,13 +165,26 @@ export const FIELDS: FieldDef[] = [
     help: 'Printed on the ammunition box, in grains.'
   },
   {
+    id: 'bulletDiameter',
+    group: 'load',
+    kind: 'number',
+    path: 'load.bulletDiameterM',
+    quantity: 'smallLength',
+    decimals: 3,
+    minSi: 0.004,
+    maxSi: 0.013,
+    label: 'Bullet diameter',
+    help: 'The diameter of the bullet, not the case. 0.308 in for .308 Winchester, 0.224 in for .223 and 5.56.'
+  },
+  {
     id: 'dragModel',
     group: 'load',
     kind: 'select',
     path: 'load.dragModel',
     options: [
       { value: 'G7', label: 'G7 (boat-tail match bullets)' },
-      { value: 'G1', label: 'G1 (flat-base bullets)' }
+      { value: 'G1', label: 'G1 (flat-base bullets)' },
+      { value: 'RA4', label: 'RA4 (.22 rimfire, Eley)' }
     ],
     label: 'Drag model',
     help: 'Which standard bullet shape the BC is measured against. Use G7 for long boat-tail match bullets when the maker publishes it.'
@@ -199,6 +214,18 @@ export const FIELDS: FieldDef[] = [
     help: 'Ballistic coefficient against the G1 shape. Higher means less drag.'
   },
   {
+    id: 'bcRA4',
+    group: 'load',
+    kind: 'number',
+    path: 'load.bcRA4',
+    decimals: 3,
+    nullable: true,
+    minSi: 0.05,
+    maxSi: 1.2,
+    label: 'RA4 BC',
+    help: 'Ballistic coefficient against the RA4 rimfire shape. Eley publishes this for .22 Long Rifle.'
+  },
+  {
     id: 'bulletLength',
     group: 'load',
     kind: 'number',
@@ -218,6 +245,27 @@ export const FIELDS: FieldDef[] = [
     path: 'spinDrift',
     label: 'Include spin drift',
     help: 'A spinning bullet drifts slightly toward the direction of its twist. Needs the bullet length.'
+  },
+  {
+    id: 'rifleName',
+    group: 'rifle',
+    kind: 'text',
+    path: 'rifle.name',
+    label: 'Rifle name',
+    help: 'A name for this rifle, so you can tell your rifles apart.'
+  },
+  {
+    id: 'barrelLength',
+    group: 'rifle',
+    kind: 'number',
+    path: 'rifle.barrelLengthM',
+    unitLabel: 'in',
+    scale: 1 / 0.0254,
+    decimals: 1,
+    minSi: 0.1,
+    maxSi: 1.0,
+    label: 'Barrel length',
+    help: 'Measured from the bolt face to the muzzle. Shorter barrels give lower velocity.'
   },
   {
     id: 'zeroRange',
@@ -297,6 +345,79 @@ export const FIELDS: FieldDef[] = [
     help: 'How much one turret click moves the impact, in the unit above. Most MIL scopes are 0.1.'
   },
   {
+    id: 'availableElevation',
+    group: 'scope',
+    kind: 'number',
+    path: 'rifle.scope.availableElevation',
+    decimals: 1,
+    minSi: 1,
+    maxSi: 60,
+    label: 'Elevation you can dial',
+    help: "How far the elevation turret turns up from your zero before it stops, in your scope's unit. It depends on your mount and your zero."
+  },
+  {
+    id: 'magMin',
+    group: 'scope',
+    kind: 'number',
+    path: 'rifle.scope.magMin',
+    unitLabel: 'x',
+    decimals: 1,
+    minSi: 1,
+    maxSi: 60,
+    label: 'Lowest magnification',
+    help: 'The low end of the zoom range.'
+  },
+  {
+    id: 'magMax',
+    group: 'scope',
+    kind: 'number',
+    path: 'rifle.scope.magMax',
+    unitLabel: 'x',
+    decimals: 1,
+    minSi: 1,
+    maxSi: 80,
+    label: 'Highest magnification',
+    help: 'The high end of the zoom range.'
+  },
+  {
+    id: 'focalPlane',
+    group: 'scope',
+    kind: 'select',
+    path: 'rifle.scope.focalPlane',
+    options: [
+      { value: 'first', label: 'First focal plane (reticle grows as you zoom)' },
+      { value: 'second', label: 'Second focal plane (reticle stays the same size)' }
+    ],
+    label: 'Reticle sits in the',
+    help: 'First focal plane reticles read true at every magnification. Second focal plane reticles read true at one magnification only.'
+  },
+  {
+    id: 'fovAtMin',
+    group: 'scope',
+    kind: 'number',
+    path: 'rifle.scope.fovAtMinRad',
+    unitLabel: 'MIL across',
+    scale: 1000,
+    decimals: 1,
+    minSi: 0.005,
+    maxSi: 0.5,
+    label: 'Field of view at lowest magnification',
+    help: 'How wide the view is at the low end. To convert a figure in feet at 100 yards, multiply by 3.33.'
+  },
+  {
+    id: 'fovAtMax',
+    group: 'scope',
+    kind: 'number',
+    path: 'rifle.scope.fovAtMaxRad',
+    unitLabel: 'MIL across',
+    scale: 1000,
+    decimals: 1,
+    minSi: 0.002,
+    maxSi: 0.5,
+    label: 'Field of view at highest magnification',
+    help: 'How wide the view is at the high end.'
+  },
+  {
     id: 'dopeStart',
     group: 'table',
     kind: 'number',
@@ -360,6 +481,7 @@ export const GROUP_TITLES: Record<Group, string> = {
   air: 'The air',
   load: 'Your load',
   rifle: 'Your rifle',
+  scope: 'Your scope',
   table: 'Dope table',
   display: 'Display'
 };
@@ -400,7 +522,7 @@ export function unitLabelFor(def: FieldDef, state: AppState): string {
   if (def.quantity !== undefined) {
     return unitFor(def.quantity, state.unitSystem).label;
   }
-  if (def.id === 'clickValue') {
+  if (def.id === 'clickValue' || def.id === 'availableElevation') {
     return state.rifle.angleUnit;
   }
   return def.unitLabel ?? '';
@@ -456,7 +578,11 @@ export function parseInput(def: FieldDef, text: string, system: UnitSystem): Par
 }
 
 export function applyField(state: AppState, def: FieldDef, value: number | string | boolean | null): AppState {
-  const next = setPath(state, def.path, value);
+  let v = value;
+  if (def.id === 'rifleName' && typeof v === 'string' && v.trim() === '') {
+    v = 'My rifle';
+  }
+  const next = setPath(state, def.path, v);
   if (def.id === 'bcG1' || def.id === 'bcG7' || def.id === 'bulletLength') {
     if (def.id === 'bcG1') {
       next.load.origin.bcG1 = 'user';
@@ -466,9 +592,37 @@ export function applyField(state: AppState, def: FieldDef, value: number | strin
       next.load.origin.bulletLengthM = 'user';
     }
   }
+  if (def.id === 'bcRA4') {
+    next.load.origin.bcRA4 = 'user';
+  }
   if (def.id === 'muzzleVelocity' && typeof value === 'number') {
     if (Math.abs(value - state.load.muzzleVelocityMps) > 0.01) {
       next.load.velocityMeasured = false;
+    }
+  }
+  if (def.id === 'barrelLength') {
+    const libId = next.load.libraryId;
+    if (libId !== null && !next.load.velocityMeasured) {
+      const lib = library.loads.find((l) => l.id === libId);
+      if (lib !== undefined) {
+        const cartridge = cartridgeById(lib.cartridgeId);
+        const v = velocityForBarrel(lib, next.rifle.barrelLengthM, cartridge).velocityMps;
+        if (v !== null) {
+          next.load.muzzleVelocityMps = v;
+        }
+      }
+    }
+  }
+  if (def.id === 'magMin' || def.id === 'magMax') {
+    next.magnification = clampMagnification(next.magnification, next.rifle.scope);
+  }
+  if (def.id === 'angleUnit' && typeof value === 'string') {
+    if (next.rifle.scope.libraryId === null) {
+      next.rifle.scope.reticleId = value === 'MOA' ? 'generic-moa' : 'generic-mil';
+    }
+    if (value !== state.rifle.angleUnit) {
+      const factor = value === 'MOA' ? 3.4377 : 1 / 3.4377;
+      next.rifle.scope.availableElevation = state.rifle.scope.availableElevation * factor;
     }
   }
   return next;
@@ -489,6 +643,12 @@ export function fieldHtml(def: FieldDef, state: AppState, error: string | undefi
       .map((o) => `<option value="${escapeHtml(o.value)}"${current === o.value ? ' selected' : ''}>${escapeHtml(o.label)}</option>`)
       .join('');
     parts.push(`<select id="${id}" name="${id}">${options}</select>`);
+  } else if (def.kind === 'text') {
+    const current = String(getPath(state, def.path) ?? '');
+    parts.push(`<label for="${id}">${escapeHtml(def.label)}</label>`);
+    parts.push(
+      `<span class="input-row"><input type="text" id="${id}" name="${id}" value="${escapeHtml(current)}" autocomplete="off"></span>`
+    );
   } else {
     const checked = getPath(state, def.path) === true ? ' checked' : '';
     parts.push(`<label class="check"><input type="checkbox" id="${id}" name="${id}"${checked}> ${escapeHtml(def.label)}</label>`);
@@ -501,13 +661,19 @@ export function fieldHtml(def: FieldDef, state: AppState, error: string | undefi
 }
 
 export function formHtml(state: AppState, errors: Record<string, string>): string {
-  const groups: Group[] = ['shot', 'air', 'load', 'rifle', 'table', 'display'];
+  const groups: Group[] = ['shot', 'air', 'load', 'rifle', 'scope', 'table', 'display'];
   const out: string[] = [];
   for (const group of groups) {
     const fields = FIELDS.filter((f) => {
       if (f.group !== group) return false;
       if (f.id === 'pressure' && state.conditions.pressureMode === 'altitude') return false;
       if (f.id === 'altitude' && state.conditions.pressureMode === 'station') return false;
+      if (
+        state.rifle.scope.libraryId !== null &&
+        (f.id === 'magMin' || f.id === 'magMax' || f.id === 'focalPlane' || f.id === 'fovAtMin' || f.id === 'fovAtMax')
+      ) {
+        return false;
+      }
       return true;
     });
     const body = fields.map((f) => fieldHtml(f, state, errors[f.id])).join('');

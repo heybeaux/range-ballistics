@@ -3,8 +3,10 @@ import { solve } from '../src/solver/solve';
 import type { AppState, ShotResults, DopeRow } from '../src/planner/types';
 import { PLANNING_NOTICE } from '../src/planner/types';
 import { toShotInput, shotResults, dopeRows } from '../src/planner/model';
-import { defaultState } from '../src/planner/storage';
+import { defaultState, loadSaved, activeState, addProfile, selectLibraryLoad } from '../src/planner/storage';
 import { escapeHtml, correctionHtml, resultsHtml, dopeTableHtml, cardHeaderLines, printCardHtml, windClockSvg } from '../src/planner/view';
+
+const emptyStorage: Pick<Storage, 'getItem'> = { getItem: () => null };
 
 function compute(state: AppState): { results: ShotResults; rows: DopeRow[] } {
   const input = toShotInput(state);
@@ -26,7 +28,7 @@ describe('correctionHtml', () => {
   it('shows clicks, direction, and the full equivalences', () => {
     const html = correctionHtml(
       'Elevation',
-      { offsetM: -0.5, mil: 1.0, moa: 3.4377, direction: 'up', clicks: 10 },
+      { offsetM: -0.5, mil: 1.0, moa: 3.4377, direction: 'up', clicks: 10, beyondDial: false, holdRemaining: 0 },
       defaultState()
     );
     expect(html).toContain('<h3>Elevation</h3>');
@@ -41,11 +43,28 @@ describe('correctionHtml', () => {
   it('says No correction when the direction is none', () => {
     const html = correctionHtml(
       'Windage',
-      { offsetM: 0, mil: 0, moa: 0, direction: 'none', clicks: 0 },
+      { offsetM: 0, mil: 0, moa: 0, direction: 'none', clicks: 0, beyondDial: false, holdRemaining: 0 },
       defaultState()
     );
     expect(html).toContain('No correction');
     expect(html).not.toContain('clicks');
+  });
+
+  it('shows the dial-limit warning when the correction is beyond the dial', () => {
+    const html = correctionHtml(
+      'Elevation',
+      { offsetM: -10, mil: 20, moa: 68.75, direction: 'up', clicks: 200, beyondDial: true, holdRemaining: 1 },
+      defaultState()
+    );
+    expect(html).toContain('class="warning dial-limit"');
+    expect(html).toContain('Your scope dials 19.0 MIL up from zero');
+    expect(html).toContain('hold the remaining 1.0 MIL');
+    const notBeyond = correctionHtml(
+      'Elevation',
+      { offsetM: -10, mil: 20, moa: 68.75, direction: 'up', clicks: 200, beyondDial: false, holdRemaining: 0 },
+      defaultState()
+    );
+    expect(notBeyond).not.toContain('dial-limit');
   });
 });
 
@@ -122,6 +141,40 @@ describe('resultsHtml', () => {
     const html = resultsHtml({ ...results, notes: ['a <b> note'] }, state, false);
     expect(html).toContain('a &lt;b&gt; note');
   });
+
+  it('shows the subsonic speed range for a subsonic load', () => {
+    const rimfire = activeState(addProfile(loadSaved(emptyStorage), '22-lr', 'Rimfire'));
+    const state = { ...rimfire, conditions: { ...rimfire.conditions, targetRangeM: 91.44 } };
+    const { results } = compute(state);
+    const html = resultsHtml(results, state, false);
+    expect(html).toContain('At 100 yd');
+    expect(html).toContain('Subsonic from the muzzle');
+    expect(html).not.toContain('Goes transonic at');
+    expect(html).not.toContain('Goes subsonic at');
+    expect(html).not.toContain('Stays supersonic');
+    expect(html).not.toContain('class="warning"');
+  });
+
+  it('shows the transonic speed range for a load that starts transonic', () => {
+    const rimfire = activeState(addProfile(loadSaved(emptyStorage), '22-lr', 'Rimfire'));
+    const state = selectLibraryLoad(rimfire, 'cci-30');
+    const { results } = compute(state);
+    const html = resultsHtml(results, state, false);
+    expect(html).toContain('Starts in the transonic range');
+    expect(html).toContain('Goes subsonic at');
+    expect(html).toContain('class="regime-note"');
+    expect(html).not.toContain('Goes transonic at');
+    expect(html).not.toContain('class="warning"');
+  });
+
+  it('keeps the supersonic rows for the default state', () => {
+    const state = defaultState();
+    const { results } = compute(state);
+    const html = resultsHtml(results, state, false);
+    expect(html).toContain('Stays supersonic to 300 yd');
+    expect(html).not.toContain('Subsonic from the muzzle');
+    expect(html).not.toContain('regime-note');
+  });
 });
 
 describe('dopeTableHtml', () => {
@@ -140,6 +193,41 @@ describe('dopeTableHtml', () => {
   it('shows an empty message with no rows', () => {
     const html = dopeTableHtml([], defaultState());
     expect(html).toContain('No rows');
+  });
+
+  it('marks beyond-dial rows and adds the note when any row is beyond the dial', () => {
+    const base = defaultState();
+    const state = {
+      ...base,
+      rifle: { ...base.rifle, scope: { ...base.rifle.scope, availableElevation: 2 } },
+      dope: { startM: 91.44, endM: 548.64, stepM: 45.72 }
+    };
+    const { rows } = compute(state);
+    const html = dopeTableHtml(rows, state);
+    const beyondCount = (html.match(/class="(current )?beyond"/g) ?? []).length;
+    expect(beyondCount).toBeGreaterThanOrEqual(5);
+    expect(html).toContain('<p class="dope-note">');
+    expect(html).toContain('2.0 MIL');
+    const wide = { ...base, rifle: { ...base.rifle, scope: { ...base.rifle.scope, availableElevation: 19 } } };
+    const { rows: wideRows } = compute(wide);
+    const wideHtml = dopeTableHtml(wideRows, wide);
+    expect(wideHtml).not.toContain('beyond');
+    expect(wideHtml).not.toContain('dope-note');
+  });
+
+  it('asterisks only the elevation clicks of beyond-dial rows', () => {
+    const base = defaultState();
+    const state = {
+      ...base,
+      rifle: { ...base.rifle, scope: { ...base.rifle.scope, availableElevation: 2 } },
+      dope: { startM: 91.44, endM: 548.64, stepM: 45.72 }
+    };
+    const { rows } = compute(state);
+    const html = dopeTableHtml(rows, state);
+    const row100 = html.split('<tr').find((r) => r.includes('<td>100</td>'));
+    expect(row100).toContain('<td>0</td>');
+    const row600 = html.split('<tr').find((r) => r.includes('<td>600</td>'));
+    expect(row600).toContain('48*');
   });
 });
 
@@ -167,6 +255,18 @@ describe('printCardHtml', () => {
     expect(html).toContain('(estimated velocity)');
     expect(html).toContain('<table class="dope">');
     expect(html).toContain('2026-11-10');
+  });
+
+  it('prints the dial-limit note when a row is beyond the dial', () => {
+    const base = defaultState();
+    const state = {
+      ...base,
+      rifle: { ...base.rifle, scope: { ...base.rifle.scope, availableElevation: 2 } },
+      dope: { startM: 91.44, endM: 548.64, stepM: 45.72 }
+    };
+    const { rows } = compute(state);
+    const html = printCardHtml(rows, state, '2026-11-10');
+    expect(html).toContain('dope-note');
   });
 });
 

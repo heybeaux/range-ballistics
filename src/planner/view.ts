@@ -30,7 +30,10 @@ export function correctionHtml(title: string, c: Correction, state: AppState): s
   }
   const dial = `<p class="dial"><strong>${a.toFixed(1)} ${u} ${dir}</strong></p>`;
   const clicks = `<p class="clicks">${c.clicks} clicks ${dir} &middot; exact ${a.toFixed(2)} ${u}</p>`;
-  return `<div class="correction"><h3>${escapeHtml(title)}</h3>${dial}${clicks}<p class="equiv">${equiv}</p></div>`;
+  const dialLimit = c.beyondDial
+    ? `<p class="warning dial-limit">Your scope dials ${state.rifle.scope.availableElevation.toFixed(1)} ${u} up from zero. Dial all of it and hold the remaining ${c.holdRemaining.toFixed(1)} ${u}.</p>`
+    : '';
+  return `<div class="correction"><h3>${escapeHtml(title)}</h3>${dial}${clicks}${dialLimit}<p class="equiv">${equiv}</p></div>`;
 }
 
 export function windClockSvg(windClock: number, speedText: string): string {
@@ -81,23 +84,38 @@ export function resultsHtml(results: ShotResults | null, state: AppState, stale:
       results.stabilitySg === null
         ? 'Not available (bullet length unknown)'
         : `${results.stabilitySg.toFixed(2)} (${results.stabilityStatus ?? ''})`
-    ],
-    [
+    ]
+  ];
+  if (results.muzzleRegime === 'supersonic') {
+    facts.push([
       'Goes transonic at',
       results.transonicRangeM === null
         ? `Stays supersonic to ${format(results.rangeM, 'range', sys)}`
         : format(results.transonicRangeM, 'range', sys)
-    ],
-    [
+    ]);
+    facts.push([
       'Goes subsonic at',
       results.subsonicRangeM === null ? 'Not within this distance' : format(results.subsonicRangeM, 'range', sys)
-    ]
-  ];
+    ]);
+  } else if (results.muzzleRegime === 'transonic') {
+    facts.push(['Speed range', 'Starts in the transonic range (between Mach 1.0 and 1.2 at the muzzle)']);
+    facts.push([
+      'Goes subsonic at',
+      results.subsonicRangeM === null ? 'Not within this distance' : format(results.subsonicRangeM, 'range', sys)
+    ]);
+  } else {
+    facts.push(['Speed range', 'Subsonic from the muzzle']);
+  }
   parts.push('<dl class="facts">');
   for (const [dt, dd] of facts) {
     parts.push(`<dt>${dt}</dt><dd>${dd}</dd>`);
   }
   parts.push('</dl>');
+  if (results.muzzleRegime === 'transonic') {
+    parts.push(
+      '<p class="regime-note">This load starts just above the speed of sound and drops through it early in flight. Predictions for it are less exact than for a load that stays subsonic or stays well supersonic.</p>'
+    );
+  }
   if (results.pastTransonic) {
     parts.push('<p class="warning">The target is past the transonic range. Predictions beyond it are less reliable.</p>');
   }
@@ -122,11 +140,19 @@ export function dopeTableHtml(rows: DopeRow[], state: AppState): string {
     .map((row) => {
       const e = `${angle(row.elevation, u).toFixed(1)} ${dirWord(row.elevation.direction)}`.trim();
       const w = `${angle(row.windage, u).toFixed(1)} ${dirWord(row.windage.direction)}`.trim();
-      const current = Math.abs(row.rangeM - state.conditions.targetRangeM) <= 0.5 ? ' class="current"' : '';
-      return `<tr${current}><td>${format(row.rangeM, 'range', sys, false)}</td><td>${e}</td><td>${row.elevation.clicks}</td><td>${w}</td><td>${row.windage.clicks}</td><td>${row.timeOfFlightS.toFixed(2)}</td><td>${format(row.velocityMps, 'velocity', sys, false)}</td></tr>`;
+      const beyond = row.elevation.beyondDial ? ' beyond' : '';
+      const current = Math.abs(row.rangeM - state.conditions.targetRangeM) <= 0.5 ? ' current' : '';
+      const cls = current || beyond ? ` class="${(current + beyond).trim()}"` : '';
+      const clicks = row.elevation.beyondDial ? `${row.elevation.clicks}*` : `${row.elevation.clicks}`;
+      return `<tr${cls}><td>${format(row.rangeM, 'range', sys, false)}</td><td>${e}</td><td>${clicks}</td><td>${w}</td><td>${row.windage.clicks}</td><td>${row.timeOfFlightS.toFixed(2)}</td><td>${format(row.velocityMps, 'velocity', sys, false)}</td></tr>`;
     })
     .join('');
-  return `<table class="dope"><thead><tr><th>Distance (${unitFor('range', sys).label})</th><th>Elevation (${u})</th><th>Clicks</th><th>Windage (${u})</th><th>Clicks</th><th>Time (s)</th><th>Velocity (${unitFor('velocity', sys).label})</th></tr></thead><tbody>${body}</tbody></table>`;
+  const table = `<table class="dope"><thead><tr><th>Distance (${unitFor('range', sys).label})</th><th>Elevation (${u})</th><th>Clicks</th><th>Windage (${u})</th><th>Clicks</th><th>Time (s)</th><th>Velocity (${unitFor('velocity', sys).label})</th></tr></thead><tbody>${body}</tbody></table>`;
+  const anyBeyond = rows.some((row) => row.elevation.beyondDial);
+  const note = anyBeyond
+    ? `<p class="dope-note">* More than your scope can dial (${state.rifle.scope.availableElevation.toFixed(1)} ${u}). Dial all of it and hold the rest.</p>`
+    : '';
+  return table + note;
 }
 
 export function cardHeaderLines(state: AppState, dateIso: string): string[] {
