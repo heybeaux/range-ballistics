@@ -1,24 +1,22 @@
 import { describe, it, expect } from 'vitest';
 import { solve } from '../src/solver/solve';
 import type { SolveSuccess } from '../src/solver/types';
-import type { AppState, LibraryLoad, LoadLibrary } from '../src/planner/types';
+import type { AppState } from '../src/planner/types';
 import { PLANNING_NOTICE } from '../src/planner/types';
-import { effectivePressurePa, toShotInput, makeCorrection, shotResults, dopeRows, estimateVelocityMps, activeLoadFromLibrary, toCsv } from '../src/planner/model';
-
-function testState(): AppState {
-  return {
-    version: 1,
-    unitSystem: 'imperial',
-    rifle: { name: 'Test rifle', barrelLengthM: 0.4064, twistM: 0.2794, twistDirection: 'right', twistConfirmed: false, sightHeightM: 0.05, zeroRangeM: 91.44, angleUnit: 'MIL', clickValue: 0.1 },
-    load: { libraryId: null, name: 'Test 175', bulletMassKg: 0.01134, bulletDiameterM: 0.007823, bulletLengthM: null, bcG1: 0.5, bcG7: 0.243, dragModel: 'G7', muzzleVelocityMps: 750, velocityMeasured: false, origin: { bulletLengthM: 'user', bcG1: 'user', bcG7: 'user' } },
-    customLoads: [],
-    conditions: { targetRangeM: 548.64, windSpeedMps: 4.4704, windClock: 3, temperatureK: 288.15, pressureMode: 'station', pressurePa: 101325, altitudeM: 0, relativeHumidity: 0, shotAngleRad: 0 },
-    dope: { startM: 91.44, endM: 548.64, stepM: 45.72 },
-    spinDrift: false,
-    targetType: 'steel',
-    setupDone: true
-  };
-}
+import {
+  effectivePressurePa,
+  toShotInput,
+  makeCorrection,
+  shotResults,
+  dopeRows,
+  estimateVelocityMps,
+  activeLoadFromLibrary,
+  toCsv,
+  muzzleRegimeOf,
+  velocityForBarrel,
+  clampMagnification
+} from '../src/planner/model';
+import { testState, testRifle, testLoad, testLibrary, testCartridge, src, none } from './helpers/fixtures';
 
 function solved(state: AppState): SolveSuccess {
   const input = toShotInput(state);
@@ -28,7 +26,7 @@ function solved(state: AppState): SolveSuccess {
   return r;
 }
 
-const rifle = testState().rifle;
+const rifle = testRifle();
 
 describe('effectivePressurePa', () => {
   it('station mode returns the station pressure', () => {
@@ -71,6 +69,21 @@ describe('toShotInput', () => {
 
   it('G7 drag model with null bcG7 returns null', () => {
     const state = { ...testState(), load: { ...testState().load, dragModel: 'G7' as const, bcG7: null } };
+    expect(toShotInput(state)).toBeNull();
+  });
+
+  it('RA4 drag model uses bcRA4', () => {
+    const state = { ...testState(), load: { ...testState().load, dragModel: 'RA4' as const, bcRA4: 0.112 } };
+    const input = toShotInput(state);
+    expect(input).not.toBeNull();
+    if (input !== null) {
+      expect(input.bc).toBe(0.112);
+      expect(input.dragModel).toBe('RA4');
+    }
+  });
+
+  it('RA4 drag model with null bcRA4 returns null', () => {
+    const state = { ...testState(), load: { ...testState().load, dragModel: 'RA4' as const, bcRA4: null } };
     expect(toShotInput(state)).toBeNull();
   });
 
@@ -120,6 +133,39 @@ describe('makeCorrection', () => {
     const c = makeCorrection(-0.5, 500, 'elevation', { ...rifle, angleUnit: 'MOA', clickValue: 0.25 });
     expect(c.clicks).toBe(14);
   });
+
+  it('small elevation correction: beyondDial false, holdRemaining 0', () => {
+    const c = makeCorrection(-0.5, 500, 'elevation', rifle);
+    expect(c.beyondDial).toBe(false);
+    expect(c.holdRemaining).toBe(0);
+  });
+
+  it('10 m low at 500 m exceeds the 19 MIL dial: beyondDial with 1 MIL left to hold', () => {
+    const c = makeCorrection(-10, 500, 'elevation', rifle);
+    expect(c.beyondDial).toBe(true);
+    expect(Math.abs(c.holdRemaining - 1.0)).toBeLessThan(0.01);
+    expect(c.clicks).toBe(200);
+  });
+
+  it('beyondDial is false for a down correction and for windage', () => {
+    expect(makeCorrection(10, 500, 'elevation', rifle).beyondDial).toBe(false);
+    expect(makeCorrection(-10, 500, 'windage', rifle).beyondDial).toBe(false);
+  });
+
+  it('beyondDial is false when the scope can dial the full correction', () => {
+    const bigScope = { ...rifle, scope: { ...rifle.scope, availableElevation: 25 } };
+    expect(makeCorrection(-10, 500, 'elevation', bigScope).beyondDial).toBe(false);
+  });
+});
+
+describe('muzzleRegimeOf', () => {
+  it('classifies the muzzle mach number', () => {
+    expect(muzzleRegimeOf(2)).toBe('supersonic');
+    expect(muzzleRegimeOf(1.2)).toBe('supersonic');
+    expect(muzzleRegimeOf(1.19)).toBe('transonic');
+    expect(muzzleRegimeOf(1.0)).toBe('transonic');
+    expect(muzzleRegimeOf(0.95)).toBe('subsonic');
+  });
 });
 
 describe('shotResults', () => {
@@ -142,6 +188,7 @@ describe('shotResults', () => {
     expect(r.spinDriftM).toBeNull();
     expect(r.stabilitySg).toBeNull();
     expect(r.velocityEstimated).toBe(true);
+    expect(r.muzzleRegime).toBe('supersonic');
   });
 
   it('spin drift and stability with a known bullet length', () => {
@@ -175,6 +222,62 @@ describe('shotResults', () => {
     const result = solved(testState());
     const state = { ...testState(), conditions: { ...testState().conditions, targetRangeM: 5000 } };
     expect(shotResults(state, result)).toBeNull();
+  });
+
+  it('subsonic .22 LR shot: subsonic regime, no pastTransonic, up correction', () => {
+    const state: AppState = {
+      ...testState(),
+      load: {
+        ...testState().load,
+        bulletMassKg: 0.002592,
+        bulletDiameterM: 0.0057277,
+        bcG1: 0.138,
+        bcG7: null,
+        dragModel: 'G1',
+        muzzleVelocityMps: 329
+      },
+      rifle: { ...testRifle(), zeroRangeM: 45.72, twistM: 0.4064 },
+      conditions: { ...testState().conditions, targetRangeM: 91.44 },
+      dope: { startM: 22.86, endM: 182.88, stepM: 22.86 }
+    };
+    const r = shotResults(state, solved(state));
+    expect(r).not.toBeNull();
+    if (r === null) return;
+    expect(r.muzzleRegime).toBe('subsonic');
+    expect(r.pastTransonic).toBe(false);
+    expect(r.elevation.direction).toBe('up');
+    expect(r.elevation.mil).toBeGreaterThan(1.5);
+    expect(r.elevation.mil).toBeLessThan(3.0);
+    expect(r.velocityMps).toBeGreaterThan(270);
+    expect(r.velocityMps).toBeLessThan(300);
+  });
+
+  it('transonic .22 LR start: transonic regime, subsonic range within the solve', () => {
+    const state: AppState = {
+      ...testState(),
+      load: {
+        ...testState().load,
+        bulletMassKg: 0.002592,
+        bulletDiameterM: 0.0057277,
+        bcG1: 0.13,
+        bcG7: null,
+        dragModel: 'G1',
+        muzzleVelocityMps: 376
+      },
+      rifle: { ...testRifle(), zeroRangeM: 45.72, twistM: 0.4064 },
+      conditions: { ...testState().conditions, targetRangeM: 91.44 },
+      dope: { startM: 22.86, endM: 182.88, stepM: 22.86 }
+    };
+    const r = shotResults(state, solved(state));
+    expect(r).not.toBeNull();
+    if (r === null) return;
+    expect(r.muzzleRegime).toBe('transonic');
+    expect(r.pastTransonic).toBe(false);
+    expect(r.subsonicRangeM).not.toBeNull();
+    if (r.subsonicRangeM !== null) {
+      expect(r.subsonicRangeM).toBeGreaterThan(5);
+      expect(r.subsonicRangeM).toBeLessThan(120);
+    }
   });
 });
 
@@ -226,33 +329,8 @@ describe('estimateVelocityMps', () => {
 });
 
 describe('activeLoadFromLibrary', () => {
-  function lib(bullet: Partial<LibraryLoad> = {}): LibraryLoad {
-    return {
-      id: 'x',
-      name: 'X',
-      bulletMassKg: 0.0109,
-      bulletDiameterM: 0.007823,
-      bulletLengthM: { value: null, sourceUrl: null, readOn: null },
-      bcG1: { value: 0.462, sourceUrl: 'https://example.com', readOn: '2026-11-10' },
-      bcG7: { value: null, sourceUrl: null, readOn: null },
-      publishedVelocityMps: { value: 800, sourceUrl: 'https://example.com', readOn: '2026-11-10' },
-      testBarrelM: 0.6096,
-      note: null,
-      ...bullet
-    };
-  }
-
-  function library(): LoadLibrary {
-    return {
-      loads: [lib()],
-      velocityLossMpsPerM: { value: 250, sourceUrl: 'https://example.com', readOn: '2026-11-10' },
-      velocityLossNote: ''
-    };
-  }
-
   it('copies the library load with an estimated velocity', () => {
-    const l = lib();
-    const load = activeLoadFromLibrary(l, rifle, library());
+    const load = activeLoadFromLibrary(testLoad(), rifle, testLibrary());
     expect(load.dragModel).toBe('G1');
     expect(Math.abs(load.muzzleVelocityMps - 749.2)).toBeLessThan(1e-9);
     expect(load.velocityMeasured).toBe(false);
@@ -262,10 +340,86 @@ describe('activeLoadFromLibrary', () => {
   });
 
   it('prefers G7 when published; falls back to published velocity without a test barrel', () => {
-    const l7 = lib({ bcG7: { value: 0.224, sourceUrl: 'https://example.com', readOn: '2026-11-10' } });
-    expect(activeLoadFromLibrary(l7, rifle, library()).dragModel).toBe('G7');
-    const noBarrel = lib({ testBarrelM: null });
-    expect(activeLoadFromLibrary(noBarrel, rifle, library()).muzzleVelocityMps).toBe(800);
+    const l7 = testLoad({ bcG7: src(0.224) });
+    expect(activeLoadFromLibrary(l7, rifle, testLibrary([l7])).dragModel).toBe('G7');
+    const noBarrel = testLoad({ testBarrelM: null });
+    expect(activeLoadFromLibrary(noBarrel, rifle, testLibrary([noBarrel])).muzzleVelocityMps).toBe(800);
+  });
+
+  it('falls back to RA4 when only bcRA4 is published', () => {
+    const load = activeLoadFromLibrary(
+      testLoad({ bcG1: none, bcRA4: src(0.112), publishedVelocityMps: none }),
+      rifle,
+      testLibrary()
+    );
+    expect(load.dragModel).toBe('RA4');
+    expect(load.bcRA4).toBe(0.112);
+    expect(load.muzzleVelocityMps).toBe(0);
+    expect(load.origin.bcRA4).toBe('library');
+  });
+
+  it('uses the load\'s own cartridge for the velocity loss figure', () => {
+    const lib = testLoad();
+    const library = testLibrary(
+      [lib],
+      [testCartridge({ id: 'other', velocityLossMpsPerM: src(999) }), testCartridge()]
+    );
+    const load = activeLoadFromLibrary(lib, rifle, library);
+    expect(Math.abs(load.muzzleVelocityMps - 749.2)).toBeLessThan(1e-9);
+  });
+});
+
+describe('velocityForBarrel', () => {
+  it('estimates from the test barrel and the cartridge loss figure', () => {
+    const v = velocityForBarrel(testLoad(), 0.4064, testCartridge());
+    expect(Math.abs((v.velocityMps ?? 0) - 749.2)).toBeLessThan(1e-9);
+    expect(v.basis).toBe('estimated');
+  });
+
+  it('keeps the published velocity when no estimate is possible', () => {
+    const noLoss = velocityForBarrel(testLoad(), 0.4064, testCartridge({ velocityLossMpsPerM: none }));
+    expect(noLoss.velocityMps).toBe(800);
+    expect(noLoss.basis).toBe('published');
+    const noCartridge = velocityForBarrel(testLoad(), 0.4064, undefined);
+    expect(noCartridge.velocityMps).toBe(800);
+    expect(noCartridge.basis).toBe('published');
+    const noTestBarrel = velocityForBarrel(testLoad({ testBarrelM: null }), 0.4064, testCartridge());
+    expect(noTestBarrel.velocityMps).toBe(800);
+    expect(noTestBarrel.basis).toBe('published');
+  });
+
+  it('returns null with basis none when nothing is published', () => {
+    const v = velocityForBarrel(testLoad({ publishedVelocityMps: none }), 0.4064, testCartridge());
+    expect(v.velocityMps).toBeNull();
+    expect(v.basis).toBe('none');
+  });
+
+  it('published barrels: exact, near, interpolated and nearest', () => {
+    const lib = testLoad({
+      velocityByBarrel: [
+        { barrelM: 0.4064, velocityMps: 890 },
+        { barrelM: 0.508, velocityMps: 945 }
+      ]
+    });
+    const at = (barrelLengthM: number) => velocityForBarrel(lib, barrelLengthM, testCartridge());
+    expect(at(0.4064)).toEqual({ velocityMps: 890, basis: 'published-barrel' });
+    expect(at(0.41)).toEqual({ velocityMps: 890, basis: 'published-barrel' });
+    expect(at(0.508)).toEqual({ velocityMps: 945, basis: 'published-barrel' });
+    const mid = at(0.4572);
+    expect(Math.abs((mid.velocityMps ?? 0) - 917.5)).toBeLessThan(1e-6);
+    expect(mid.basis).toBe('interpolated');
+    expect(at(0.3)).toEqual({ velocityMps: 890, basis: 'nearest-barrel' });
+    expect(at(0.66)).toEqual({ velocityMps: 945, basis: 'nearest-barrel' });
+  });
+});
+
+describe('clampMagnification', () => {
+  it('keeps the value in the scope range and maps NaN to magMin', () => {
+    const scope = rifle.scope;
+    expect(clampMagnification(10, scope)).toBe(10);
+    expect(clampMagnification(1, scope)).toBe(5);
+    expect(clampMagnification(99, scope)).toBe(25);
+    expect(clampMagnification(NaN, scope)).toBe(5);
   });
 });
 

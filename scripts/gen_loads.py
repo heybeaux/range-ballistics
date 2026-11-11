@@ -1,8 +1,8 @@
-"""Build src/data/loads.json and src/data/rifle.json from research/sources.md values.
+"""Build src/data/loads.json, src/data/rifle.json and src/data/scopes.json.
 
-Every number here was read from the page named next to it on READ_ON and re-checked against the
-page text the same day. None is typed from memory. A value the maker does not publish is None.
-Run: python3 scripts/gen_loads.py
+Every number here was read from the page named next to it on READ_ON and checked a second time
+against the page text. None is typed from memory. A value the maker does not publish is None.
+The research notes are in research/. Run: python3 scripts/gen_loads.py
 """
 import json
 from pathlib import Path
@@ -10,8 +10,8 @@ from pathlib import Path
 READ_ON = "2026-11-10"
 IN = 0.0254
 FT = 0.3048
+YD = 0.9144
 GR = 0.00006479891
-DIAMETER_M = round(0.308 * IN, 7)
 
 ICAO = "BC quoted by the bullet maker. Makers use different standard atmospheres; the difference is about 2%."
 SIERRA = "Sierra quotes BCs against Army Standard Metro, most other makers against ICAO. The difference is about 2%."
@@ -23,22 +23,37 @@ def sourced(value, url):
     return {"value": value, "sourceUrl": url, "readOn": READ_ON}
 
 
-def load(id_, name, grains, g1, g7, bc_url, length_in, length_url, fps, mps, vel_url, barrel_in, note):
+def quote(text, url):
+    return {"text": text, "sourceUrl": url, "readOn": READ_ON}
+
+
+def load(id_, cartridge, name, grains, diameter_in, *, g1=None, g7=None, ra4=None, bc_url=None,
+         model_stated=True, length_in=None, length_url=None, fps=None, mps=None, vel_url=None,
+         barrel_in=None, by_barrel=(), note=None):
+    """by_barrel: (barrel inches, fps) pairs the maker publishes for the same load."""
     velocity = mps if mps is not None else (round(fps * FT, 2) if fps is not None else None)
     return {
         "id": id_,
+        "cartridgeId": cartridge,
         "name": name,
         "bulletMassKg": round(grains * GR, 8),
-        "bulletDiameterM": DIAMETER_M,
+        "bulletDiameterM": round(diameter_in * IN, 7),
         "bulletLengthM": sourced(None if length_in is None else round(length_in * IN, 6), length_url),
         "bcG1": sourced(g1, bc_url),
         "bcG7": sourced(g7, bc_url),
+        "bcRA4": sourced(ra4, bc_url),
+        "bcModelStated": model_stated,
         "publishedVelocityMps": sourced(velocity, vel_url),
         "testBarrelM": None if barrel_in is None else round(barrel_in * IN, 4),
+        "velocityByBarrel": [
+            {"barrelM": round(b * IN, 4), "velocityMps": round(v * FT, 2)} for b, v in sorted(by_barrel)
+        ],
         "note": note,
     }
 
 
+# ---------------------------------------------------------------- .308 Winchester
+D308 = 0.308
 FED168 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M.html"
 FED175 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html"
 SMK168 = "https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/"
@@ -51,70 +66,333 @@ BER168 = "https://bergerbullets.com/product/30-caliber-168-grain-hybrid-target/"
 BER175 = "https://bergerbullets.com/product/30-caliber-175-grain-otm-tactical/"
 LAP155A = "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-10g-155gr-4317076/"
 LAP175A = "https://www.lapua.com/product/308-win-target-cartridge-scenar-l-113g-175gr-4317520/"
-LAP155 = "https://www.lapua.com/product/30-cal-scenar-l-bullet-gb552-100-g-155-gr-otm/"
-LAP175 = "https://www.lapua.com/product/30-scenar-l-bullet-gb550-113-g-175-gr-otm/"
 NOS168 = "https://www.nosler.com/30-caliber-168gr-hpbt-custom-competition-100ct.html"
-RIFLESHOOTER = "https://rifleshooter.com/2014/12/308-winchester-7-62x51mm-nato-barrel-length-versus-velocity-28-to-16-5/"
+RIFLESHOOTER_308 = "https://rifleshooter.com/2014/12/308-winchester-7-62x51mm-nato-barrel-length-versus-velocity-28-to-16-5/"
 
 FED_NOTE = (
-    "Federal does not state its test barrel length, so the app cannot work out a 16 inch estimate "
-    "for this load. The starting velocity is Federal's published figure and is probably high for a "
-    "16 inch barrel. "
+    "Federal does not state its test barrel length, so the app cannot correct this velocity for "
+    "your barrel. The starting velocity is Federal's published figure and is probably high for a "
+    "short barrel. "
 )
+COMPONENT = "Component bullet. Enter your own chronograph velocity."
 
-LOADS = [
-    # Factory match ammunition
-    load("federal-gm308m", "Federal Gold Medal 168 gr Sierra MatchKing (GM308M)", 168, 0.462, 0.224, SMK168,
-         1.220, FED168, 2650, None, FED168, None,
-         FED_NOTE + "One independent test measured 2466 fps for this load from a 16.5 inch barrel "
+LOADS_308 = [
+    load("federal-gm308m", "308-win", "Federal Gold Medal 168 gr Sierra MatchKing (GM308M)", 168, D308,
+         g1=0.462, g7=0.224, bc_url=SMK168, length_in=1.220, length_url=FED168, fps=2650, vel_url=FED168,
+         note=FED_NOTE + "One independent test measured 2466 fps for this load from a 16.5 inch barrel "
          "(Rifleshooter.com, one barrel). " + SIERRA),
-    load("federal-gm308m2", "Federal Gold Medal 175 gr Sierra MatchKing (GM308M2)", 175, 0.505, 0.250, SMK175,
-         1.242, FED175, 2600, None, FED175, None, FED_NOTE + SIERRA),
-    load("hornady-80966", "Hornady Match 168 gr ELD Match (80966)", 168, 0.523, 0.263, HBC,
-         None, None, 2700, None, HOR168, 24,
-         "Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.498 and G7 0.251, so real "
+    load("federal-gm308m2", "308-win", "Federal Gold Medal 175 gr Sierra MatchKing (GM308M2)", 175, D308,
+         g1=0.505, g7=0.250, bc_url=SMK175, length_in=1.242, length_url=FED175, fps=2600, vel_url=FED175,
+         note=FED_NOTE + SIERRA),
+    load("hornady-80966", "308-win", "Hornady Match 168 gr ELD Match (80966)", 168, D308,
+         g1=0.523, g7=0.263, bc_url=HBC, fps=2700, vel_url=HOR168, barrel_in=24,
+         note="Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.498 and G7 0.251, so real "
          "drop at long range will be a little more than shown."),
-    load("hornady-8105", "Hornady Match 178 gr BTHP (8105)", 178, None, None, None,
-         None, None, 2600, None, HOR178, 24,
-         "Hornady's page for this load does not give a BC. Type the BC from your ammunition box before solving."),
-    load("berger-60010", "Berger 175 gr OTM Tactical (60010)", 175, 0.512, 0.263, BER175A,
-         1.261, BER175, 2668, None, BER175A, 26, ICAO),
-    load("lapua-4317076", "Lapua 155 gr Scenar-L (4317076)", 155, 0.460, 0.230, LAP155A,
-         None, None, None, 860, LAP155A, 26, ICAO),
-    load("lapua-4317520", "Lapua 175 gr Scenar-L (4317520)", 175, 0.490, 0.247, LAP175A,
-         None, None, None, 793, LAP175A, 26, ICAO),
-    # Component bullets for handloads: no factory velocity, so the user must enter one.
-    load("bullet-berger-30425", "Handload: Berger 168 gr Hybrid Target (30425)", 168, 0.515, 0.264, BER168,
-         1.287, BER168, None, None, None, None, "Component bullet. Enter your own chronograph velocity."),
-    load("bullet-hornady-178-eldm", "Handload: Hornady 178 gr ELD Match", 178, 0.547, 0.275, HBC,
-         None, None, None, None, None, None,
-         "Component bullet. Enter your own chronograph velocity. BCs are Hornady's Mach 2.25 figures."),
-    load("bullet-nosler-53164", "Handload: Nosler 168 gr Custom Competition (53164)", 168, 0.462, None, NOS168,
-         1.200, NOS168, None, None, None, None,
-         "Component bullet. Enter your own chronograph velocity. Nosler does not publish a G7 BC."),
+    load("hornady-8105", "308-win", "Hornady Match 178 gr BTHP (8105)", 178, D308,
+         fps=2600, vel_url=HOR178, barrel_in=24,
+         note="Hornady's page for this load does not give a BC. Type the BC from your ammunition box before solving."),
+    load("berger-60010", "308-win", "Berger 175 gr OTM Tactical (60010)", 175, D308,
+         g1=0.512, g7=0.263, bc_url=BER175A, length_in=1.261, length_url=BER175, fps=2668, vel_url=BER175A,
+         barrel_in=26, note=ICAO),
+    load("lapua-4317076", "308-win", "Lapua 155 gr Scenar-L (4317076)", 155, D308,
+         g1=0.460, g7=0.230, bc_url=LAP155A, mps=860, vel_url=LAP155A, barrel_in=26, note=ICAO),
+    load("lapua-4317520", "308-win", "Lapua 175 gr Scenar-L (4317520)", 175, D308,
+         g1=0.490, g7=0.247, bc_url=LAP175A, mps=793, vel_url=LAP175A, barrel_in=26, note=ICAO),
+    load("bullet-berger-30425", "308-win", "Handload: Berger 168 gr Hybrid Target (30425)", 168, D308,
+         g1=0.515, g7=0.264, bc_url=BER168, length_in=1.287, length_url=BER168, note=COMPONENT),
+    load("bullet-hornady-178-eldm", "308-win", "Handload: Hornady 178 gr ELD Match", 178, D308,
+         g1=0.547, g7=0.275, bc_url=HBC, note=COMPONENT + " BCs are Hornady's Mach 2.25 figures."),
+    load("bullet-nosler-53164", "308-win", "Handload: Nosler 168 gr Custom Competition (53164)", 168, D308,
+         g1=0.462, bc_url=NOS168, length_in=1.200, length_url=NOS168,
+         note=COMPONENT + " Nosler does not publish a G7 BC."),
 ]
 
-LIBRARY = {
-    "loads": LOADS,
-    # 20.9 fps per inch of barrel, converted to m/s per metre of barrel.
-    "velocityLossMpsPerM": sourced(round(20.9 * FT / IN, 2), RIFLESHOOTER),
-    "velocityLossNote": (
-        "Rifleshooter.com cut one .308 barrel from 28 to 16.5 inches and measured Federal Gold Medal "
-        "168 gr at each length: 20.9 fps lost per inch on average. It is one barrel and one test, "
-        "not manufacturer data. Your rifle will differ, so chronograph your load."
-    ),
+# ---------------------------------------------------------------- .223 Remington
+D224 = 0.224
+FED69 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M.html"
+FED77 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M3.html"
+FED73 = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-berger/11-GM223BH73.html"
+BER73A = "https://bergerbullets.com/product/223-remington-73-grain-boat-tail-target/"
+FEDAE223 = "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223.html"
+SMK69 = "https://sierrabullets.com/22-cal-69-gr-hpbt-matchking-smk/"
+SMK77 = "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk/"
+HOR73 = "https://www.hornady.com/ammunition/rifle/223-rem-73-gr-eld-match"
+HOR75 = "https://www.hornady.com/ammunition/rifle/223-rem-75-gr-bthp-match"
+HOR68 = "https://www.hornady.com/ammunition/rifle/223-remington-68-gr-bthp-match-frontier"
+BER77A = "https://bergerbullets.com/product/223-remington-77-grain-otm-tactical/"
+BER77 = "https://bergerbullets.com/product/22-caliber-77-grain-otm-tactical/"
+LAP69 = "https://www.lapua.com/product/223-rem-target-cartridge-scenar-l-45g-69gr-4315015/"
+NOS77A = "https://www.nosler.com/223-rem-77gr-custom-competition-match-grade-ammunition.html"
+NOS77 = "https://www.nosler.com/22-caliber-77gr-hpbt-custom-competition-100ct.html"
+PMC223A = "https://pmcammo.com/product/bronze-223a/"
+
+FED_SIERRA_223 = (
+    "The BCs shown are Sierra's, the bullet maker. Federal's page for this load gives different "
+    "figures (G1 {g1}, G7 {g7}). "
+)
+NOT_STATED = "The maker gives this BC without naming a drag model. The app treats it as G1."
+G1_ONLY = "The maker publishes a G1 BC only for this bullet."
+PMC_NOTE = "PMC publishes this load's velocity from two barrel lengths. The app uses the one nearest your barrel."
+
+LOADS_223 = [
+    load("federal-gm223m", "223-rem", "Federal Gold Medal 69 gr Sierra MatchKing (GM223M)", 69, D224,
+         g1=0.341, g7=0.167, bc_url=SMK69, length_in=0.921, length_url=FED69, fps=2950, vel_url=FED69,
+         note=FED_SIERRA_223.format(g1=".301", g7=".165") + FED_NOTE + SIERRA),
+    load("federal-gm223m3", "223-rem", "Federal Gold Medal 77 gr Sierra MatchKing (GM223M3)", 77, D224,
+         g1=0.372, g7=0.182, bc_url=SMK77, length_in=0.982, length_url=FED77, fps=2720, vel_url=FED77,
+         note=FED_SIERRA_223.format(g1=".372", g7=".188") + FED_NOTE + SIERRA),
+    load("federal-gm223bh73", "223-rem", "Federal Gold Medal 73 gr Berger BT Target (GM223BH73)", 73, D224,
+         g1=0.348, g7=0.178, bc_url=BER73A, length_in=0.962, length_url=FED73, fps=2800, vel_url=FED73,
+         note=FED_NOTE + ICAO),
+    load("federal-ae223", "223-rem", "Federal American Eagle 55 gr FMJ (AE223)", 55, D224,
+         g1=0.269, bc_url=FEDAE223, model_stated=False, length_in=0.735, length_url=FEDAE223, fps=3240,
+         vel_url=FEDAE223, note=FED_NOTE + NOT_STATED),
+    load("hornady-80269", "223-rem", "Hornady Match 73 gr ELD Match (80269)", 73, D224,
+         g1=0.398, g7=0.200, bc_url=HOR73, fps=2790, vel_url=HOR73, barrel_in=24,
+         note="Hornady quotes these BCs at Mach 2.25. At Mach 1.75 it quotes G1 0.382 and G7 0.192, so real "
+         "drop at long range will be a little more than shown."),
+    load("hornady-8026", "223-rem", "Hornady Match 75 gr BTHP (8026)", 75, D224,
+         g1=0.395, bc_url=HOR75, fps=2790, vel_url=HOR75, barrel_in=24, note=G1_ONLY),
+    load("hornady-fr160", "223-rem", "Hornady Frontier 68 gr BTHP Match (FR160)", 68, D224,
+         g1=0.355, bc_url=HOR68, fps=2960, vel_url=HOR68, barrel_in=24, note=G1_ONLY),
+    load("berger-23030", "223-rem", "Berger 77 gr OTM Tactical (23030)", 77, D224,
+         g1=0.374, g7=0.192, bc_url=BER77A, length_in=1.015, length_url=BER77, fps=2750, vel_url=BER77A,
+         barrel_in=20, note=ICAO),
+    load("lapua-4315015", "223-rem", "Lapua 69 gr Scenar-L (4315015)", 69, D224,
+         g1=0.341, g7=0.171, bc_url=LAP69, mps=830, vel_url=LAP69, barrel_in=20, note=ICAO),
+    load("nosler-60011", "223-rem", "Nosler Match Grade 77 gr Custom Competition (60011)", 77, D224,
+         g1=0.340, bc_url=NOS77, length_in=0.980, length_url=NOS77, fps=2600, vel_url=NOS77A, barrel_in=24,
+         note=G1_ONLY),
+    load("pmc-223a", "223-rem", "PMC Bronze 55 gr FMJ-BT (223A)", 55, D224,
+         g1=0.243, bc_url=PMC223A, model_stated=False, length_in=0.740, length_url=PMC223A, fps=3200,
+         vel_url=PMC223A, barrel_in=24, by_barrel=[(24, 3200), (16, 2900)], note=PMC_NOTE + " " + NOT_STATED),
+]
+
+# ---------------------------------------------------------------- 5.56x45 NATO
+FEDAE193 = "https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html"
+HORFR200 = "https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-bt-frontier"
+HORFR260 = "https://www.hornady.com/ammunition/rifle/5.56-nato-62-gr-fmj-frontier"
+HORFR310 = "https://www.hornady.com/ammunition/rifle/5.56-nato-68-gr-bthp-match-frontier"
+HOR81264 = "https://www.hornady.com/ammunition/rifle/5-56-nato-75-gr-bthp-superformance-match"
+PMC556X = "https://pmcammo.com/product/x-tac-5-56x/"
+PMC556K = "https://pmcammo.com/product/x-tac-5-56k/"
+BHMK262 = "https://www.black-hills.com/shop/mk-262-mod-1-c-mil-pack/556mm/"
+
+LOADS_556 = [
+    load("federal-ae193", "556-nato", "Federal American Eagle 55 gr FMJ-BT (AE193)", 55, D224,
+         g1=0.246, bc_url=FEDAE193, model_stated=False, length_in=0.735, length_url=FEDAE193, fps=3165,
+         vel_url=FEDAE193, note=FED_NOTE + NOT_STATED),
+    load("hornady-fr200", "556-nato", "Hornady Frontier 55 gr FMJ, M193 (FR200)", 55, D224,
+         g1=0.243, bc_url=HORFR200, fps=3240, vel_url=HORFR200, barrel_in=20, note=G1_ONLY),
+    load("pmc-556x", "556-nato", "PMC X-TAC 55 gr FMJ-BT (5.56X)", 55, D224,
+         g1=0.243, bc_url=PMC556X, model_stated=False, length_in=0.740, length_url=PMC556X, fps=3270,
+         vel_url=PMC556X, barrel_in=20, by_barrel=[(20, 3270), (16, 3120)], note=PMC_NOTE + " " + NOT_STATED),
+    load("pmc-556k", "556-nato", "PMC X-TAC 62 gr LAP (5.56K)", 62, D224,
+         g1=0.304, bc_url=PMC556K, model_stated=False, length_in=0.923, length_url=PMC556K, fps=3100,
+         vel_url=PMC556K, barrel_in=20, by_barrel=[(20, 3100), (16, 2920)], note=PMC_NOTE + " " + NOT_STATED),
+    load("hornady-fr260", "556-nato", "Hornady Frontier 62 gr FMJ (FR260)", 62, D224,
+         g1=0.274, bc_url=HORFR260, fps=3060, vel_url=HORFR260, barrel_in=20, note=G1_ONLY),
+    load("hornady-fr310", "556-nato", "Hornady Frontier 68 gr BTHP Match (FR310)", 68, D224,
+         g1=0.355, bc_url=HORFR310, fps=2960, vel_url=HORFR310, barrel_in=20, note=G1_ONLY),
+    load("hornady-81264", "556-nato", "Hornady Superformance Match 75 gr BTHP (81264)", 75, D224,
+         g1=0.395, bc_url=HOR81264, fps=2910, vel_url=HOR81264, barrel_in=20, note=G1_ONLY),
+    load("blackhills-mk262", "556-nato", "Black Hills 77 gr MK 262 MOD 1-C", 77, D224,
+         fps=2750, vel_url=BHMK262, barrel_in=20,
+         note="Black Hills publishes the velocity for this load and no BC. Type a BC before solving."),
+]
+
+# ---------------------------------------------------------------- .22 Long Rifle
+D22 = 0.2255  # SAAMI maximum bullet diameter
+CCI32 = "https://www.cci-ammunition.com/rimfire/cci/standard-velocity/6-32.html"
+CCI33 = "https://www.cci-ammunition.com/rimfire/cci/green-tag/6-33.html"
+CCI30 = "https://www.cci-ammunition.com/rimfire/cci/target-mini-mag/6-30.html"
+FED711B = "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-711B.html"
+FED719 = "https://www.federalpremium.com/rimfire/gold-medal/gold-medal-rimfire/11-719.html"
+LAPCX = "https://www.lapua.com/product/22-lr-lapua-center-x-rimfire-ammo/"
+LAPMID = "https://www.lapua.com/product/22-lr-lapua-midas-plus-rimfire-ammo/"
+LAPLR = "https://www.lapua.com/product/22-lr-lapua-long-range-rimfire-ammo/"
+SKSTD = "https://sk-ammunition.com/products/standard-plus/"
+SKRM = "https://sk-ammunition.com/products/rifle-match/"
+SKLRM = "https://sk-ammunition.com/products/long-range-match/"
+ELEYTENEX = "https://eley.co.uk/eley-tenex/"
+ELEYMATCH = "https://eley.co.uk/eley-match/"
+ELEYCLUB = "https://eley.co.uk/eley-club/"
+RWSR50 = "https://rws-ammunition.com/en/products/rimfire-cartridges/rws-r-50"
+
+LAPUA_BC = "Lapua gives one calculated G1 BC, 0.172, for all its .22 LR bullets. It is not measured for this load."
+SK_NOTE = (
+    "SK's page for this load gives no BC. SK's brochure gives G1 0.172 for round-nose and 0.139 for "
+    "flat-nose bullets and does not say which this load has. Type the BC before solving."
+)
+ELEY_NOTE = (
+    "Eley publishes its BC against the RA4 rimfire drag model, not G1, and gives a velocity band "
+    "(1040 to 1085 fps) instead of one figure. Eley says to use the velocity printed on your box. "
+    "Enter it before solving."
+)
+
+LOADS_22 = [
+    load("cci-32", "22-lr", "CCI Standard Velocity 40 gr (32)", 40, D22,
+         g1=0.120, bc_url=CCI32, model_stated=False, fps=1070, vel_url=CCI32, note=NOT_STATED),
+    load("cci-33", "22-lr", "CCI Green Tag 40 gr (33)", 40, D22,
+         g1=0.120, bc_url=CCI33, model_stated=False, fps=1070, vel_url=CCI33, note=NOT_STATED),
+    load("cci-30", "22-lr", "CCI Target Mini-Mag 40 gr (30)", 40, D22,
+         g1=0.130, bc_url=CCI30, model_stated=False, fps=1235, vel_url=CCI30, note=NOT_STATED),
+    load("federal-711b", "22-lr", "Federal Gold Medal Rimfire 40 gr, 1080 fps (711B)", 40, D22,
+         g1=0.138, bc_url=FED711B, model_stated=False, fps=1080, vel_url=FED711B, note=NOT_STATED),
+    load("federal-719", "22-lr", "Federal Gold Medal Rimfire 40 gr, 1200 fps (719)", 40, D22,
+         g1=0.138, bc_url=FED719, model_stated=False, fps=1200, vel_url=FED719, note=NOT_STATED),
+    load("lapua-420163", "22-lr", "Lapua Center-X 40 gr (420163)", 40, D22,
+         g1=0.172, bc_url=LAPCX, mps=327, vel_url=LAPCX, barrel_in=26, note=LAPUA_BC),
+    load("lapua-420162", "22-lr", "Lapua Midas+ 40 gr (420162)", 40, D22,
+         g1=0.172, bc_url=LAPMID, mps=327, vel_url=LAPMID, barrel_in=26, note=LAPUA_BC),
+    load("lapua-420168", "22-lr", "Lapua Long Range 40 gr (420168)", 40, D22,
+         g1=0.172, bc_url=LAPLR, mps=337, vel_url=LAPLR, note=LAPUA_BC),
+    load("sk-420101", "22-lr", "SK Standard Plus 40 gr (420101)", 40, D22,
+         mps=327, vel_url=SKSTD, barrel_in=26, note=SK_NOTE),
+    load("sk-420108", "22-lr", "SK Rifle Match 40 gr (420108)", 40, D22,
+         mps=327, vel_url=SKRM, barrel_in=26, note=SK_NOTE),
+    load("sk-420158", "22-lr", "SK Long Range Match 40 gr (420158)", 40, D22,
+         mps=335, vel_url=SKLRM, barrel_in=26, note=SK_NOTE),
+    load("eley-tenex", "22-lr", "Eley Tenex 40 gr", 40, D22, ra4=0.112, bc_url=ELEYTENEX, note=ELEY_NOTE),
+    load("eley-match", "22-lr", "Eley Match 40 gr", 40, D22, ra4=0.112, bc_url=ELEYMATCH, note=ELEY_NOTE),
+    load("eley-club", "22-lr", "Eley Club 40 gr", 40, D22, ra4=0.112, bc_url=ELEYCLUB, note=ELEY_NOTE),
+    load("rws-2134187", "22-lr", "RWS R 50 40 gr (2134187)", 40, D22,
+         g1=0.136, bc_url=RWSR50, model_stated=False, mps=330, vel_url=RWSR50, barrel_in=650 / 25.4,
+         note=NOT_STATED),
+]
+
+# ---------------------------------------------------------------- cartridges
+SAAMI_CF = "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf"
+SAAMI_RF = "https://saami.org/wp-content/uploads/2026/05/SAAMI-Z299.1-R2026-Rimfire-FINAL-Approved-2026-05-08.pdf"
+SAAMI_556 = "https://saami.org/wp-content/uploads/2026/10/Public-Introduction-5.56-Commercial-2026-06-22-FINAL-Rev-3.pdf"
+SAAMI_FAQ = "https://saami.org/faqs/"
+
+SAFETY_556_IN_223 = (
+    "However, it is not safe to shoot \u201c5.56,\u201d \u201c5.56 NATO,\u201d or \u201c5.56x45mm\u201d ammunition in a "
+    "barrel marked as being chambered in 223 Remington for a number of reasons. The main reason being that a "
+    "barrel marked as chambered in 223 Remington will have a shorter throat into the rifling than a "
+    "\u201c5.56\u201d barrel which may cause increased pressure if the \u201c5.56\u201d ammunition is fired in it. This "
+    "can result in serious injury or death to the user and/or bystanders, as well as damage to the "
+    "firearm."
+)
+NO_LOSS_224 = (
+    "No barrel-length correction is made for this cartridge. The published figures disagree: PMC's "
+    "own two-barrel velocities work out to 37 to 45 fps per inch, and one independent cut-down test "
+    "measured 22 to 30. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+
+
+def dope(start_yd, end_yd, step_yd):
+    return {"startM": round(start_yd * YD, 4), "endM": round(end_yd * YD, 4), "stepM": round(step_yd * YD, 4)}
+
+
+CARTRIDGES = [
+    {
+        "id": "308-win", "name": ".308 Winchester", "bulletDiameterM": round(D308 * IN, 7),
+        "diameterSource": quote("Bullet diameter 0.308 in, as listed on the bullet makers' pages.", SMK168),
+        "velocityLossMpsPerM": sourced(round(20.9 * FT / IN, 2), RIFLESHOOTER_308),
+        "velocityLossNote": (
+            "Rifleshooter.com cut one .308 barrel from 28 to 16.5 inches and measured Federal Gold Medal "
+            "168 gr at each length: 20.9 fps lost per inch on average. It is one barrel and one test, "
+            "not manufacturer data. Your rifle will differ, so chronograph your load."
+        ),
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(11 * IN, 4), "barrelLengthM": round(16 * IN, 4)},
+    },
+    {
+        "id": "223-rem", "name": ".223 Remington", "bulletDiameterM": round(D224 * IN, 7),
+        "diameterSource": quote("SAAMI .223 Remington drawing: bullet diameter .2245 - .0030 in.", SAAMI_CF),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_224,
+        "safetyNote": quote(SAFETY_556_IN_223, SAAMI_FAQ),
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(8 * IN, 4), "barrelLengthM": round(20 * IN, 4)},
+    },
+    {
+        "id": "556-nato", "name": "5.56x45 NATO", "bulletDiameterM": round(D224 * IN, 7),
+        "diameterSource": quote("SAAMI 5.56 Commercial introduction: bullet diameter .2245 - .0030 in.", SAAMI_556),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_224,
+        "safetyNote": quote(SAFETY_556_IN_223, SAAMI_FAQ),
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(7 * IN, 4), "barrelLengthM": round(16 * IN, 4)},
+    },
+    {
+        "id": "22-lr", "name": ".22 Long Rifle", "bulletDiameterM": round(D22 * IN, 7),
+        "diameterSource": quote("SAAMI 22 Long Rifle Match drawing: bullet diameter .2255 - .0040 in.", SAAMI_RF),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": (
+            "No barrel-length correction is made for .22 Long Rifle. The one cut-down test found "
+            "(Ballistics By The Inch, one barrel) shows velocity flat within shot-to-shot noise from about "
+            "12 to 18 inches, and it did not test longer barrels or match ammunition. Chronograph your load."
+        ),
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(50 * YD, 4), "zeroRangeM": round(50 * YD, 4), "dope": dope(25, 200, 25),
+                     "twistM": round(16 * IN, 4), "barrelLengthM": round(20 * IN, 4)},
+    },
+]
+
+LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22}
+
+# ---------------------------------------------------------------- scopes
+VENOM_PAGE = "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html"
+VENOM_MANUAL = "https://vortexoptics.widen.net/view/pdf/j900peyuse/VTX_M-00285-0_WEB.pdf"
+EBR7C_SHEET = "https://vortexoptics.widen.net/view/pdf/wtqaqb3spd/VTX_VEN-52502_EBR-7C_MRAD_RS_I_RI_ST.pdf"
+
+
+def fov_rad(feet_at_100yd):
+    """Angle across the field of view, from the published linear field of view at 100 yd."""
+    import math
+    return round(2 * math.atan((feet_at_100yd / 2) / 300.0), 6)
+
+
+VENOM = {
+    "scope": {
+        "libraryId": "vortex-venom-5-25x56-ebr7c-mrad",
+        "name": "Vortex Venom 5-25x56 FFP, EBR-7C MRAD",
+        "magMin": 5, "magMax": 25, "focalPlane": "first",
+        "fovAtMinRad": fov_rad(21.2), "fovAtMaxRad": fov_rad(4.7),
+        "trueSubtensionMag": None,
+        "reticleId": "ebr-7c-mrad",
+        # RevStop zero ring fitted (confirmed by the owner 2026-11-10): 19 MRAD instead of 25.
+        "availableElevation": 19,
+        "note": quote(
+            "The reticle's line, dot, and hash sizes are Vortex's published figures. The positions of the "
+            "hashes and wind dots are drawn from Vortex's subtension diagram, which Vortex marks "
+            "\"for representation only\".", EBR7C_SHEET),
+    },
+    "angleUnit": "MIL",
+    "clickValue": 0.1,
+    "facts": [
+        quote("Magnification 5-25x, first focal plane.", VENOM_PAGE),
+        quote("Field of view 21.2 ft to 4.7 ft at 100 yd.", VENOM_MANUAL),
+        quote("0.1 MRAD per click, 10 MRAD per rotation.", VENOM_MANUAL),
+        quote("Maximum elevation 25 MRAD; 19 MRAD with the RevStop zero ring fitted.", VENOM_MANUAL),
+        quote("Maximum windage 25 MRAD.", VENOM_MANUAL),
+    ],
+}
+SCOPES = {"scopes": [VENOM]}
+
+GENERIC_SCOPE = {
+    "libraryId": None, "name": "Generic scope", "magMin": 3, "magMax": 18, "focalPlane": "first",
+    "fovAtMinRad": 0.105, "fovAtMaxRad": 0.0175, "trueSubtensionMag": None,
+    "reticleId": "generic-mil", "availableElevation": 15, "note": None,
 }
 
 RIFLE = {
     "name": "Tikka T3x CTR .308 Win, 16 inch",
+    "cartridgeId": "308-win",
     "barrelLengthM": round(16 * IN, 4),
     "twistM": round(11 * IN, 4),
     "twistDirection": "right",
     "twistConfirmed": False,
     "sightHeightM": round(1.75 * IN, 5),
-    "zeroRangeM": round(100 * 0.9144, 2),
+    "zeroRangeM": round(100 * YD, 2),
     "angleUnit": "MIL",
     "clickValue": 0.1,
+    "scope": VENOM["scope"],
+    "genericScope": GENERIC_SCOPE,
     "twistSources": [
         {"label": "1:11 inch, 2014 Tikka T3 CTR specification sheet (20 inch barrel)",
          "url": "https://media.sako.global/image/upload/v1695721076/TIKKA_T3_CTR_dldro4.pdf", "readOn": READ_ON},
@@ -127,10 +405,21 @@ RIFLE = {
         "and put a tape flag on the handle, push until the flag has made one full turn, and measure "
         "how far the mark moved. That distance in inches is your twist."
     ),
+    "genericTwistNote": (
+        "To measure your twist: push a tight patch on a cleaning rod into the bore, mark the rod at the "
+        "muzzle and put a tape flag on the handle, push until the flag has made one full turn, and "
+        "measure how far the mark moved. That distance in inches is your twist."
+    ),
     "sightHeightNote": "1.75 inches is a typical scope height, not a measurement. Measure from the centre of the bolt to the centre of the scope tube.",
 }
 
-out = Path(__file__).resolve().parent.parent / "src" / "data"
-(out / "loads.json").write_text(json.dumps(LIBRARY, indent=2) + "\n")
-(out / "rifle.json").write_text(json.dumps(RIFLE, indent=2) + "\n")
-print("wrote", len(LOADS), "loads; loss", LIBRARY["velocityLossMpsPerM"]["value"], "m/s per m")
+if __name__ == "__main__":
+    out = Path(__file__).resolve().parent.parent / "src" / "data"
+    (out / "loads.json").write_text(json.dumps(LIBRARY, indent=2) + "\n")
+    (out / "rifle.json").write_text(json.dumps(RIFLE, indent=2) + "\n")
+    (out / "scopes.json").write_text(json.dumps(SCOPES, indent=2) + "\n")
+    by = {}
+    for l in LIBRARY["loads"]:
+        by[l["cartridgeId"]] = by.get(l["cartridgeId"], 0) + 1
+    print("wrote", len(LIBRARY["loads"]), "loads:", by, "| scopes:", len(SCOPES["scopes"]))
+    print("Venom FOV rad:", VENOM["scope"]["fovAtMinRad"], VENOM["scope"]["fovAtMaxRad"])
