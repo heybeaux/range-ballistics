@@ -2,9 +2,9 @@
 
 - [x] 1.1 Scaffold Vite + TypeScript + Vitest + three.js; add lint and typecheck scripts
 - [x] 1.2 Write `src/solver/types.ts` (the fixed solver contract)
-- [ ] 1.3 Generate `g1.json` and `g7.json` by script; add checksum and spot-value tests
+- [x] 1.3 Generate `g1.json` and `g7.json` by script; add checksum and spot-value tests
 - [x] 1.4 Generate reference cases with py-ballisticcalc into `tests/reference/`
-- [ ] 1.5 Fill `loads.json` and `rifle.json` from sourced research; add the source-present test
+- [x] 1.5 Fill `loads.json` and `rifle.json` from sourced research; add the source-present test
 
 ## 2. Solver (Qwen writes, Scout verifies)
 
@@ -21,8 +21,8 @@
 
 ## 3. Units (Qwen writes, Scout verifies)
 
-- [ ] 3.1 Conversions and MOA / MIL / click maths with round-trip tests
-- [ ] 3.2 Number formatting for both unit systems
+- [x] 3.1 Conversions and MOA / MIL / click maths with round-trip tests
+- [x] 3.2 Number formatting for both unit systems
 
 ## 4. Planner (Qwen writes, Scout verifies)
 

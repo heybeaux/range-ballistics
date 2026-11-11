@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "omlx": {
+      "models": {
+        "mlx-community--Qwen3.8-27B-8bit": {
+          "options": {
+            "chat_template_kwargs": { "enable_thinking": false }
+          }
+        }
+      }
+    }
+  }
+}
