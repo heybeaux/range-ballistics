@@ -4,6 +4,7 @@
 - [ ] 1.2 `cartridges.json` and `cartridgeId` on loads, generated; data tests
 - [ ] 1.3 `scopes.json` with the Venom from Vortex sources; data tests
 - [ ] 1.4 Reference cases for each added cartridge
+- [ ] 1.5 RA4 drag table (generated, checksum) and `'RA4'` in the solver contract
 
 ## 2. Rifle profiles (Qwen writes, Scout verifies)
 

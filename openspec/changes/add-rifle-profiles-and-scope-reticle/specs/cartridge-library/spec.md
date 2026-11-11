@@ -76,3 +76,22 @@ case applies.
 - **WHEN** the selected rifle is chambered in .22 LR and has no saved conditions
 - **THEN** the default target is 50 yd, the default zero is 50 yd, and the dope table runs from 25
   to 200 yd in 25 yd steps
+
+### Requirement: Drag model as published
+A library BC SHALL be used only with the drag model its maker names. When the maker publishes a BC
+without naming the model, the load SHALL say "drag model not stated, treated as G1" next to the BC.
+The solver SHALL add the RA4 drag model, because Eley publishes .22 LR BCs against RA4 only.
+
+#### Scenario: Eley load
+- **WHEN** an Eley load is selected
+- **THEN** the drag model is RA4 with Eley's published BC, and the G1 and G7 fields are empty
+
+#### Scenario: Unnamed model
+- **WHEN** a load's maker gives a BC and no drag model
+- **THEN** the app solves with G1 and shows "drag model not stated, treated as G1" with the source
+  link
+
+#### Scenario: RA4 is checked
+- **WHEN** the tests run
+- **THEN** the RA4 table has a checksum test and at least two RA4 reference cases pass to the
+  existing tolerance
