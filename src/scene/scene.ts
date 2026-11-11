@@ -11,13 +11,18 @@ import {
   losPoint,
   markerRanges,
   pathRuns,
-  pxPerMil,
   readoutAt,
   sampleAtTime,
-  scopeFovRad,
   trimToRange,
   visibleLabels
 } from './geometry';
+import {
+  drawReticle as drawReticleShapes,
+  reticleFor,
+  reticlePxPerUnit,
+  scopeFovAt,
+  subtensionsAreTrue
+} from './reticle';
 import {
   buildDot,
   buildFlag,
@@ -93,7 +98,6 @@ export function createRangeScene(container: HTMLElement): RangeScene {
   let currentPreset: CameraPreset = 'reset';
   let scopeMode = false;
   let markerLabels: Array<{ sprite: THREE.Sprite; rangeM: number }> = [];
-  let drawnScope: TrajectorySample[] = [];
 
   let fpsValue = 0;
   let fpsFrames = 0;
@@ -125,70 +129,46 @@ export function createRangeScene(container: HTMLElement): RangeScene {
 
     const cx = w / 2;
     const cy = h / 2;
-    const ppm = pxPerMil((camera.fov * Math.PI) / 180, h);
-    const r = h * 0.48;
+    const D = h * 0.96;
 
     ctx.fillStyle = 'rgba(0,0,0,1)';
     ctx.fillRect(0, 0, w, h);
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.arc(cx, cy, D / 2, 0, Math.PI * 2);
     ctx.fill();
     ctx.globalCompositeOperation = 'source-over';
     ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.arc(cx, cy, D / 2, 0, Math.PI * 2);
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'rgba(0,0,0,0.9)';
     ctx.stroke();
 
-    if (ppm > 0) {
-      const gap = 0.25 * ppm;
-      ctx.strokeStyle = 'rgba(10,10,10,0.9)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(cx - r, cy);
-      ctx.lineTo(cx - gap, cy);
-      ctx.moveTo(cx + gap, cy);
-      ctx.lineTo(cx + r, cy);
-      ctx.moveTo(cx, cy - r);
-      ctx.lineTo(cx, cy - gap);
-      ctx.moveTo(cx, cy + gap);
-      ctx.lineTo(cx, cy + r);
-      ctx.stroke();
+    const reticle = reticleFor(view.scope.reticleId);
+    const ppu = reticlePxPerUnit(view.scope, view.magnification, D, reticle.unit);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, D / 2, 0, Math.PI * 2);
+    ctx.clip();
+    drawReticleShapes(ctx, reticle, cx, cy, ppu, 'rgba(8,8,8,0.92)');
+    ctx.restore();
 
-      const maxMil = Math.floor(r / ppm);
-      ctx.font = '11px system-ui';
-      ctx.fillStyle = 'rgba(10,10,10,0.9)';
-      for (let m = 1; m <= maxMil; m++) {
-        const d = m * ppm;
-        const long = m % 5 === 0;
-        const half = long ? 8 : 4;
-        ctx.beginPath();
-        ctx.moveTo(cx + d, cy - half);
-        ctx.lineTo(cx + d, cy + half);
-        ctx.moveTo(cx - d, cy - half);
-        ctx.lineTo(cx - d, cy + half);
-        ctx.moveTo(cx - half, cy + d);
-        ctx.lineTo(cx + half, cy + d);
-        ctx.moveTo(cx - half, cy - d);
-        ctx.lineTo(cx + half, cy - d);
-        ctx.stroke();
-        if (long) {
-          ctx.textAlign = 'left';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(String(m), cx + d + 4, cy);
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'top';
-          ctx.fillText(String(m), cx, cy + d + 4);
-        }
-      }
-    }
-
-    ctx.font = '12px system-ui';
+    ctx.font = '12px system-ui, sans-serif';
     ctx.fillStyle = 'rgba(232,234,237,0.9)';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'alphabetic';
-    ctx.fillText('Scope view, true scale. 1 mark = 1 MIL', w - 12, h - 12);
+    ctx.fillText(
+      `${view.scope.name} · ${view.magnification.toFixed(view.magnification % 1 === 0 ? 0 : 1)}×`,
+      w - 12,
+      h - 28
+    );
+    ctx.fillText(
+      subtensionsAreTrue(view.scope, view.magnification)
+        ? `Reticle: ${reticle.name}. Marks read true.`
+        : `Reticle: ${reticle.name}. Marks read true only at ${(view.scope.trueSubtensionMag ?? view.scope.magMax)}×.`,
+      w - 12,
+      h - 12
+    );
   }
 
   function resize(): void {
@@ -221,7 +201,6 @@ export function createRangeScene(container: HTMLElement): RangeScene {
 
     trimmed = trimToRange(v.samples, v.targetRangeM);
     drawn = v.showDialed ? dialSamples(trimmed, v.targetRangeM) : trimmed;
-    drawnScope = trimmed;
     const lastSample = trimmed[trimmed.length - 1];
     durationS = lastSample === undefined ? 0 : lastSample.timeS;
 
@@ -304,8 +283,8 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     currentPreset = preset;
     scopeMode = preset === 'shooter';
     if (scopeMode) {
-      const fovRad = scopeFovRad(drawnScope, view.targetRangeM);
-      camera.fov = (fovRad * 180) / Math.PI;
+      const lensFov = scopeFovAt(view.scope, view.magnification);
+      camera.fov = (lensFov / 0.96) * (180 / Math.PI);
       camera.near = 0.5;
       camera.up.set(0, 1, 0);
       setVec(camera.position, losPoint(-1, view.shotAngleRad, view.sightHeightM));
@@ -345,6 +324,17 @@ export function createRangeScene(container: HTMLElement): RangeScene {
   function setSpeed(m: number): void {
     if (m > 0) {
       speed = m;
+    }
+  }
+
+  function setMagnification(m: number): void {
+    if (view === null) return;
+    view = { ...view, magnification: m };
+    if (scopeMode) {
+      const lensFov = scopeFovAt(view.scope, view.magnification);
+      camera.fov = (lensFov / 0.96) * (180 / Math.PI);
+      camera.updateProjectionMatrix();
+      drawReticle();
     }
   }
 
@@ -394,8 +384,10 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     bullet.visible = s !== null;
 
     const fovRad = (camera.fov * Math.PI) / 180;
-    bullet.scale.setScalar(dotScale(camera.position.distanceTo(bullet.position), fovRad, 0.012));
-    impact.scale.setScalar(dotScale(camera.position.distanceTo(impact.position), fovRad, 0.008));
+    const bulletK = scopeMode ? 0.006 : 0.012;
+    const impactK = scopeMode ? 0.004 : 0.008;
+    bullet.scale.setScalar(dotScale(camera.position.distanceTo(bullet.position), fovRad, bulletK));
+    impact.scale.setScalar(dotScale(camera.position.distanceTo(impact.position), fovRad, impactK));
     aim.scale.setScalar(dotScale(camera.position.distanceTo(aim.position), fovRad, 0.008));
     aim.visible = !scopeMode;
 
@@ -465,6 +457,7 @@ export function createRangeScene(container: HTMLElement): RangeScene {
     pause,
     replay,
     setSpeed,
+    setMagnification,
     seek,
     onReadout,
     fps,

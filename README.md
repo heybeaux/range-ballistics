@@ -3,11 +3,14 @@
 A local web app that shows where a rifle bullet goes. You enter the distance, wind, air, and load.
 It shows what to dial on the scope, a dope table, and the flight path in a 3D range.
 
-It is set up for a Tikka T3x CTR in .308 Win with a 16 inch barrel. Every value can be changed.
+It starts set up for a Tikka T3x CTR in .308 Win with a 16 inch barrel and a Vortex Venom 5-25x56
+scope. You can add more rifles. Each one keeps its own cartridge, barrel, load, zero, scope, and
+conditions. The load library covers .22 Long Rifle, .223 Remington, 5.56x45 NATO, and .308
+Winchester. Every value can be changed.
 
 **This is a planning aid.** Real impacts and your own recorded dope are the authority.
 
-![Scope view: 600 yd, 10 mph wind from 3 o'clock, correction dialled](docs/screenshots/scope-dialled.png)
+![Scope view through the Venom at 15x: 600 yd, 10 mph wind from 3 o'clock, correction dialled](docs/screenshots/scope-dialled.png)
 
 ## Run it
 
@@ -32,8 +35,8 @@ Other commands:
 
 ## First use
 
-The first time, the app walks you through four steps: confirm the rifle, pick a load, set the
-muzzle velocity, and set your zero. You can skip it, and run it again from the top bar.
+The first time, and for each rifle you add, the app walks you through five steps: confirm the
+rifle, pick the scope, pick a load, set the muzzle velocity, and set your zero. You can skip it, and run it again from the top bar.
 
 Three defaults are not measured on your rifle. The app marks each one until you replace it:
 
@@ -58,7 +61,7 @@ The 3D range has four views:
 | View | Shows |
 |---|---|
 | Range view | The whole range at true scale. Drag to orbit, scroll to zoom. |
-| Scope view | A zoomed view down the line of sight with a MIL reticle, at true scale. With the correction dialled you see the bullet rise and come down onto the target. With it off, the red dot shows where the bullet would land, so you can read the hold off the reticle. |
+| Scope view | The view through your scope, at true scale: its field of view at the magnification you pick, and its reticle. With the correction dialled you see the bullet rise and come down onto the target. With it off, the red dot shows where the bullet would land, so you can read the hold off the reticle. |
 | Side view | The arc of the shot. Drop is drawn larger than real so you can see it. The factor is shown on screen. |
 | Top-down view | The wind curve. Drift is drawn larger than real. The factor is shown on screen. |
 
@@ -69,14 +72,56 @@ The same shot (600 yd, 10 mph from 3 o'clock) in the other views:
 | | |
 |---|---|
 | ![Range view](docs/screenshots/range-view.png) | ![Side view](docs/screenshots/side-view.png) |
-| ![Top-down view](docs/screenshots/top-view.png) | ![Scope view with the correction off](docs/screenshots/scope-undialled.png) |
+| ![Top-down view](docs/screenshots/top-view.png) | ![Scope view at 25x with the correction off](docs/screenshots/scope-undialled.png) |
 
-In the last picture the scope is still at its zero. The red dot is where the bullet would land:
-4.75 MIL low and 1.5 MIL left on the reticle, the same figures the results panel gives.
+In the last picture the scope is at 25x and still at its zero. The red dot is where the bullet
+would land: just above the 5 MRAD row and 1.5 MRAD left on the EBR-7C, the same figures the results
+panel gives (4.75 up, 1.5 right).
+
+## Your scope
+
+Each rifle has a scope. Pick one from the list, or choose "generic scope" and type your own figures.
+
+The list ships with the Vortex Venom 5-25x56 FFP with the EBR-7C MRAD reticle. Its magnification
+range, field of view, click value, and travel are Vortex's published figures, each with a link.
+
+- **Field of view.** The scope view covers 21.2 ft at 100 yd on 5x and 4.7 ft on 25x, as published.
+- **Reticle.** The line, dot, and hash sizes are Vortex's published subtensions. The positions of
+  the hashes and wind dots are drawn from Vortex's subtension diagram, which Vortex marks "for
+  representation only". The app says so next to the scope.
+- **First focal plane.** The reticle grows and shrinks with the target, so the marks read true at
+  every magnification. A second-focal-plane scope keeps the reticle one size and the app says at
+  which magnification the marks are true.
+- **Dial limit.** The app warns when a correction is more than the turret can dial up from your
+  zero, and shows how much is left to hold. The Venom is set to 19 MRAD (RevStop zero ring fitted).
+  Change it under "Elevation you can dial" to match your mount.
+
+![The same scope at 5x](docs/screenshots/scope-5x.png)
+
+## Cartridges and loads
+
+| Cartridge | Library loads | Barrel-length velocity correction |
+|---|---|---|
+| .308 Winchester | 10 | 20.9 fps per inch, from one cut-down test (not manufacturer data) |
+| .223 Remington | 11 | None. Published figures disagree (22 to 45 fps per inch). |
+| 5.56x45 NATO | 8 | None, for the same reason. |
+| .22 Long Rifle | 15 | None. The one test found shows velocity flat from about 12 to 18 inches. |
+
+- Where a maker publishes the same load from two barrel lengths (PMC), the app uses the maker's
+  own figure for your barrel.
+- Where a maker gives a BC without naming the drag model (CCI, Federal, PMC, RWS), the app treats
+  it as G1 and says so. The makers' own velocity tables support that: see "How it was checked".
+- Eley publishes .22 LR BCs against the RA4 rimfire drag model. The solver includes RA4.
+- Most .22 LR match ammunition is subsonic from the muzzle. The app says so and drops the
+  transonic warning, which only applies to loads that start supersonic.
+- **5.56 NATO ammunition is not safe in a barrel marked .223 Remington.** The app shows SAAMI's
+  statement, in SAAMI's words, on both cartridges.
+- Any other cartridge: add a rifle, choose "Other", and enter the bullet weight, diameter, BC, and
+  velocity yourself.
 
 ## What the model includes
 
-- Point-mass trajectory with G1 or G7 drag, solved with a fourth-order Runge-Kutta integrator at
+- Point-mass trajectory with G1, G7, or RA4 drag, solved with a fourth-order Runge-Kutta integrator at
   0.5 ms steps.
 - Air density from temperature, station pressure, and humidity. Altitude can stand in for pressure
   (standard atmosphere).
@@ -101,14 +146,19 @@ In the last picture the scope is still at its zero. The red dot is where the bul
 
 The solver is compared with two independent references every time the tests run.
 
-1. **py-ballisticcalc 2.2.2**, a separate open-source solver. 19 shots (G1 and G7 loads, wind from
-   several directions, altitude, heat, cold, humidity, 15 to 30 degree slopes, a 200 yd zero, spin
-   drift), each compared at ten distances from 100 to 1000 yd: 190 points.
-   Required: 0.05 MIL or 1%. Measured worst case: **0.007 MIL** elevation, **0.003 MIL** windage,
-   0.07% velocity, 0.03% time of flight. Inside 600 yd the worst case is 0.002 MIL.
-2. **Federal's published velocity tables** for Gold Medal 168 gr and 175 gr. With Federal's muzzle
-   velocity and G1 BC, the solver matches the published velocity at 100 to 500 yd within 13 fps
-   (0.75%).
+1. **py-ballisticcalc 2.2.2**, a separate open-source solver.
+   - .308: 19 shots (G1 and G7 loads, wind from several directions, altitude, heat, cold, humidity,
+     15 to 30 degree slopes, a 200 yd zero, spin drift), each at ten distances from 100 to 1000 yd:
+     190 points. Required: 0.05 MIL or 1%. Measured worst case: **0.007 MIL** elevation,
+     **0.003 MIL** windage, 0.07% velocity, 0.03% time of flight. Inside 600 yd: 0.002 MIL.
+   - .22 LR, .223, and 5.56: 15 more shots, 120 points, including subsonic and transonic rimfire
+     loads and the RA4 drag model. All pass the same tolerance.
+2. **Makers' published velocity tables.** With the maker's muzzle velocity and BC, the solver
+   reproduces the maker's own downrange velocities:
+   - Federal Gold Medal .308, 168 and 175 gr: within 13 fps (0.75%) at 500 yd.
+   - CCI and Federal .22 LR (four loads): within 0.5% out to 150 yd. Federal's published drop for
+     its 1080 fps load (-7.3 in at 100 yd, -24.5 in at 150 yd) is matched within 0.3 in.
+   - Federal, Hornady, and PMC .223 and 5.56 (five loads): within 1.3% at 500 yd.
 
 Both references use the same kind of model as this app, so this shows the maths is right. It does
 not show the model matches your rifle. Only shooting does that.
@@ -125,9 +175,9 @@ colder air gives more drop, and so on.
 ## Where each number comes from
 
 Every BC, bullet length, and muzzle velocity in the load list was read from the maker's own page
-on 2026-11-10 and checked a second time against the page text. The app shows a "source" link next
+on 2026-11-10 and then fetched and checked a second time. The app shows a "source" link next
 to each value. A value the maker does not publish is left empty and never guessed.
-The full list is in `research/sources.md`.
+The full lists are in `research/` (one file per cartridge, and one for the scope).
 
 - The drag tables come from the py-ballisticcalc source and are generated by script. A checksum
   test fails if a single value changes.
@@ -139,9 +189,9 @@ The full list is in `research/sources.md`.
 ```
 src/solver/    physics. Pure functions, SI units, no browser code.
 src/units/     unit conversion and formatting
-src/data/      drag tables, load library, rifle defaults (all generated by script)
+src/data/      drag tables, load library, scopes, rifle defaults (all generated by script)
 src/planner/   inputs, results, dope table, setup, saved state
-src/scene/     the three.js range
+src/scene/     the three.js range and the scope reticles
 tests/         unit tests and reference comparisons
 scripts/       data generators and the task briefs used during the build
 openspec/      the specification this was built from
