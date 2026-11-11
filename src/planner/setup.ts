@@ -56,13 +56,12 @@ export function setupStepHtml(state: AppState, stepIndex: number, errors: Record
     const def = fieldById(id);
     if (def === undefined) continue;
     body.push(fieldHtml(def, state, errors[id]));
+    if (id === 'twistConfirmed') body.push(twistNoteHtml(state));
+    else if (id === 'sightHeight') body.push(sightHeightNoteHtml());
+    else if (id === 'velocityMeasured') body.push(velocityNoteHtml(state));
   }
-  if (step.key === 'rifle') {
-    body.push(twistNoteHtml(state) + sightHeightNoteHtml());
-  } else if (step.key === 'load') {
+  if (step.key === 'load') {
     body.push(loadPickerHtml(state) + loadSourcesHtml(state));
-  } else if (step.key === 'velocity') {
-    body.push(velocityNoteHtml(state));
   }
   const back = stepIndex > 0 ? '<button type="button" id="setupBack">Back</button>' : '';
   const next =

@@ -3,7 +3,7 @@ import type { AppState, DopeRow, ShotResults } from './planner/types';
 import { loadState, saveState, selectLibraryLoad, selectCustomLoad, saveCustomLoad } from './planner/storage';
 import { dopeRows, shotResults, toCsv, toShotInput } from './planner/model';
 import { applyField, fieldById, formHtml, parseInput } from './planner/fields';
-import { dopeTableHtml, printCardHtml, resultsHtml } from './planner/view';
+import { dopeTableHtml, printCardHtml, resultsHtml, windClockSvg } from './planner/view';
 import { openSetup } from './planner/setup';
 import {
   loadPickerHtml,
@@ -43,6 +43,8 @@ const exaggerationLabel = el('exaggerationLabel', HTMLSpanElement);
 const timelineEl = el('timeline', HTMLInputElement);
 const readoutEl = el('readout', HTMLSpanElement);
 const printArea = el('printArea', HTMLDivElement);
+const windHud = el('windHud', HTMLDivElement);
+const scaleHud = el('scaleHud', HTMLDivElement);
 const sceneBar = el('sceneBar', HTMLDivElement);
 const showDialedEl = el('showDialed', HTMLInputElement);
 const sceneNoteEl = el('sceneNote', HTMLParagraphElement);
@@ -168,6 +170,11 @@ function setExaggeration(value: number): void {
 function renderOutputs(): void {
   resultsEl.innerHTML = resultsHtml(lastResults, state, stale);
   dopeEl.innerHTML = dopeTableHtml(lastRows, state);
+  windHud.innerHTML = windClockSvg(
+    state.conditions.windClock,
+    state.conditions.windSpeedMps < 0.05 ? '' : format(state.conditions.windSpeedMps, 'windSpeed', state.unitSystem)
+  );
+  scaleHud.textContent = exaggeration === 1 ? '' : `Drawn ${exaggeration}× larger than real`;
   exaggerationLabel.textContent =
     exaggeration === 1
       ? 'True scale'

@@ -374,3 +374,30 @@ button.primary {
 
 #scene canvas { display: block; }
 #exaggerationLabel { font-size: 12px; }
+
+/* Sidebar: show a field's help only while that field is in use. Setup keeps all help visible. */
+#form .help { display: none; }
+#form .field:focus-within .help { display: block; }
+#form .field { margin-bottom: 8px; }
+/* Results */
+#results h2 { font-size: 22px; margin: 10px 0 8px; }
+.correction { border: 1px solid #333a42; }
+.correction h3 { text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+.dial { font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.dial strong { color: #ffb000; }
+.clicks { margin: 4px 0 0; font-size: 14px; color: #e8eaed; font-variant-numeric: tabular-nums; }
+dl.facts dd { font-variant-numeric: tabular-nums; }
+/* Dope table */
+table.dope tr.current td { background: #2b2410; color: #ffb000; font-weight: 600; }
+table.dope tbody tr:hover td { background: #232a31; }
+/* Scene overlay */
+#hud { position: absolute; left: 10px; top: 10px; z-index: 3; pointer-events: none; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.wind-clock .wc-num { fill: #9aa3ad; font: 600 10px system-ui, sans-serif; text-anchor: middle; }
+.wind-clock .wc-speed { fill: #ffffff; font: 600 13px system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,0.75); stroke-width: 3px; }
+#scaleHud { background: #ffb000; color: #14171a; font: 600 12px system-ui, sans-serif; padding: 3px 8px; border-radius: 4px; }
+#scaleHud:empty { display: none; }
+/* Buttons and focus */
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #ffb000; outline-offset: 1px; }
+#sceneBar button[data-camera] { min-width: 96px; }
+#topbar { border-bottom: 1px solid #333a42; background: #1e2328; }
+#rifleName { color: #9aa3ad; font-size: 13px; }

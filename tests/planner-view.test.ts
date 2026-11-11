@@ -4,7 +4,7 @@ import type { AppState, ShotResults, DopeRow } from '../src/planner/types';
 import { PLANNING_NOTICE } from '../src/planner/types';
 import { toShotInput, shotResults, dopeRows } from '../src/planner/model';
 import { defaultState } from '../src/planner/storage';
-import { escapeHtml, correctionHtml, resultsHtml, dopeTableHtml, cardHeaderLines, printCardHtml } from '../src/planner/view';
+import { escapeHtml, correctionHtml, resultsHtml, dopeTableHtml, cardHeaderLines, printCardHtml, windClockSvg } from '../src/planner/view';
 
 function compute(state: AppState): { results: ShotResults; rows: DopeRow[] } {
   const input = toShotInput(state);
@@ -30,8 +30,9 @@ describe('correctionHtml', () => {
       defaultState()
     );
     expect(html).toContain('<h3>Elevation</h3>');
+    expect(html).toContain('1.0 MIL up');
     expect(html).toContain('10 clicks up');
-    expect(html).toContain('1.00 MIL');
+    expect(html).toContain('exact 1.00 MIL');
     expect(html).toContain('3.44 MOA');
     expect(html).toContain('19.7 in');
     expect(html).toContain('50.0 cm');
@@ -128,7 +129,8 @@ describe('dopeTableHtml', () => {
     const state = defaultState();
     const { rows } = compute(state);
     const html = dopeTableHtml(rows, state);
-    expect(html.match(/<tr>/g)?.length).toBe(12);
+    expect(html.match(/<tr/g)?.length).toBe(12);
+    expect(html.match(/class="current"/g)?.length).toBe(1);
     expect(html).toContain('<th>Distance (yd)</th>');
     expect(html).toContain('<th>Elevation (MIL)</th>');
     expect(html).toContain('<td>100</td>');
@@ -165,5 +167,20 @@ describe('printCardHtml', () => {
     expect(html).toContain('(estimated velocity)');
     expect(html).toContain('<table class="dope">');
     expect(html).toContain('2026-11-10');
+  });
+});
+
+describe('windClockSvg', () => {
+  it('renders the arrow rotated to the wind clock direction', () => {
+    const svg = windClockSvg(3, '10 mph');
+    expect(svg).toContain('<svg');
+    expect(svg).toContain('rotate(90 48 48)');
+    expect(svg).toContain('>10 mph</text>');
+    expect(svg).toContain('aria-label="Wind 10 mph from 3 o&#39;clock"');
+  });
+
+  it('handles 12 o\'clock and empty speed', () => {
+    expect(windClockSvg(12, '5 mph')).toContain('rotate(360 48 48)');
+    expect(windClockSvg(6, '')).toContain('>No wind</text>');
   });
 });
