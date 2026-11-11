@@ -3,10 +3,11 @@
 A local web app that shows where a rifle bullet goes. You enter the distance, wind, air, and load.
 It shows what to dial on the scope, a dope table, and the flight path in a 3D range.
 
-It starts set up for a Tikka T3x CTR in .308 Win with a 16 inch barrel and a Vortex Venom 5-25x56
-scope. You can add more rifles. Each one keeps its own cartridge, barrel, load, zero, scope, and
-conditions. The load library covers .22 Long Rifle, .223 Remington, 5.56x45 NATO, and .308
-Winchester. Every value can be changed.
+The load library covers fifteen cartridges, from .22 Long Rifle to .300 PRC, with sourced factory
+loads for each — and any other cartridge if you type your own figures. You can keep several
+rifles; each one has its own cartridge, barrel, load, zero, scope, and conditions. The first rifle
+starts set up as a Tikka T3x CTR in .308 Win with a 16 inch barrel and a Vortex Venom 5-25x56
+scope. Every value can be changed.
 
 **This is a planning aid.** Real impacts and your own recorded dope are the authority.
 
@@ -106,6 +107,26 @@ range, field of view, click value, and travel are Vortex's published figures, ea
 | .223 Remington | 11 | None. Published figures disagree (22 to 45 fps per inch). |
 | 5.56x45 NATO | 8 | None, for the same reason. |
 | .22 Long Rifle | 15 | None. The one test found shows velocity flat from about 12 to 18 inches. |
+| 6.5 Creedmoor | 3 | None sourced. |
+| 6.5 PRC | 3 | None sourced. |
+| .243 Winchester | 3 | None sourced. |
+| 7mm-08 Remington | 3 | None sourced. |
+| 7mm Remington Magnum | 3 | None sourced. |
+| 7mm PRC | 3 | None sourced. |
+| .270 Winchester | 3 | None sourced. |
+| .30-06 Springfield | 3 | None sourced. |
+| .300 Winchester Magnum | 3 | None sourced. |
+| .300 PRC | 3 | None sourced. |
+| .450 Bushmaster | 3 | None sourced. Short-range cartridge: makers' own tables stop at 300 yd. |
+
+The eleven cartridges added on 2026-11-11 are the rest of [Backfire's ammo-sales top 15](https://backfire.tv/popular-cartridges/).
+Each ships three sourced factory loads to start; the first four cartridges carry more.
+
+| | |
+|---|---|
+| ![6.5 Creedmoor at 600 yd through the scope view, 10 mph wind](docs/screenshots/scope-65cm-600.png) | ![7mm PRC at 1000 yd in the range view, still supersonic](docs/screenshots/range-7prc-1000.png) |
+
+![.450 Bushmaster side view at 300 yd: 3.4 MIL of drop, transonic at 223 yd](docs/screenshots/side-450bm-300.png)
 
 - Where a maker publishes the same load from two barrel lengths (PMC), the app uses the maker's
   own figure for your barrel.
@@ -151,14 +172,17 @@ The solver is compared with two independent references every time the tests run.
      15 to 30 degree slopes, a 200 yd zero, spin drift), each at ten distances from 100 to 1000 yd:
      190 points. Required: 0.05 MIL or 1%. Measured worst case: **0.007 MIL** elevation,
      **0.003 MIL** windage, 0.07% velocity, 0.03% time of flight. Inside 600 yd: 0.002 MIL.
-   - .22 LR, .223, and 5.56: 15 more shots, 120 points, including subsonic and transonic rimfire
-     loads and the RA4 drag model. All pass the same tolerance.
+   - The other fourteen cartridges: 38 more shots, 350 points, including subsonic and transonic
+     rimfire loads, the RA4 drag model, spin drift, altitude, and the .450 Bushmaster's transonic
+     300 yd flight. All pass the same tolerance.
 2. **Makers' published velocity tables.** With the maker's muzzle velocity and BC, the solver
    reproduces the maker's own downrange velocities:
    - Federal Gold Medal .308, 168 and 175 gr: within 13 fps (0.75%) at 500 yd.
    - CCI and Federal .22 LR (four loads): within 0.5% out to 150 yd. Federal's published drop for
      its 1080 fps load (-7.3 in at 100 yd, -24.5 in at 150 yd) is matched within 0.3 in.
    - Federal, Hornady, and PMC .223 and 5.56 (five loads): within 1.3% at 500 yd.
+   - The eleven 2026-11-11 cartridges (one Federal or Berger table each, from 6.5 Creedmoor to
+     .450 Bushmaster): within 1.5% at every distance the maker prints.
 
 Both references use the same kind of model as this app, so this shows the maths is right. It does
 not show the model matches your rifle. Only shooting does that.
@@ -175,7 +199,7 @@ colder air gives more drop, and so on.
 ## Where each number comes from
 
 Every BC, bullet length, and muzzle velocity in the load list was read from the maker's own page
-on 2026-11-10 and then fetched and checked a second time. The app shows a "source" link next
+(on 2026-11-10 or 2026-11-11; the app shows the date) and then fetched and checked a second time. The app shows a "source" link next
 to each value. A value the maker does not publish is left empty and never guessed.
 The full lists are in `research/` (one file per cartridge, and one for the scope).
 
