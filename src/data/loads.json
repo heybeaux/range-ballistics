@@ -315,6 +315,90 @@
         "twistM": 0.254,
         "barrelLengthM": 0.6096
       }
+    },
+    {
+      "id": "3006-spr",
+      "name": ".30-06 Springfield",
+      "bulletDiameterM": 0.0078232,
+      "diameterSource": {
+        "text": "SAAMI 30-06 Springfield drawing: bullet diameter .309 - .003 in (SAAMI draws .309 max; the common .308 figure is the groove diameter).",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.254,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "300-win-mag",
+      "name": ".300 Winchester Magnum",
+      "bulletDiameterM": 0.0078232,
+      "diameterSource": {
+        "text": "SAAMI 300 Winchester Magnum drawing: bullet diameter .309 - .003 in (SAAMI draws .309 max; the common .308 figure is the groove diameter).",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.254,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "300-prc",
+      "name": ".300 PRC",
+      "bulletDiameterM": 0.0078232,
+      "diameterSource": {
+        "text": "SAAMI 300 PRC drawing: bullet diameter .3084 - .0030 in (SAAMI draws .3084 max; the common .308 figure is the groove diameter).",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2159,
+        "barrelLengthM": 0.6096
+      }
     }
   ],
   "loads": [
@@ -2684,6 +2768,330 @@
       "testBarrelM": null,
       "velocityByBarrel": [],
       "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-81174",
+      "cartridgeId": "3006-spr",
+      "name": "Hornady Precision Hunter 178 gr ELD-X (81174)",
+      "bulletMassKg": 0.01153421,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.552,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.278,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 838.2,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/30-06-springfield-178-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-gm3006m",
+      "cartridgeId": "3006-spr",
+      "name": "Federal Gold Medal 168 gr Sierra MatchKing (GM3006M)",
+      "bulletMassKg": 0.01088622,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.030988,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM3006M.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.463,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM3006M.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.224,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM3006M.html",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 822.96,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM3006M.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The G7 value is labeled on the page."
+    },
+    {
+      "id": "remington-29037",
+      "cartridgeId": "3006-spr",
+      "name": "Remington Core-Lokt Tipped 180 gr (29037)",
+      "bulletMassKg": 0.0116638,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.48,
+        "sourceUrl": "https://remington.com/rifle/core-lokt-tipped/29-29037.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 836.68,
+        "sourceUrl": "https://remington.com/rifle/core-lokt-tipped/29-29037.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-82002",
+      "cartridgeId": "300-win-mag",
+      "name": "Hornady Precision Hunter 200 gr ELD-X (82002)",
+      "bulletMassKg": 0.01295978,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.597,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.301,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 871.73,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/300-win-mag-200-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-gm300wm",
+      "cartridgeId": "300-win-mag",
+      "name": "Federal Gold Medal 190 gr Sierra MatchKing (GM300WM)",
+      "bulletMassKg": 0.01231179,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": 0.034544,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM300WM.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.533,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM300WM.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.275,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM300WM.html",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 883.92,
+        "sourceUrl": "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM300WM.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The G7 value is labeled on the page."
+    },
+    {
+      "id": "remington-r29038",
+      "cartridgeId": "300-win-mag",
+      "name": "Remington Core-Lokt Tipped 180 gr (R29038)",
+      "bulletMassKg": 0.0116638,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.481,
+        "sourceUrl": "https://remington.com/rifle/core-lokt-tipped/29-R29038.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 908.3,
+        "sourceUrl": "https://remington.com/rifle/core-lokt-tipped/29-R29038.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-82162",
+      "cartridgeId": "300-prc",
+      "name": "Hornady Match 225 gr ELD Match (82162)",
+      "bulletMassKg": 0.01457975,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.777,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.391,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 856.49,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/300-prc-225-gr-eld-match",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs. The chart also lists G1 0.798 / G7 0.402 for a 1:7 twist; the ammo page does not state its test barrel twist."
+    },
+    {
+      "id": "hornady-82166",
+      "cartridgeId": "300-prc",
+      "name": "Hornady Precision Hunter 212 gr ELD-X (82166)",
+      "bulletMassKg": 0.01373737,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.663,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.334,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 871.73,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/300-prc-212-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs. The chart also lists G1 0.702 / G7 0.354 for a 1:7 twist; the ammo page does not state its test barrel twist."
+    },
+    {
+      "id": "berger-55030",
+      "cartridgeId": "300-prc",
+      "name": "Berger 215 gr Hybrid Target (55030)",
+      "bulletMassKg": 0.01393177,
+      "bulletDiameterM": 0.0078232,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.691,
+        "sourceUrl": "https://bergerbullets.com/product/300-prc-215-grain-hybrid-target-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.354,
+        "sourceUrl": "https://bergerbullets.com/product/300-prc-215-grain-hybrid-target-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 896.11,
+        "sourceUrl": "https://bergerbullets.com/product/300-prc-215-grain-hybrid-target-rifle-ammunition/",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6604,
+      "velocityByBarrel": [],
+      "note": "Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:10."
     }
   ]
 }

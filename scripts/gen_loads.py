@@ -397,6 +397,62 @@ LOADS_270 = [
          note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
 ]
 
+# ---------------------------------------------------------------- .30-06 Springfield
+D30 = 0.308
+HOR81174 = "https://www.hornady.com/ammunition/rifle/30-06-springfield-178-gr-eld-x-precision-hunter"
+FEDGM3006M = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM3006M.html"
+REM29037 = "https://remington.com/rifle/core-lokt-tipped/29-29037.html"
+
+LOADS_3006 = [
+    load("hornady-81174", "3006-spr", "Hornady Precision Hunter 178 gr ELD-X (81174)", 178, D30,
+         g1=0.552, g7=0.278, bc_url=HBC, fps=2750, vel_url=HOR81174, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-gm3006m", "3006-spr", "Federal Gold Medal 168 gr Sierra MatchKing (GM3006M)", 168, D30,
+         g1=0.463, g7=0.224, bc_url=FEDGM3006M, model_stated=False, length_in=1.220, length_url=FEDGM3006M,
+         fps=2700, vel_url=FEDGM3006M, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " The G7 value is labeled on the page."),
+    load("remington-29037", "3006-spr", "Remington Core-Lokt Tipped 180 gr (29037)", 180, D30,
+         g1=0.480, bc_url=REM29037, model_stated=False, fps=2745, vel_url=REM29037, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
+# ---------------------------------------------------------------- .300 Winchester Magnum
+HOR82002 = "https://www.hornady.com/ammunition/rifle/300-win-mag-200-gr-eld-x-precision-hunter"
+FEDGM300WM = "https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM300WM.html"
+REMR29038 = "https://remington.com/rifle/core-lokt-tipped/29-R29038.html"
+
+LOADS_300WM = [
+    load("hornady-82002", "300-win-mag", "Hornady Precision Hunter 200 gr ELD-X (82002)", 200, D30,
+         g1=0.597, g7=0.301, bc_url=HBC, fps=2860, vel_url=HOR82002, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-gm300wm", "300-win-mag", "Federal Gold Medal 190 gr Sierra MatchKing (GM300WM)", 190, D30,
+         g1=0.533, g7=0.275, bc_url=FEDGM300WM, model_stated=False, length_in=1.360, length_url=FEDGM300WM,
+         fps=2900, vel_url=FEDGM300WM, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " The G7 value is labeled on the page."),
+    load("remington-r29038", "300-win-mag", "Remington Core-Lokt Tipped 180 gr (R29038)", 180, D30,
+         g1=0.481, bc_url=REMR29038, model_stated=False, fps=2980, vel_url=REMR29038, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
+# ---------------------------------------------------------------- .300 PRC
+HOR82162 = "https://www.hornady.com/ammunition/rifle/300-prc-225-gr-eld-match"
+HOR82166 = "https://www.hornady.com/ammunition/rifle/300-prc-212-gr-eld-x-precision-hunter"
+BER55030 = "https://bergerbullets.com/product/300-prc-215-grain-hybrid-target-rifle-ammunition/"
+
+LOADS_300PRC = [
+    load("hornady-82162", "300-prc", "Hornady Match 225 gr ELD Match (82162)", 225, D30,
+         g1=0.777, g7=0.391, bc_url=HBC, fps=2810, vel_url=HOR82162, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE + " The chart also lists G1 0.798 / G7 0.402 for a 1:7 twist; the ammo "
+         "page does not state its test barrel twist."),
+    load("hornady-82166", "300-prc", "Hornady Precision Hunter 212 gr ELD-X (82166)", 212, D30,
+         g1=0.663, g7=0.334, bc_url=HBC, fps=2860, vel_url=HOR82166, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE + " The chart also lists G1 0.702 / G7 0.354 for a 1:7 twist; the ammo "
+         "page does not state its test barrel twist."),
+    load("berger-55030", "300-prc", "Berger 215 gr Hybrid Target (55030)", 215, D30,
+         g1=0.691, g7=0.354, bc_url=BER55030, fps=2940, vel_url=BER55030, barrel_in=26, read_on=READ_ON_2,
+         note="Berger states a 26 in test barrel and sea level conditions. Minimum twist 1:10."),
+]
+
 # ---------------------------------------------------------------- cartridges
 SAAMI_CF = "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf"
 SAAMI_CF_2 = "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf"
@@ -430,6 +486,10 @@ NO_LOSS_7MM = (
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
 NO_LOSS_270 = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_30 = (
     "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
@@ -549,9 +609,42 @@ CARTRIDGES = [
         "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
                      "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
     },
+    {
+        "id": "3006-spr", "name": ".30-06 Springfield", "bulletDiameterM": round(D30 * IN, 7),
+        "diameterSource": quote(
+            "SAAMI 30-06 Springfield drawing: bullet diameter .309 - .003 in (SAAMI draws .309 max; "
+            "the common .308 figure is the groove diameter).", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_30,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "300-win-mag", "name": ".300 Winchester Magnum", "bulletDiameterM": round(D30 * IN, 7),
+        "diameterSource": quote(
+            "SAAMI 300 Winchester Magnum drawing: bullet diameter .309 - .003 in (SAAMI draws .309 max; "
+            "the common .308 figure is the groove diameter).", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_30,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "300-prc", "name": ".300 PRC", "bulletDiameterM": round(D30 * IN, 7),
+        "diameterSource": quote(
+            "SAAMI 300 PRC drawing: bullet diameter .3084 - .0030 in (SAAMI draws .3084 max; the "
+            "common .308 figure is the groove diameter).", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_30,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(8.5 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
 ]
 
-LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243 + LOADS_7MM08 + LOADS_7MMRM + LOADS_7MMPRC + LOADS_270}
+LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243 + LOADS_7MM08 + LOADS_7MMRM + LOADS_7MMPRC + LOADS_270 + LOADS_3006 + LOADS_300WM + LOADS_300PRC}
 
 # ---------------------------------------------------------------- scopes
 VENOM_PAGE = "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html"
