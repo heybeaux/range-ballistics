@@ -186,3 +186,57 @@ export function readoutAt(samples: TrajectorySample[], timeS: number, playing: b
     playing
   };
 }
+
+export function scopeFovRad(samples: TrajectorySample[], targetRangeM: number): number {
+  const t = sampleAt(samples, targetRangeM);
+  if (t === null || t.rangeM <= 0) return 0.024;
+  const elev = Math.abs(Math.atan2(t.pathM, t.rangeM));
+  const wind = Math.abs(Math.atan2(t.windageM, t.rangeM));
+  return Math.min(0.12, Math.max(0.024, 3.2 * Math.max(elev, wind)));
+}
+
+export const NICE_SCALES: number[] = [1, 2, 5, 10, 20, 50, 100, 200];
+
+export function autoExaggeration(samples: TrajectorySample[], targetRangeM: number, axis: 'path' | 'windage'): number {
+  if (samples.length === 0 || targetRangeM <= 0) return 1;
+  let m = 0;
+  for (const s of samples) {
+    if (s.rangeM <= targetRangeM) {
+      const off = axis === 'path' ? Math.abs(s.pathM) : Math.abs(s.windageM);
+      if (off > m) m = off;
+    }
+  }
+  if (m < 1e-6) return 1;
+  const raw = (0.12 * targetRangeM) / m;
+  if (raw < 1) return 1;
+  let result = 1;
+  for (const scale of NICE_SCALES) {
+    if (scale <= raw) result = scale;
+  }
+  return result;
+}
+
+export function pxPerMil(fovRad: number, heightPx: number): number {
+  if (fovRad <= 0) return 0;
+  return heightPx / (2 * Math.tan(fovRad / 2) * 1000);
+}
+
+export function visibleLabels(points: Array<{ x: number; y: number; depth: number }>, minDx: number, minDy: number): boolean[] {
+  const order = points
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => a.p.depth - b.p.depth);
+  const shown: Array<{ x: number; y: number }> = [];
+  const result: boolean[] = new Array(points.length).fill(false);
+  for (const { p, i } of order) {
+    const blocked = shown.some((s) => Math.abs(p.x - s.x) < minDx && Math.abs(p.y - s.y) < minDy);
+    if (!blocked) {
+      result[i] = true;
+      shown.push(p);
+    }
+  }
+  return result;
+}
+
+export function dotScale(distanceM: number, fovRad: number, k: number): number {
+  return distanceM * k * (Math.tan(fovRad / 2) / Math.tan((50 * Math.PI / 180) / 2));
+}

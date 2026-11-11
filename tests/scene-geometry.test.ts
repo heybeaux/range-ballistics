@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { solve, sampleAt } from '../src/solver/solve';
 import type { ShotInput, TrajectorySample } from '../src/solver/types';
-import { losPoint, displayPoint, trimToRange, regimeOf, pathRuns, sampleAtTime, flagPose, markerRanges, cameraPose, readoutAt, dialSamples } from '../src/scene/geometry';
+import { losPoint, displayPoint, trimToRange, regimeOf, pathRuns, sampleAtTime, flagPose, markerRanges, cameraPose, readoutAt, dialSamples, scopeFovRad, NICE_SCALES, autoExaggeration, pxPerMil, visibleLabels, dotScale } from '../src/scene/geometry';
 
 const base: ShotInput = {
   muzzleVelocityMps: 750, bc: 0.243, dragModel: 'G7', bulletMassKg: 0.01134, bulletDiameterM: 0.007823,
@@ -303,5 +303,88 @@ describe('dialSamples', () => {
     expect(b.speedMps).toBe(a.speedMps);
     expect(b.rangeM).toBe(a.rangeM);
     expect(b.position).toEqual(a.position);
+  });
+});
+
+describe('scopeFovRad', () => {
+  it('test 22', () => {
+    const samples = samplesFor(base);
+    expect(Math.abs(scopeFovRad(samples, 548.64) - 0.024)).toBeLessThan(1e-12);
+    expect(scopeFovRad(samples, 900)).toBeCloseTo(3.2 * Math.atan2(11.8861, 900), 4);
+    expect(scopeFovRad([], 500)).toBe(0.024);
+    for (const range of [100, 300, 500, 700, 900]) {
+      const fov = scopeFovRad(samples, range);
+      expect(fov).toBeGreaterThanOrEqual(0.024);
+      expect(fov).toBeLessThanOrEqual(0.12);
+    }
+  });
+});
+
+describe('NICE_SCALES', () => {
+  it('test 23', () => {
+    expect(NICE_SCALES).toEqual([1, 2, 5, 10, 20, 50, 100, 200]);
+  });
+});
+
+describe('autoExaggeration', () => {
+  it('test 24: dialled arc', () => {
+    const samples = samplesFor(base);
+    expect(autoExaggeration(dialSamples(trimToRange(samples, 548.64), 548.64), 548.64, 'path')).toBe(50);
+  });
+
+  it('test 25: uncorrected drop and drift', () => {
+    const samples = samplesFor(base);
+    const trimmed = trimToRange(samples, 548.64);
+    expect(autoExaggeration(trimmed, 548.64, 'path')).toBe(20);
+    expect(autoExaggeration(trimmed, 548.64, 'windage')).toBe(50);
+  });
+
+  it('test 26: degenerate inputs', () => {
+    expect(autoExaggeration([], 500, 'path')).toBe(1);
+    const noWind = samplesFor({ ...base, wind: { speedMps: 0, clock: 3 } });
+    expect(autoExaggeration(noWind, 500, 'windage')).toBe(1);
+  });
+});
+
+describe('pxPerMil', () => {
+  it('test 27', () => {
+    expect(Math.abs(pxPerMil(0.024, 480) - 20)).toBeLessThan(0.01);
+    expect(pxPerMil(0, 480)).toBe(0);
+  });
+});
+
+describe('visibleLabels', () => {
+  it('test 28', () => {
+    expect(
+      visibleLabels(
+        [
+          { x: 100, y: 100, depth: 10 },
+          { x: 110, y: 104, depth: 20 },
+          { x: 300, y: 100, depth: 30 }
+        ],
+        60,
+        24
+      )
+    ).toEqual([true, false, true]);
+  });
+
+  it('test 29: nearest wins when unsorted; empty input', () => {
+    expect(
+      visibleLabels([{ x: 100, y: 100, depth: 50 }, { x: 105, y: 100, depth: 5 }], 60, 24)
+    ).toEqual([false, true]);
+    expect(visibleLabels([], 60, 24)).toEqual([]);
+  });
+
+  it('test 30: close in x but far in y both show', () => {
+    expect(
+      visibleLabels([{ x: 100, y: 100, depth: 1 }, { x: 100, y: 200, depth: 2 }], 60, 24)
+    ).toEqual([true, true]);
+  });
+});
+
+describe('dotScale', () => {
+  it('test 31', () => {
+    expect(Math.abs(dotScale(100, (50 * Math.PI) / 180, 0.012) - 1.2)).toBeLessThan(1e-9);
+    expect(dotScale(100, 0.024, 0.012)).toBeLessThan(0.05);
   });
 });
