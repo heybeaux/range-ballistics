@@ -322,6 +322,81 @@ LOADS_243 = [
          note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
 ]
 
+# ---------------------------------------------------------------- 7mm-08 Remington
+D7MM = 0.284
+HOR85578 = "https://www.hornady.com/ammunition/rifle/7mm-08-rem-150-gr-eld-x-precision-hunter"
+FEDF708 = "https://www.federalpremium.com/rifle/fusion/11-F708FS1.html"
+REM21337 = "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-21337.html"
+
+LOADS_7MM08 = [
+    load("hornady-85578", "7mm08-rem", "Hornady Precision Hunter 150 gr ELD-X (85578)", 150, D7MM,
+         g1=0.574, g7=0.289, bc_url=HBC, fps=2770, vel_url=HOR85578, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-f708fs1", "7mm08-rem", "Federal Fusion 140 gr (F708FS1)", 140, D7MM,
+         g1=0.390, bc_url=FEDF708, model_stated=False, length_in=1.135, length_url=FEDF708, fps=2850,
+         vel_url=FEDF708, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+    load("remington-21337", "7mm08-rem", "Remington Core-Lokt 140 gr (21337)", 140, D7MM,
+         g1=0.390, bc_url=REM21337, model_stated=False, fps=2860, vel_url=REM21337, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
+# ---------------------------------------------------------------- 7mm Remington Magnum
+HOR80636 = "https://www.hornady.com/ammunition/rifle/7mm-rem-mag-162-gr-eld-x-precision-hunter"
+FEDP7RTA1 = "https://www.federalpremium.com/rifle/terminal-ascent/11-P7RTA1.html"
+REM28821 = "https://www.remington.com/rifle/core-lokt/29-28821.html"
+
+LOADS_7MMRM = [
+    load("hornady-80636", "7mm-rem-mag", "Hornady Precision Hunter 162 gr ELD-X (80636)", 162, D7MM,
+         g1=0.631, g7=0.318, bc_url=HBC, fps=2975, vel_url=HOR80636, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-p7rta1", "7mm-rem-mag", "Federal Terminal Ascent 155 gr (P7RTA1)", 155, D7MM,
+         g1=0.586, g7=0.300, bc_url=FEDP7RTA1, model_stated=False, length_in=1.514, length_url=FEDP7RTA1,
+         fps=3000, vel_url=FEDP7RTA1, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " The G7 value is labeled on the page."),
+    load("remington-28821", "7mm-rem-mag", "Remington Core-Lokt 140 gr (28821)", 140, D7MM,
+         g1=0.390, bc_url=REM28821, model_stated=False, fps=3175, vel_url=REM28821, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
+# ---------------------------------------------------------------- 7mm PRC
+HOR80711 = "https://www.hornady.com/ammunition/rifle/7mm-prc-180-gr-eld-match"
+HOR80712 = "https://www.hornady.com/ammunition/rifle/7mm-prc-175-gr-eld-x-precision-hunter"
+FEDP7PRCTA1 = "https://www.federalpremium.com/rifle/terminal-ascent/11-P7PRCTA1.html"
+
+LOADS_7MMPRC = [
+    load("hornady-80711", "7mm-prc", "Hornady Match 180 gr ELD Match (80711)", 180, D7MM,
+         g1=0.777, g7=0.391, bc_url=HBC, fps=2975, vel_url=HOR80711, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE + " The chart also lists G1 0.816 / G7 0.411 for a 1:7.5 twist; the ammo "
+         "page does not state its test barrel twist."),
+    load("hornady-80712", "7mm-prc", "Hornady Precision Hunter 175 gr ELD-X (80712)", 175, D7MM,
+         g1=0.689, g7=0.347, bc_url=HBC, fps=3000, vel_url=HOR80712, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-p7prcta1", "7mm-prc", "Federal Terminal Ascent 155 gr (P7PRCTA1)", 155, D7MM,
+         g1=0.586, bc_url=FEDP7PRCTA1, model_stated=False, length_in=1.510, length_url=FEDP7PRCTA1,
+         fps=3100, vel_url=FEDP7PRCTA1, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
+# ---------------------------------------------------------------- .270 Winchester
+D270 = 0.277
+HOR80536 = "https://www.hornady.com/ammunition/rifle/270-win-145-gr-eld-x-precision-hunter"
+FEDP270TA1 = "https://www.federalpremium.com/rifle/terminal-ascent/11-P270TA1.html"
+REM27808 = "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-27808.html"
+
+LOADS_270 = [
+    load("hornady-80536", "270-win", "Hornady Precision Hunter 145 gr ELD-X (80536)", 145, D270,
+         g1=0.536, g7=0.270, bc_url=HBC, fps=2970, vel_url=HOR80536, barrel_in=24, read_on=READ_ON_2,
+         note=HOR_CHART_NOTE),
+    load("federal-p270ta1", "270-win", "Federal Terminal Ascent 136 gr (P270TA1)", 136, D270,
+         g1=0.493, g7=0.247, bc_url=FEDP270TA1, model_stated=False, length_in=1.354, length_url=FEDP270TA1,
+         fps=3000, vel_url=FEDP270TA1, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " The G7 value is labeled on the page."),
+    load("remington-27808", "270-win", "Remington Core-Lokt 130 gr (27808)", 130, D270,
+         g1=0.336, bc_url=REM27808, model_stated=False, fps=3060, vel_url=REM27808, read_on=READ_ON_2,
+         note=FED_NOTE + NOT_STATED + " " + G1_ONLY),
+]
+
 # ---------------------------------------------------------------- cartridges
 SAAMI_CF = "https://saami.org/wp-content/uploads/2026/10/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-10-21.pdf"
 SAAMI_CF_2 = "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf"
@@ -347,6 +422,14 @@ NO_LOSS_65 = (
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
 NO_LOSS_243 = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_7MM = (
+    "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
+    "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
+)
+NO_LOSS_270 = (
     "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction "
     "is made. The app shows the maker's velocity with its test barrel. Chronograph your load."
 )
@@ -428,9 +511,47 @@ CARTRIDGES = [
         "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
                      "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
     },
+    {
+        "id": "7mm08-rem", "name": "7mm-08 Remington", "bulletDiameterM": round(D7MM * IN, 7),
+        "diameterSource": quote("SAAMI 7mm-08 Remington drawing: bullet diameter .2845 - .0030 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_7MM,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(9.5 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "7mm-rem-mag", "name": "7mm Remington Magnum", "bulletDiameterM": round(D7MM * IN, 7),
+        "diameterSource": quote("SAAMI 7mm Remington Magnum drawing: bullet diameter .2845 - .0030 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_7MM,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(9.5 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "7mm-prc", "name": "7mm PRC", "bulletDiameterM": round(D7MM * IN, 7),
+        "diameterSource": quote("SAAMI 7mm PRC drawing: bullet diameter .2844 - .0030 in.", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_7MM,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(8 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
+    {
+        "id": "270-win", "name": ".270 Winchester", "bulletDiameterM": round(D270 * IN, 7),
+        "diameterSource": quote(
+            "SAAMI 270 Winchester drawing: bullet diameter .278 - .003 in (SAAMI draws .278 max; the "
+            "common .277 figure is the groove diameter).", SAAMI_CF_2, READ_ON_2),
+        "velocityLossMpsPerM": sourced(None, None),
+        "velocityLossNote": NO_LOSS_270,
+        "safetyNote": None,
+        "defaults": {"targetRangeM": round(300 * YD, 4), "zeroRangeM": round(100 * YD, 4), "dope": dope(100, 600, 50),
+                     "twistM": round(10 * IN, 4), "barrelLengthM": round(24 * IN, 4)},
+    },
 ]
 
-LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243}
+LIBRARY = {"cartridges": CARTRIDGES, "loads": LOADS_308 + LOADS_223 + LOADS_556 + LOADS_22 + LOADS_65CM + LOADS_65PRC + LOADS_243 + LOADS_7MM08 + LOADS_7MMRM + LOADS_7MMPRC + LOADS_270}
 
 # ---------------------------------------------------------------- scopes
 VENOM_PAGE = "https://vortexoptics.com/venom-5-25x56-ffp-riflescope.html"

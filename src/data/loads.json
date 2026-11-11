@@ -203,6 +203,118 @@
         "twistM": 0.254,
         "barrelLengthM": 0.6096
       }
+    },
+    {
+      "id": "7mm08-rem",
+      "name": "7mm-08 Remington",
+      "bulletDiameterM": 0.0072136,
+      "diameterSource": {
+        "text": "SAAMI 7mm-08 Remington drawing: bullet diameter .2845 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2413,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "7mm-rem-mag",
+      "name": "7mm Remington Magnum",
+      "bulletDiameterM": 0.0072136,
+      "diameterSource": {
+        "text": "SAAMI 7mm Remington Magnum drawing: bullet diameter .2845 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2413,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "7mm-prc",
+      "name": "7mm PRC",
+      "bulletDiameterM": 0.0072136,
+      "diameterSource": {
+        "text": "SAAMI 7mm PRC drawing: bullet diameter .2844 - .0030 in.",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.2032,
+        "barrelLengthM": 0.6096
+      }
+    },
+    {
+      "id": "270-win",
+      "name": ".270 Winchester",
+      "bulletDiameterM": 0.0070358,
+      "diameterSource": {
+        "text": "SAAMI 270 Winchester drawing: bullet diameter .278 - .003 in (SAAMI draws .278 max; the common .277 figure is the groove diameter).",
+        "sourceUrl": "https://saami.org/wp-content/uploads/2026/04/SAAMI-Z299.4-CFR-2025-Centerfire-Rifle-Approved-2-10-2025-2026-04-27.pdf",
+        "readOn": "2026-11-11"
+      },
+      "velocityLossMpsPerM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "velocityLossNote": "No per-inch velocity-loss figure was sourced for this cartridge, so no barrel-length correction is made. The app shows the maker's velocity with its test barrel. Chronograph your load.",
+      "safetyNote": null,
+      "defaults": {
+        "targetRangeM": 274.32,
+        "zeroRangeM": 91.44,
+        "dope": {
+          "startM": 91.44,
+          "endM": 548.64,
+          "stepM": 45.72
+        },
+        "twistM": 0.254,
+        "barrelLengthM": 0.6096
+      }
     }
   ],
   "loads": [
@@ -2135,6 +2247,438 @@
       "publishedVelocityMps": {
         "value": 957.07,
         "sourceUrl": "https://www.remington.com/rifle/core-lokt-tipped/29-29015.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-85578",
+      "cartridgeId": "7mm08-rem",
+      "name": "Hornady Precision Hunter 150 gr ELD-X (85578)",
+      "bulletMassKg": 0.00971984,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.574,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.289,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 844.3,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/7mm-08-rem-150-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-f708fs1",
+      "cartridgeId": "7mm08-rem",
+      "name": "Federal Fusion 140 gr (F708FS1)",
+      "bulletMassKg": 0.00907185,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": 0.028829,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F708FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.39,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F708FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 868.68,
+        "sourceUrl": "https://www.federalpremium.com/rifle/fusion/11-F708FS1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "remington-21337",
+      "cartridgeId": "7mm08-rem",
+      "name": "Remington Core-Lokt 140 gr (21337)",
+      "bulletMassKg": 0.00907185,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.39,
+        "sourceUrl": "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-21337.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 871.73,
+        "sourceUrl": "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-21337.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-80636",
+      "cartridgeId": "7mm-rem-mag",
+      "name": "Hornady Precision Hunter 162 gr ELD-X (80636)",
+      "bulletMassKg": 0.01049742,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.631,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.318,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 906.78,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/7mm-rem-mag-162-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-p7rta1",
+      "cartridgeId": "7mm-rem-mag",
+      "name": "Federal Terminal Ascent 155 gr (P7RTA1)",
+      "bulletMassKg": 0.01004383,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": 0.038456,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7RTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.586,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7RTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.3,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7RTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 914.4,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7RTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The G7 value is labeled on the page."
+    },
+    {
+      "id": "remington-28821",
+      "cartridgeId": "7mm-rem-mag",
+      "name": "Remington Core-Lokt 140 gr (28821)",
+      "bulletMassKg": 0.00907185,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.39,
+        "sourceUrl": "https://www.remington.com/rifle/core-lokt/29-28821.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 967.74,
+        "sourceUrl": "https://www.remington.com/rifle/core-lokt/29-28821.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-80711",
+      "cartridgeId": "7mm-prc",
+      "name": "Hornady Match 180 gr ELD Match (80711)",
+      "bulletMassKg": 0.0116638,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.777,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.391,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 906.78,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/7mm-prc-180-gr-eld-match",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs. The chart also lists G1 0.816 / G7 0.411 for a 1:7.5 twist; the ammo page does not state its test barrel twist."
+    },
+    {
+      "id": "hornady-80712",
+      "cartridgeId": "7mm-prc",
+      "name": "Hornady Precision Hunter 175 gr ELD-X (80712)",
+      "bulletMassKg": 0.01133981,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.689,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.347,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 914.4,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/7mm-prc-175-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-p7prcta1",
+      "cartridgeId": "7mm-prc",
+      "name": "Federal Terminal Ascent 155 gr (P7PRCTA1)",
+      "bulletMassKg": 0.01004383,
+      "bulletDiameterM": 0.0072136,
+      "bulletLengthM": {
+        "value": 0.038354,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7PRCTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.586,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7PRCTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 944.88,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P7PRCTA1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The maker publishes a G1 BC only for this bullet."
+    },
+    {
+      "id": "hornady-80536",
+      "cartridgeId": "270-win",
+      "name": "Hornady Precision Hunter 145 gr ELD-X (80536)",
+      "bulletMassKg": 0.00939584,
+      "bulletDiameterM": 0.0070358,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.536,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.27,
+        "sourceUrl": "https://www.hornady.com/bc",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": true,
+      "publishedVelocityMps": {
+        "value": 905.26,
+        "sourceUrl": "https://www.hornady.com/ammunition/rifle/270-win-145-gr-eld-x-precision-hunter",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": 0.6096,
+      "velocityByBarrel": [],
+      "note": "The ammo page prints no BC. The value is the Hornady BC chart's Mach 2.25 figure, which Hornady says is the one comparable to industry BCs."
+    },
+    {
+      "id": "federal-p270ta1",
+      "cartridgeId": "270-win",
+      "name": "Federal Terminal Ascent 136 gr (P270TA1)",
+      "bulletMassKg": 0.00881265,
+      "bulletDiameterM": 0.0070358,
+      "bulletLengthM": {
+        "value": 0.034392,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P270TA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG1": {
+        "value": 0.493,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P270TA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": 0.247,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P270TA1.html",
+        "readOn": "2026-11-11"
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 914.4,
+        "sourceUrl": "https://www.federalpremium.com/rifle/terminal-ascent/11-P270TA1.html",
+        "readOn": "2026-11-11"
+      },
+      "testBarrelM": null,
+      "velocityByBarrel": [],
+      "note": "Federal does not state its test barrel length, so the app cannot correct this velocity for your barrel. The starting velocity is Federal's published figure and is probably high for a short barrel. The maker gives this BC without naming a drag model. The app treats it as G1. The G7 value is labeled on the page."
+    },
+    {
+      "id": "remington-27808",
+      "cartridgeId": "270-win",
+      "name": "Remington Core-Lokt 130 gr (27808)",
+      "bulletMassKg": 0.00842386,
+      "bulletDiameterM": 0.0070358,
+      "bulletLengthM": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcG1": {
+        "value": 0.336,
+        "sourceUrl": "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-27808.html",
+        "readOn": "2026-11-11"
+      },
+      "bcG7": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcRA4": {
+        "value": null,
+        "sourceUrl": null,
+        "readOn": null
+      },
+      "bcModelStated": false,
+      "publishedVelocityMps": {
+        "value": 932.69,
+        "sourceUrl": "https://www.remington.com/rifle/shop-by-caliber/shop-all-calibers/29-27808.html",
         "readOn": "2026-11-11"
       },
       "testBarrelM": null,

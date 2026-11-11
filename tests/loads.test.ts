@@ -24,14 +24,18 @@ const LIMITS: Record<string, { massKg: [number, number]; velocity: [number, numb
   '22-lr': { massKg: [0.0025, 0.0027], velocity: [310, 385], g1: [0.1, 0.18], g7: [0, 0], lengthM: [0, 0] },
   '65-creedmoor': { massKg: [0.0088, 0.0097], velocity: [800, 870], g1: [0.55, 0.75], g7: [0.28, 0.38], lengthM: [0.033, 0.038] },
   '65-prc': { massKg: [0.0088, 0.0105], velocity: [860, 930], g1: [0.55, 0.75], g7: [0.28, 0.38], lengthM: [0.033, 0.038] },
-  '243-win': { massKg: [0.0055, 0.0068], velocity: [890, 980], g1: [0.30, 0.45], g7: [0.18, 0.24], lengthM: [0.024, 0.028] }
+  '243-win': { massKg: [0.0055, 0.0068], velocity: [890, 980], g1: [0.30, 0.45], g7: [0.18, 0.24], lengthM: [0.024, 0.028] },
+  '7mm08-rem': { massKg: [0.0088, 0.0100], velocity: [820, 900], g1: [0.35, 0.62], g7: [0.25, 0.32], lengthM: [0.027, 0.032] },
+  '7mm-rem-mag': { massKg: [0.0088, 0.0108], velocity: [880, 990], g1: [0.35, 0.68], g7: [0.27, 0.35], lengthM: [0.036, 0.040] },
+  '7mm-prc': { massKg: [0.0098, 0.0120], velocity: [880, 970], g1: [0.55, 0.82], g7: [0.30, 0.42], lengthM: [0.036, 0.040] },
+  '270-win': { massKg: [0.0082, 0.0096], velocity: [880, 960], g1: [0.30, 0.58], g7: [0.22, 0.30], lengthM: [0.032, 0.037] }
 };
 
 describe('load library', () => {
   it('ships the library cartridges, each with loads', () => {
-    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '243-win', '308-win', '556-nato', '65-creedmoor', '65-prc']);
+    expect(library.cartridges.map(c => c.id).sort()).toEqual(['22-lr', '223-rem', '243-win', '270-win', '308-win', '556-nato', '65-creedmoor', '65-prc', '7mm-prc', '7mm-rem-mag', '7mm08-rem']);
     for (const c of library.cartridges) {
-      const minLoads = c.id === '65-creedmoor' || c.id === '65-prc' || c.id === '243-win' ? 3 : 7;
+      const minLoads = c.id === '65-creedmoor' || c.id === '65-prc' || c.id === '243-win' || c.id === '7mm08-rem' || c.id === '7mm-rem-mag' || c.id === '7mm-prc' || c.id === '270-win' ? 3 : 7;
       expect(library.loads.filter(l => l.cartridgeId === c.id).length, c.id).toBeGreaterThanOrEqual(minLoads);
     }
   });
