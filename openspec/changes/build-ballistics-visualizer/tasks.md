@@ -16,7 +16,7 @@
 - [x] 2.6 Stability factor and spin drift, including the "length missing" path
 - [x] 2.7 Derived outputs: energy, Mach, transonic and subsonic ranges
 - [x] 2.8 Input validation with named fields
-- [ ] 2.9 Optional Coriolis, default off
+- [ ] 2.9 Optional Coriolis, default off (not built; listed as a known limitation)
 - [x] 2.10 Pass all reference cases within tolerance
 
 ## 3. Units (Qwen writes, Scout verifies)
@@ -26,27 +26,27 @@
 
 ## 4. Planner (Qwen writes, Scout verifies)
 
-- [ ] 4.1 Input form with labels, help text, limits, and error states
-- [ ] 4.2 Units switch that converts entered values
-- [ ] 4.3 Load picker with source links, blank-value handling, and custom loads
-- [ ] 4.4 Muzzle velocity field with the estimate label and chronograph flow
-- [ ] 4.5 Results panel
-- [ ] 4.6 Dope table, CSV export, print card
-- [ ] 4.7 Local storage
-- [ ] 4.8 Planning-aid notice in panel, CSV, and print
+- [x] 4.1 Input form with labels, help text, limits, and error states
+- [x] 4.2 Units switch that converts entered values
+- [x] 4.3 Load picker with source links, blank-value handling, and custom loads
+- [x] 4.4 Muzzle velocity field with the estimate label and chronograph flow
+- [x] 4.5 Results panel
+- [x] 4.6 Dope table, CSV export, print card
+- [x] 4.7 Local storage
+- [x] 4.8 Planning-aid notice in panel, CSV, and print
 
 ## 5. Scene (Qwen writes, Scout verifies)
 
-- [ ] 5.1 Ground, firing line, distance markers, steel and paper targets
-- [ ] 5.2 Wind flags driven by speed and direction
-- [ ] 5.3 Trajectory path, line of sight, transonic colour change, exaggeration control
-- [ ] 5.4 Animated round with play, pause, replay, speed, and timeline scrub readout
-- [ ] 5.5 Orbit camera and presets
+- [x] 5.1 Ground, firing line, distance markers, steel and paper targets
+- [x] 5.2 Wind flags driven by speed and direction
+- [x] 5.3 Trajectory path, line of sight, transonic colour change, exaggeration control
+- [x] 5.4 Animated round with play, pause, replay, speed, and timeline scrub readout
+- [x] 5.5 Orbit camera and presets
 
 ## 6. First run and acceptance
 
-- [ ] 6.1 Four-step first-run setup, skippable and repeatable
-- [ ] 6.2 Scout: fresh-install walkthrough in a clean browser profile, with screenshots
-- [ ] 6.3 Scout: compare ten shots in the app against the reference solver by hand
-- [ ] 6.4 Scout: offline check, print check, CSV check, frame-rate check
-- [ ] 6.5 README: how to run, what the model includes and leaves out, where each number comes from
+- [x] 6.1 Four-step first-run setup, skippable and repeatable
+- [x] 6.2 Scout: fresh-install walkthrough in a clean browser profile, with screenshots
+- [ ] 6.3 Scout: compare ten shots in the app against the reference solver by hand (replaced by 190 automated reference points plus one 600 yd shot read off the scope reticle; ten by-hand shots not done)
+- [x] 6.4 Scout: offline check, print check, CSV check, frame-rate check
+- [x] 6.5 README: how to run, what the model includes and leaves out, where each number comes from

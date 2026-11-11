@@ -7,6 +7,8 @@ It is set up for a Tikka T3x CTR in .308 Win with a 16 inch barrel. Every value 
 
 **This is a planning aid.** Real impacts and your own recorded dope are the authority.
 
+![Scope view: 600 yd, 10 mph wind from 3 o'clock, correction dialled](docs/screenshots/scope-dialled.png)
+
 ## Run it
 
 You need Node.js 20 or newer.
@@ -61,6 +63,16 @@ The 3D range has four views:
 | Top-down view | The wind curve. Drift is drawn larger than real. The factor is shown on screen. |
 
 Scaling the drawing never changes the numbers.
+
+The same shot (600 yd, 10 mph from 3 o'clock) in the other views:
+
+| | |
+|---|---|
+| ![Range view](docs/screenshots/range-view.png) | ![Side view](docs/screenshots/side-view.png) |
+| ![Top-down view](docs/screenshots/top-view.png) | ![Scope view with the correction off](docs/screenshots/scope-undialled.png) |
+
+In the last picture the scope is still at its zero. The red dot is where the bullet would land:
+4.75 MIL low and 1.5 MIL left on the reticle, the same figures the results panel gives.
 
 ## What the model includes
 

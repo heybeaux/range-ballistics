@@ -290,7 +290,10 @@ export function buildPath(runs: PathRun[]): THREE.Group {
     geometry.setPositions(positions);
     const color =
       run.regime === 'supersonic' ? COLORS.supersonic : run.regime === 'transonic' ? COLORS.transonic : COLORS.subsonic;
-    const line = new Line2(geometry, new LineMaterial({ color, linewidth: 3 }));
+    // Drawn on top of the ground: an undialled shot ends below ground level, and the shooter
+    // still needs to see where it would have gone to read the hold off the reticle.
+    const line = new Line2(geometry, new LineMaterial({ color, linewidth: 3, depthTest: false }));
+    line.renderOrder = 10;
     line.computeLineDistances();
     group.add(line);
   }
@@ -327,7 +330,12 @@ export function buildLineOfSight(from: Vec3, to: Vec3): THREE.Line {
 }
 
 export function buildDot(color: number): THREE.Mesh {
-  return new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), new THREE.MeshBasicMaterial({ color }));
+  const dot = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 16, 12),
+    new THREE.MeshBasicMaterial({ color, depthTest: false })
+  );
+  dot.renderOrder = 11;
+  return dot;
 }
 
 function disposeMaterial(material: THREE.Material | THREE.Material[]): void {

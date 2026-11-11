@@ -302,7 +302,7 @@ scene.onReadout((r) => {
 });
 
 exportCsvBtn.addEventListener('click', () => {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateIso();
   const csv = toCsv(state, lastRows, today);
   const blob = new Blob([csv], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
@@ -314,7 +314,7 @@ exportCsvBtn.addEventListener('click', () => {
 });
 
 printCardBtn.addEventListener('click', () => {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateIso();
   printArea.innerHTML = printCardHtml(lastRows, state, today);
   window.print();
 });
@@ -342,3 +342,10 @@ if (!state.setupDone) {
 }
 
 export {};
+
+/** Today's date in the user's own time zone, as YYYY-MM-DD. */
+function localDateIso(): string {
+  const d = new Date();
+  const pad = (n: number): string => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
