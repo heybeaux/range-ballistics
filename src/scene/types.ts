@@ -25,6 +25,8 @@ export interface SceneView {
   targetType: 'steel' | 'paper';
   /** Display-only multiplier for drop and drift away from the line of sight. 1 = true scale. */
   exaggeration: number;
+  /** true = draw the shot after the shooter dials the correction, so it lands on the target. */
+  showDialed: boolean;
 }
 
 export type CameraPreset = 'shooter' | 'side' | 'top' | 'reset';
