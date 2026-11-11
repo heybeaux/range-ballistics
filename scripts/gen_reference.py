@@ -19,7 +19,7 @@ YARD = 0.9144
 GRAIN_KG = 0.00006479891
 INCH = 0.0254
 
-TABLES = {"G1": pbc.TableG1, "G7": pbc.TableG7}
+TABLES = {"G1": pbc.TableG1, "G7": pbc.TableG7, "RA4": pbc.TableRA4}
 
 
 def clock_to_pbc_degrees(clock: float) -> float:
@@ -65,7 +65,7 @@ def run(case):
     calc, shot, weapon = build(case)
     rows = []
     max_yd = case["maxRangeYd"]
-    result = calc.fire(shot, Unit.Yard(max_yd), Unit.Yard(100))
+    result = calc.fire(shot, Unit.Yard(max_yd), Unit.Yard(case.get("stepYd", 100)))
     # Sight-offset convention. py-ballisticcalc keeps the scope vertically above the bore on a
     # slope. Our contract (types.ts) tilts the rifle with the line of sight, so the scope sits at
     # right angles to it. Same trajectory, different measuring origin:

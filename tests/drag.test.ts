@@ -37,4 +37,19 @@ describe('drag', () => {
     const expected = (Math.PI / 8) * 1.225 * 0.298 / (0.25 * BC_LB_IN2_TO_KG_M2);
     expect(Math.abs(k - expected)).toBeLessThanOrEqual(1e-12);
   });
+
+  it('RA4 table values', () => {
+    expect(Math.abs(dragCoefficient('RA4', 0) - 0.2283)).toBeLessThanOrEqual(1e-6);
+    expect(Math.abs(dragCoefficient('RA4', 1) - 0.3975)).toBeLessThanOrEqual(1e-6);
+    expect(Math.abs(dragCoefficient('RA4', 4) - 0.4969)).toBeLessThanOrEqual(1e-6);
+  });
+
+  it('RA4 clamps outside the table range', () => {
+    expect(dragCoefficient('RA4', 9)).toBe(dragCoefficient('RA4', 4));
+    expect(dragCoefficient('RA4', -1)).toBe(dragCoefficient('RA4', 0));
+  });
+
+  it('RA4 differs from G1 at Mach 0.9', () => {
+    expect(dragCoefficient('RA4', 0.9)).not.toBe(dragCoefficient('G1', 0.9));
+  });
 });

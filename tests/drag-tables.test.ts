@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
 import g1 from '../src/data/g1.json';
 import g7 from '../src/data/g7.json';
+import ra4 from '../src/data/ra4.json';
 
 // The drag tables are generated from py-ballisticcalc, never typed by hand or by a model.
 // These checksums fail if any point is changed, added, or removed.
@@ -22,6 +23,14 @@ describe('drag tables', () => {
     expect(sha(g7.points)).toBe('c7c9b1aaa0b35eea461c1bbb16b04d43e75cad28f1b12bfa33171f1584d3c22a');
   });
 
+  it('RA4 has 87 points and the recorded checksum', () => {
+    expect(ra4.points.length).toBe(87);
+    expect(sha(ra4.points)).toBe('926219f7ca07bb56bda13ae6d705a0b8872a1cd0327c3e93cce32666c8e57cb1');
+    expect(cdAt(ra4.points, 0)).toBe(0.2283);
+    expect(cdAt(ra4.points, 1)).toBe(0.3975);
+    expect(cdAt(ra4.points, 4)).toBe(0.4969);
+  });
+
   it('spot values match the published tables', () => {
     expect(cdAt(g1.points, 0)).toBe(0.2629);
     expect(cdAt(g1.points, 2)).toBe(0.5934);
@@ -32,7 +41,7 @@ describe('drag tables', () => {
   });
 
   it('Mach values strictly increase and every Cd is positive', () => {
-    for (const table of [g1.points, g7.points]) {
+    for (const table of [g1.points, g7.points, ra4.points]) {
       for (let i = 0; i < table.length; i++) {
         const row = table[i];
         const prev = table[i - 1];

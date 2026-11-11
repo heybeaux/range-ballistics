@@ -1,6 +1,7 @@
 import type { DragModel } from './types';
 import g1 from '../data/g1.json';
 import g7 from '../data/g7.json';
+import ra4 from '../data/ra4.json';
 
 export const BC_LB_IN2_TO_KG_M2 = 703.0696;
 
@@ -13,6 +14,7 @@ const toTable = (pts: number[][]): Array<readonly [number, number]> =>
 
 const G1_TABLE = toTable(g1.points);
 const G7_TABLE = toTable(g7.points);
+const RA4_TABLE = toTable(ra4.points);
 
 /**
  * Drag coefficient at a Mach number: linear interpolation between the two
@@ -20,7 +22,18 @@ const G7_TABLE = toTable(g7.points);
  * first cd. If above the last point return the last cd.
  */
 export function dragCoefficient(model: DragModel, mach: number): number {
-  const points = model === 'G1' ? G1_TABLE : G7_TABLE;
+  let points: Array<readonly [number, number]>;
+  switch (model) {
+    case 'G1':
+      points = G1_TABLE;
+      break;
+    case 'G7':
+      points = G7_TABLE;
+      break;
+    case 'RA4':
+      points = RA4_TABLE;
+      break;
+  }
   const n = points.length;
   if (n === 0) throw new Error('empty drag table');
 

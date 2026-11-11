@@ -23,7 +23,7 @@
  *
  * DRAG: vr = v - airVelocity; M = |vr| / speedOfSound;
  *   acceleration = -(PI / 8) * rho * |vr| * Cd(M) / (bc * 703.0696) * vr
- *   Cd(M) is linear interpolation in the G1 or G7 table (src/data/g1.json, g7.json),
+ *   Cd(M) is linear interpolation in the G1, G7 or RA4 table (src/data/g1.json, g7.json, ra4.json),
  *   clamped to the first / last point outside the table.
  *
  * AIR ALONG THE FLIGHT: the input atmosphere is the air at the muzzle. As the bullet climbs or
@@ -32,7 +32,8 @@
  *   This matters on steep shots: 20 degrees downhill at 900 m is about 3% more drag.
  */
 
-export type DragModel = 'G1' | 'G7';
+/** RA4 is the rimfire drag model Eley publishes .22 LR BCs against. */
+export type DragModel = 'G1' | 'G7' | 'RA4';
 
 export interface Vec3 {
   x: number;

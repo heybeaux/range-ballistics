@@ -9,6 +9,8 @@ task_file="$1"
 task_name="$(basename "$task_file" .md)"
 log_file="/tmp/rb-oc-${task_name}.log"
 cd "$(dirname "$0")/.." || exit 1
+# The project requires Node 24 (.node-version); make sure the agent's npm uses it.
+if command -v mise >/dev/null 2>&1; then export PATH="$(mise where node@24)/bin:$PATH"; fi
 : > "$log_file"
 ln -sf "$log_file" /tmp/rb-oc-current.log
 XDG_DATA_HOME="$HOME/.local/share/opencode-range-ballistics" \
