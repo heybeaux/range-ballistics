@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Typecheck, tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  data-sync:
+    name: Generated data matches the generators
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # loads.json, rifle.json, scopes.json come from gen_loads.py (stdlib only).
+      - run: python3 scripts/gen_loads.py
+      # The reference test vectors come from py-ballisticcalc, pinned to the
+      # version the committed vectors were generated with.
+      - run: pip install py-ballisticcalc==2.2.2
+      - run: python3 scripts/gen_reference.py
+      - run: python3 scripts/gen_reference_cartridges.py
+      - name: Committed files must match regenerated output
+        run: git diff --exit-code
+
+  audit:
+    name: npm audit (production dependencies)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm audit --omit=dev --audit-level=high
