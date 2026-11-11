@@ -18,11 +18,11 @@
         <div id="scene"></div>
         <div id="sceneBar">
           <div class="bar-row">
-            <button type="button" data-camera="shooter">Shooter's view</button>
+            <button type="button" data-camera="reset">Range view</button>
+            <button type="button" data-camera="shooter">Scope view</button>
             <button type="button" data-camera="side">Side view</button>
             <button type="button" data-camera="top">Top-down view</button>
-            <button type="button" data-camera="reset">Reset view</button>
-            <label>Drop and drift scale <input type="range" id="exaggeration" min="1" max="20" step="1" value="1"></label>
+            <label>Drop and drift scale <input type="range" id="exaggeration" min="0" max="7" step="1" value="0"></label>
             <span id="exaggerationLabel"></span>
             <label class="inline"><input type="checkbox" id="showDialed" checked> Show the shot with the correction dialled</label>
           </div>

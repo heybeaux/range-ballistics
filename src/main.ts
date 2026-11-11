@@ -14,9 +14,11 @@ import {
   velocityNoteHtml
 } from './planner/panels';
 import { solve } from './solver/solve';
+import type { TrajectorySample } from './solver/types';
 import { format } from './units/units';
 import { createRangeScene } from './scene/scene';
 import type { RangeScene } from './scene/types';
+import { NICE_SCALES, autoExaggeration, dialSamples, trimToRange } from './scene/geometry';
 
 declare global {
   interface Window {
@@ -61,6 +63,7 @@ let stale = false;
 let exaggeration = 1;
 let showDialed = true;
 let durationS = 0;
+let lastSamples: TrajectorySample[] = [];
 const scene = createRangeScene(el('scene', HTMLDivElement));
 
 const SOLVER_FIELD_TO_FORM: Record<string, string | 'bc'> = {
@@ -133,6 +136,7 @@ function recompute(): void {
   stale = false;
   lastResults = r;
   lastRows = dopeRows(state, solved);
+  lastSamples = solved.samples;
   scene.update({
     samples: solved.samples,
     targetRangeM: state.conditions.targetRangeM,
@@ -149,11 +153,25 @@ function recompute(): void {
   });
 }
 
+function drawnSamples(): TrajectorySample[] {
+  const t = trimToRange(lastSamples, state.conditions.targetRangeM);
+  return showDialed ? dialSamples(t, state.conditions.targetRangeM) : t;
+}
+
+function setExaggeration(value: number): void {
+  exaggeration = value;
+  exaggerationEl.value = String(Math.max(0, NICE_SCALES.indexOf(value)));
+  recompute();
+  renderOutputs();
+}
+
 function renderOutputs(): void {
   resultsEl.innerHTML = resultsHtml(lastResults, state, stale);
   dopeEl.innerHTML = dopeTableHtml(lastRows, state);
   exaggerationLabel.textContent =
-    exaggeration === 1 ? 'True scale' : `Drop and drift drawn ${exaggeration}× larger than real`;
+    exaggeration === 1
+      ? 'True scale'
+      : `Drop and drift drawn ${exaggeration}× larger than real. The numbers are not changed.`;
   sceneNoteEl.textContent =
     showDialed
       ? 'Showing the shot after you dial the correction: the bullet rises above your line of sight (dashed) and comes down onto the target. Blue arrows show which way the wind blows.'
@@ -229,6 +247,14 @@ for (const button of sceneBar.querySelectorAll<HTMLButtonElement>('button[data-c
   button.addEventListener('click', () => {
     const value = button.dataset.camera;
     if (value === 'shooter' || value === 'side' || value === 'top' || value === 'reset') {
+      const R = state.conditions.targetRangeM;
+      if (value === 'side') {
+        setExaggeration(autoExaggeration(drawnSamples(), R, 'path'));
+      } else if (value === 'top') {
+        setExaggeration(autoExaggeration(drawnSamples(), R, 'windage'));
+      } else {
+        setExaggeration(1);
+      }
       scene.setCamera(value);
     }
   });
@@ -243,9 +269,7 @@ speedEl.addEventListener('change', () => {
 });
 
 exaggerationEl.addEventListener('input', () => {
-  exaggeration = Number(exaggerationEl.value);
-  recompute();
-  renderOutputs();
+  setExaggeration(NICE_SCALES[Number(exaggerationEl.value)] ?? 1);
 });
 
 showDialedEl.addEventListener('change', () => {

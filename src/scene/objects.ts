@@ -25,30 +25,86 @@ function toV3(p: Vec3): THREE.Vector3 {
   return new THREE.Vector3(p.x, p.y, p.z);
 }
 
+export function buildSkyTexture(): THREE.Texture | null {
+  const canvas = document.createElement('canvas');
+  canvas.width = 2;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  if (ctx === null) return null;
+  const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+  gradient.addColorStop(0.0, '#3f78bd');
+  gradient.addColorStop(0.55, '#a9cbe8');
+  gradient.addColorStop(1.0, '#e3ecf2');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 2, 512);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
 export function buildGround(lengthM: number): THREE.Group {
   const group = new THREE.Group();
 
   const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(lengthM + 120, 240),
-    new THREE.MeshLambertMaterial({ color: COLORS.ground })
+    new THREE.PlaneGeometry(8000, 8000),
+    new THREE.MeshLambertMaterial({ color: 0x5a7a45 })
   );
   ground.rotation.x = -Math.PI / 2;
-  ground.position.set(lengthM / 2 - 10, -0.3, 0);
+  ground.position.set(lengthM / 2, -0.3, 0);
   group.add(ground);
 
+  const lane = new THREE.Mesh(
+    new THREE.PlaneGeometry(lengthM + 50, 26),
+    new THREE.MeshLambertMaterial({ color: 0x7fa65c })
+  );
+  lane.rotation.x = -Math.PI / 2;
+  lane.position.set(lengthM / 2 - 5, -0.29, 0);
+  group.add(lane);
+
+  const berm = new THREE.Mesh(
+    new THREE.CylinderGeometry(5, 5, 44, 24),
+    new THREE.MeshLambertMaterial({ color: 0x8a6f4d })
+  );
+  berm.rotation.x = Math.PI / 2;
+  berm.position.set(lengthM + 22, -0.3, 0);
+  group.add(berm);
+
   const firingLine = new THREE.Mesh(
-    new THREE.BoxGeometry(0.15, 0.02, 12),
+    new THREE.BoxGeometry(0.15, 0.02, 26),
     new THREE.MeshLambertMaterial({ color: COLORS.line })
   );
-  firingLine.position.set(0, -0.29, 0);
+  firingLine.position.set(0, -0.28, 0);
   group.add(firingLine);
 
   const mat = new THREE.Mesh(
     new THREE.BoxGeometry(2, 0.02, 0.8),
     new THREE.MeshLambertMaterial({ color: 0x3a3a3a })
   );
-  mat.position.set(-1, -0.29, 0);
+  mat.position.set(-1, -0.28, 0);
   group.add(mat);
+
+  const barrel = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.012, 0.012, 0.41, 8),
+    new THREE.MeshLambertMaterial({ color: 0x222222 })
+  );
+  barrel.rotation.z = Math.PI / 2;
+  barrel.position.set(-0.205, 0, 0);
+  group.add(barrel);
+
+  const stock = new THREE.Mesh(
+    new THREE.BoxGeometry(0.75, 0.07, 0.05),
+    new THREE.MeshLambertMaterial({ color: 0x4a3b2a })
+  );
+  stock.position.set(-0.75, -0.03, 0);
+  group.add(stock);
+
+  const scope = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.02, 0.02, 0.32, 10),
+    new THREE.MeshLambertMaterial({ color: 0x111111 })
+  );
+  scope.rotation.z = Math.PI / 2;
+  scope.position.set(-0.55, 0.045, 0);
+  group.add(scope);
 
   return group;
 }
@@ -89,11 +145,11 @@ function makeLabelSprite(label: string): THREE.Sprite | null {
   return sprite;
 }
 
-export function buildMarker(marker: DistanceMarker): THREE.Group {
+export function buildMarker(marker: DistanceMarker): { group: THREE.Group; label: THREE.Sprite | null } {
   const group = new THREE.Group();
 
   const stripe = new THREE.Mesh(
-    new THREE.BoxGeometry(0.2, 0.02, 16),
+    new THREE.BoxGeometry(0.2, 0.02, 26),
     new THREE.MeshLambertMaterial({ color: COLORS.line })
   );
   stripe.position.set(marker.rangeM, -0.29, 0);
@@ -101,11 +157,11 @@ export function buildMarker(marker: DistanceMarker): THREE.Group {
 
   const sprite = makeLabelSprite(marker.label);
   if (sprite !== null) {
-    sprite.position.set(marker.rangeM, 1.6, -7);
+    sprite.position.set(marker.rangeM, 2.2, -14);
     group.add(sprite);
   }
 
-  return group;
+  return { group, label: sprite };
 }
 
 function makePaperTexture(): THREE.CanvasTexture {
@@ -134,10 +190,18 @@ function makePaperTexture(): THREE.CanvasTexture {
 export function buildTarget(type: 'steel' | 'paper', rangeM: number, sightHeightM: number): THREE.Group {
   const group = new THREE.Group();
 
+  const backer = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.2, 1.2),
+    new THREE.MeshBasicMaterial({ color: 0xf4f1e8, side: THREE.DoubleSide })
+  );
+  backer.rotation.y = -Math.PI / 2;
+  backer.position.set(rangeM + 0.05, sightHeightM, 0);
+  group.add(backer);
+
   if (type === 'steel') {
     const plate = new THREE.Mesh(
       new THREE.CylinderGeometry(0.25, 0.25, 0.02, 32),
-      new THREE.MeshLambertMaterial({ color: COLORS.steel })
+      new THREE.MeshLambertMaterial({ color: 0x2b2b2b })
     );
     plate.rotation.z = Math.PI / 2;
     plate.position.set(rangeM, sightHeightM, 0);
