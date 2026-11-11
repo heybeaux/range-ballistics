@@ -4,6 +4,7 @@ import { loadState, saveState, selectLibraryLoad, selectCustomLoad, saveCustomLo
 import { dopeRows, shotResults, toCsv, toShotInput } from './planner/model';
 import { applyField, fieldById, formHtml, parseInput } from './planner/fields';
 import { dopeTableHtml, printCardHtml, resultsHtml } from './planner/view';
+import { openSetup } from './planner/setup';
 import {
   loadPickerHtml,
   loadSourcesHtml,
@@ -284,11 +285,15 @@ function setState(next: AppState): void {
 }
 
 runSetupBtn.addEventListener('click', () => {
-  setState({ ...getState(), setupDone: false });
+  openSetup(el('setupRoot', HTMLDivElement), getState, setState);
 });
 
 window.__rangeScene = scene;
 
 refresh();
+
+if (!state.setupDone) {
+  openSetup(el('setupRoot', HTMLDivElement), getState, setState);
+}
 
 export {};

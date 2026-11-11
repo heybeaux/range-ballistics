@@ -305,3 +305,63 @@ table.dope th {
     grid-column: 1 / -1;
   }
 }
+
+.setup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.setup-dialog {
+  background: #1e2328;
+  color: #e8eaed;
+  border: 1px solid #3a424b;
+  border-radius: 12px;
+  padding: 20px 24px;
+  width: min(560px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.setup-progress {
+  color: #ffb000;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.setup-dialog h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.setup-intro {
+  color: #c5cbd3;
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0 0 14px;
+}
+
+.setup-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+#setupSkip {
+  margin-right: auto;
+}
+
+button.primary {
+  background: #ffb000;
+  color: #14171a;
+  border-color: #ffb000;
+  font-weight: 600;
+}
